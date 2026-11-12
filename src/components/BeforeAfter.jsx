@@ -88,7 +88,7 @@ export default function BeforeAfter({
           src={afterImage}
           alt={t.sections.afterLabel}
           loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover object-[center_15%] pointer-events-none"
         />
 
         {/* BEFORE IMAGE (Clipped overlay via clip-path) */}
@@ -100,7 +100,7 @@ export default function BeforeAfter({
             src={beforeImage}
             alt={t.sections.beforeLabel}
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            className="absolute inset-0 w-full h-full object-cover object-[center_15%] pointer-events-none"
           />
         </div>
 

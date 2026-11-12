@@ -109,7 +109,7 @@ export default function Gallery() {
                     loading="lazy"
                     width={640}
                     height={800}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-105"
                   />
 
                   {/* Dark hover overlay with title */}

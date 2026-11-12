@@ -97,7 +97,7 @@ export default function BgVideo({
         <img
           src={posterSrc}
           alt={videoName}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-[center_20%]"
           loading={isHero ? "eager" : "lazy"}
         />
       )}

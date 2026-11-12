@@ -41,11 +41,14 @@ export default function Bridal() {
       <section className="relative min-h-[55vh] sm:min-h-[60vh] bg-[#0B2E24] text-[#F3ECDD] flex items-center justify-center text-center px-4 overflow-hidden">
         {/* Background photo with flat dark layer */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="/images/hero-bride.webp"
-            alt="Roop Nikhar Bride"
-            className="w-full h-full object-cover"
-          />
+          <picture>
+            <source media="(max-width: 640px)" srcSet="/images/hero-bride-m.webp" />
+            <img
+              src="/images/hero-bride.webp"
+              alt="Roop Nikhar Bride"
+              className="w-full h-full object-cover object-[center_20%]"
+            />
+          </picture>
           <div className="absolute inset-0 bg-[rgba(8,36,28,0.7)]" />
         </div>
 
@@ -141,7 +144,7 @@ export default function Bridal() {
                 <img
                   src="/images/bridal-trial.webp"
                   alt={lang === "hi" ? "ब्राइडल ट्रायल सत्र" : "Bridal Trial Session"}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-[center_12%]"
                   loading="lazy"
                   width={640}
                   height={800}

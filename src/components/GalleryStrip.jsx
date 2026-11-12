@@ -73,7 +73,7 @@ export default function GalleryStrip() {
                 loading="lazy"
                 width={640}
                 height={800}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-[rgba(8,36,28,0.2)] pointer-events-none" />
               <div className="absolute bottom-3 left-3 right-3 bg-[rgba(8,36,28,0.85)] border border-[rgba(201,164,92,0.2)] rounded-[8px] p-2 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

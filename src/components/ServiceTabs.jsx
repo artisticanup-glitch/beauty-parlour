@@ -156,7 +156,7 @@ export default function ServiceTabs({
                 loading="lazy"
                 width={800}
                 height={600}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover object-[center_20%] transition-transform duration-500 group-hover:scale-105"
               />
               <div
                 className={`absolute top-3 right-3 rounded-full px-3 py-1 flex items-center gap-1.5 text-[13px] border ${

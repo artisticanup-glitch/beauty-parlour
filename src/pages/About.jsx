@@ -95,7 +95,7 @@ export default function About() {
                     loading="lazy"
                     width={600}
                     height={750}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover object-[center_12%] transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-[rgba(8,36,28,0.2)] pointer-events-none" />
                 </div>
