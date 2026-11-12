@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
-import { List, X, WhatsappLogo, InstagramLogo, FacebookLogo } from "@phosphor-icons/react"
+import { List, X, CalendarCheck, WhatsappLogo, InstagramLogo, FacebookLogo } from "@phosphor-icons/react"
 import { useLanguage } from "../i18n/LanguageContext"
 import { siteData } from "../data/site"
 import Button from "./Button"
@@ -49,43 +49,41 @@ export default function Header() {
     { to: "/contact", label: t.nav.contact },
   ]
 
-  const allNavItems = [
-    ...navItems,
-    { to: "/booking", label: lang === "hi" ? "बुक" : "Book" },
-  ]
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-colors duration-300 border-b ${
+      className={`sticky top-0 z-50 w-full transition-all duration-300 border-b backdrop-blur-md ${
         scrolled
-          ? "bg-[#0B2E24] border-[rgba(201,164,92,0.28)]"
-          : "bg-[#0B2E24] border-[rgba(201,164,92,0.18)]"
+          ? "bg-[rgba(8,36,28,0.95)] border-[rgba(201,164,92,0.28)] shadow-[0_4px_24px_rgba(4,18,14,0.35)]"
+          : "bg-[rgba(8,36,28,0.85)] border-[rgba(201,164,92,0.18)]"
       }`}
     >
       <div className="site-container h-[88px] flex items-center justify-between">
         {/* DESKTOP HEADER (Logo Left -> Menu Items -> Language Switcher -> Book Button) */}
-        <div className="hidden lg:flex items-center justify-between w-full gap-4 xl:gap-8">
+        <div className="hidden lg:flex items-center justify-between w-full gap-4 xl:gap-6 2xl:gap-8">
           {/* 1. Logo Left */}
           <Link
             to="/"
             className="flex items-center gap-3.5 group shrink-0"
             aria-label="Roop Nikhar Home"
           >
-            <img
-              src="/images/logo.webp"
-              alt="Roop Nikhar Emblem"
-              width={46}
-              height={46}
-              className="w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-105"
-            />
+            <div className="relative w-11 h-11 rounded-full p-0.5 bg-[rgba(201,164,92,0.12)] border border-[rgba(201,164,92,0.3)] shadow-[0_2px_8px_rgba(0,0,0,0.25)] flex items-center justify-center transition-all duration-300 group-hover:border-[rgba(201,164,92,0.6)] group-hover:scale-105">
+              <img
+                src="/images/logo.webp"
+                alt="Roop Nikhar Emblem"
+                width={40}
+                height={40}
+                className="w-9 h-9 object-contain drop-shadow-[0_1px_3px_rgba(201,164,92,0.3)]"
+              />
+            </div>
             <div className="flex flex-col items-start text-left">
               <span
-                className="font-heading text-[24px] xl:text-[26px] leading-tight text-[#F3ECDD] tracking-[0.03em] transition-colors group-hover:text-[#E3C88A]"
+                className="font-heading text-[25px] xl:text-[27px] font-semibold leading-tight text-[#F3ECDD] tracking-[0.02em] transition-colors group-hover:text-[#E3C88A]"
               >
                 {l(siteData.name)}
               </span>
               <span
-                className={`text-[11px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.24em]"} text-[#C9A45C] font-medium leading-none`}
+                className={`text-[11px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.24em]"} text-[#C9A45C] font-medium leading-none mt-0.5`}
               >
                 {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
               </span>
@@ -93,14 +91,14 @@ export default function Header() {
           </Link>
 
           {/* 2. Menu Items */}
-          <nav className="flex items-center gap-5 xl:gap-7">
+          <nav className="flex items-center gap-4 xl:gap-6 2xl:gap-8">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `relative py-2 text-[14px] xl:text-[15px] tracking-wide whitespace-nowrap transition-colors duration-200 group ${
-                    isActive ? "text-[#C9A45C] font-medium" : "text-[#F3ECDD] hover:text-[#C9A45C]"
+                  `relative py-2 text-[14px] xl:text-[15px] font-medium tracking-wide whitespace-nowrap transition-colors duration-200 group ${
+                    isActive ? "text-[#E3C88A]" : "text-[#F3ECDD] hover:text-[#E3C88A]"
                   }`
                 }
               >
@@ -108,8 +106,8 @@ export default function Header() {
                   <>
                     <span>{item.label}</span>
                     <span
-                      className={`absolute bottom-0 left-0 h-[1.5px] bg-[#C9A45C] transition-all duration-300 ${
-                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] rounded-full bg-[#C9A45C] transition-all duration-300 ${
+                        isActive ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
                       }`}
                     />
                   </>
@@ -119,33 +117,42 @@ export default function Header() {
           </nav>
 
           {/* 3. Language Switcher + 4. Book Button */}
-          <div className="flex items-center gap-3 xl:gap-4 shrink-0 whitespace-nowrap">
-            {/* Language Switcher */}
+          <div className="flex items-center gap-3.5 xl:gap-4 shrink-0 whitespace-nowrap">
+            {/* Luxury Segmented Language Switcher */}
             <button
               onClick={toggleLang}
               type="button"
-              className="min-h-[44px] px-3.5 py-2 text-[13px] tracking-wider rounded-md border border-[rgba(201,164,92,0.35)] text-[#E3C88A] hover:bg-[#123F31] transition-colors shrink-0 whitespace-nowrap flex items-center justify-center font-medium"
-              aria-label="Switch Language between English and Hindi"
+              className="relative inline-flex items-center h-10 p-0.5 rounded-full border border-[rgba(201,164,92,0.35)] bg-[rgba(18,63,49,0.55)] hover:border-[rgba(201,164,92,0.6)] transition-all duration-200 cursor-pointer select-none shrink-0"
+              aria-label={`Switch Language to ${lang === "en" ? "Hindi" : "English"}`}
             >
-              {lang === "en" ? (
-                <span>
-                  <strong className="text-[#C9A45C]">EN</strong> | हिं
-                </span>
-              ) : (
-                <span>
-                  EN | <strong className="text-[#C9A45C]">हिं</strong>
-                </span>
-              )}
+              <span
+                className={`inline-flex items-center justify-center text-[12px] font-semibold px-2.5 py-1 rounded-full transition-all duration-200 ${
+                  lang === "en"
+                    ? "bg-[#C9A45C] text-[#08241C] shadow-sm"
+                    : "text-[#E3C88A] opacity-75 hover:opacity-100"
+                }`}
+              >
+                EN
+              </span>
+              <span
+                className={`inline-flex items-center justify-center text-[12px] font-semibold px-2.5 py-1 rounded-full transition-all duration-200 ${
+                  lang === "hi"
+                    ? "bg-[#C9A45C] text-[#08241C] shadow-sm"
+                    : "text-[#E3C88A] opacity-75 hover:opacity-100"
+                }`}
+              >
+                हिं
+              </span>
             </button>
 
             {/* Book Button */}
-            <Button
+            <Link
               to="/booking"
-              variant="primary"
-              className="!py-2.5 !px-5 !text-[14px] shrink-0 whitespace-nowrap font-medium"
+              className="inline-flex items-center justify-center gap-1.5 min-h-[42px] px-5 py-2.5 rounded-[10px] bg-[#C9A45C] hover:bg-[#D4B26F] text-[#08241C] font-semibold text-[14px] tracking-wide shadow-[0_2px_12px_rgba(201,164,92,0.22)] hover:shadow-[0_4px_18px_rgba(201,164,92,0.35)] transition-all duration-200 active:scale-[0.98] shrink-0 whitespace-nowrap"
             >
-              {lang === "hi" ? "बुक" : "Book"}
-            </Button>
+              <CalendarCheck size={16} weight="bold" />
+              <span>{lang === "hi" ? "बुक" : "Book"}</span>
+            </Link>
           </div>
         </div>
 
@@ -153,18 +160,20 @@ export default function Header() {
         <div className="flex lg:hidden items-center justify-between w-full">
           {/* Logo & Wordmark Left */}
           <Link to="/" className="flex items-center gap-2.5 text-left group" aria-label="Roop Nikhar Home">
-            <img
-              src="/images/logo.webp"
-              alt="Roop Nikhar Emblem"
-              width={38}
-              height={38}
-              className="w-9 h-9 object-contain"
-            />
+            <div className="w-10 h-10 rounded-full p-0.5 bg-[rgba(201,164,92,0.12)] border border-[rgba(201,164,92,0.3)] flex items-center justify-center shrink-0">
+              <img
+                src="/images/logo.webp"
+                alt="Roop Nikhar Emblem"
+                width={34}
+                height={34}
+                className="w-8 h-8 object-contain"
+              />
+            </div>
             <div className="flex flex-col text-left">
-              <span className="font-heading text-[22px] sm:text-[24px] leading-tight text-[#F3ECDD]">
+              <span className="font-heading text-[22px] sm:text-[24px] font-semibold leading-tight text-[#F3ECDD]">
                 {l(siteData.name)}
               </span>
-              <span className={`text-[12px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.22em]"} text-[#C9A45C] leading-none`}>
+              <span className={`text-[11px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.2em]"} text-[#C9A45C] leading-none mt-0.5`}>
                 {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
               </span>
             </div>
@@ -175,18 +184,35 @@ export default function Header() {
             <button
               onClick={toggleLang}
               type="button"
-              style={{ minHeight: "44px", height: "44px", minWidth: "56px" }}
-              className="px-3 text-[13px] rounded-[10px] border border-[rgba(201,164,92,0.35)] text-[#E3C88A] flex items-center justify-center font-medium shrink-0"
-              aria-label="Toggle language"
+              style={{ minHeight: "44px", height: "44px" }}
+              className="relative inline-flex items-center p-0.5 rounded-full border border-[rgba(201,164,92,0.35)] bg-[rgba(18,63,49,0.55)] transition-all duration-200 cursor-pointer select-none shrink-0"
+              aria-label={`Switch Language to ${lang === "en" ? "Hindi" : "English"}`}
             >
-              {lang === "en" ? "EN | हिं" : "हिं | EN"}
+              <span
+                className={`inline-flex items-center justify-center text-[12px] font-semibold px-2.5 py-1.5 rounded-full transition-all duration-200 ${
+                  lang === "en"
+                    ? "bg-[#C9A45C] text-[#08241C] shadow-sm"
+                    : "text-[#E3C88A] opacity-75 hover:opacity-100"
+                }`}
+              >
+                EN
+              </span>
+              <span
+                className={`inline-flex items-center justify-center text-[12px] font-semibold px-2.5 py-1.5 rounded-full transition-all duration-200 ${
+                  lang === "hi"
+                    ? "bg-[#C9A45C] text-[#08241C] shadow-sm"
+                    : "text-[#E3C88A] opacity-75 hover:opacity-100"
+                }`}
+              >
+                हिं
+              </span>
             </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
               style={{ minHeight: "44px", height: "44px", minWidth: "44px", width: "44px" }}
-              className="flex items-center justify-center rounded-[12px] bg-[#123F31] text-[#E3C88A] border border-[rgba(201,164,92,0.3)] shrink-0"
+              className="flex items-center justify-center rounded-[12px] bg-[#123F31] hover:bg-[#1A5240] text-[#E3C88A] border border-[rgba(201,164,92,0.3)] shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-colors shrink-0"
               aria-label={mobileMenuOpen ? t.nav.close : t.nav.menu}
             >
               {mobileMenuOpen ? (
@@ -207,7 +233,7 @@ export default function Header() {
         >
           {/* Centred Links in Cormorant 32px */}
           <nav className="flex flex-col items-center justify-center text-center py-6 gap-5">
-            {allNavItems.map((item) => (
+            {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
@@ -226,10 +252,11 @@ export default function Header() {
               <Button
                 to="/booking"
                 variant="primary"
-                className="w-full text-center"
+                className="w-full text-center flex items-center justify-center gap-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {t.nav.bookNow}
+                <CalendarCheck size={18} weight="bold" />
+                <span>{lang === "hi" ? "बुक" : "Book"}</span>
               </Button>
             </div>
           </nav>
