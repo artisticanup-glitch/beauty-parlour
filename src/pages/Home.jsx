@@ -198,9 +198,13 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Soft bottom blend into the ivory Intro section */}
+        {/* Seamless deep easing blend into the ivory Intro section (no hard edge) */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 md:h-48 bg-gradient-to-t from-[#F7F2E8] via-[rgba(247,242,232,0.45)] to-transparent pointer-events-none z-[5]"
+          className="absolute bottom-0 left-0 right-0 h-[45vh] min-h-[340px] max-h-[540px] pointer-events-none z-[5]"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(247,242,232,0) 0%, rgba(247,242,232,0.02) 15%, rgba(247,242,232,0.08) 30%, rgba(247,242,232,0.22) 45%, rgba(247,242,232,0.48) 60%, rgba(247,242,232,0.76) 75%, rgba(247,242,232,0.94) 88%, #F7F2E8 95%, #F7F2E8 100%)",
+          }}
           aria-hidden="true"
         />
 
