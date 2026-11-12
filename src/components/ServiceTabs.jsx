@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect, useCallback } from "react"
 import { Clock, ArrowRight } from "@phosphor-icons/react"
 import { serviceCategories, services } from "../data/services"
 import { useLanguage } from "../i18n/LanguageContext"
@@ -13,6 +13,7 @@ export default function ServiceTabs({
   const [activeTab, setActiveTab] = useState(serviceCategories[0].id)
   const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 })
   const tabsRef = useRef([])
+  const tablistRef = useRef(null)
 
   const isLight = theme === "light"
 
@@ -21,18 +22,43 @@ export default function ServiceTabs({
     ? services.filter((s) => s.category === activeTab)
     : services.filter((s) => s.category === activeTab).slice(0, limitCount)
 
-  // Update underline indicator position & scroll active tab into view
+  // Update underline indicator position using relative bounding rect (bulletproof with flex justify-center)
+  const updateUnderline = useCallback(() => {
+    const activeIndex = serviceCategories.findIndex((c) => c.id === activeTab)
+    const activeTabEl = tabsRef.current[activeIndex]
+    const tablistEl = tablistRef.current
+
+    if (activeTabEl && tablistEl) {
+      const tablistRect = tablistEl.getBoundingClientRect()
+      const tabRect = activeTabEl.getBoundingClientRect()
+      const left = tabRect.left - tablistRect.left + tablistEl.scrollLeft
+      const width = tabRect.width
+      setUnderlineStyle({ left, width })
+    }
+  }, [activeTab])
+
   useEffect(() => {
+    updateUnderline()
     const activeIndex = serviceCategories.findIndex((c) => c.id === activeTab)
     const activeTabEl = tabsRef.current[activeIndex]
     if (activeTabEl) {
       activeTabEl.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" })
-      setUnderlineStyle({
-        left: activeTabEl.offsetLeft,
-        width: activeTabEl.offsetWidth,
-      })
     }
-  }, [activeTab, lang])
+
+    const handleResize = () => updateUnderline()
+    window.addEventListener("resize", handleResize)
+
+    // Re-check after web fonts load
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(updateUnderline)
+    }
+
+    const timer = setTimeout(updateUnderline, 50)
+    return () => {
+      window.removeEventListener("resize", handleResize)
+      clearTimeout(timer)
+    }
+  }, [activeTab, lang, updateUnderline])
 
   // Keyboard navigation for tabs
   const handleKeyDown = (e, index) => {
@@ -56,6 +82,7 @@ export default function ServiceTabs({
         }`}
       >
         <div
+          ref={tablistRef}
           role="tablist"
           aria-label="Service categories"
           className="relative flex items-center justify-start sm:justify-center overflow-x-auto gap-6 px-4 whitespace-nowrap scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
@@ -101,17 +128,17 @@ export default function ServiceTabs({
         </div>
       </div>
 
-      {/* Services Grid (3 columns desktop, 1 on mobile) */}
+      {/* Services: Horizontal Snap Carousel on Mobile (≤768px), 3 cols on Desktop */}
       <div
         role="tabpanel"
         id={`panel-${activeTab}`}
         aria-labelledby={`tab-${activeTab}`}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 transition-opacity duration-300"
+        className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-6 md:pb-0 w-full max-w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden transition-opacity duration-300"
       >
         {activeServices.map((service) => (
           <div
             key={service.id}
-            className={`service-card group rounded-[16px] overflow-hidden border flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 ${
+            className={`service-card group rounded-[16px] overflow-hidden border flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 w-[85vw] max-w-[340px] shrink-0 snap-center md:w-auto md:max-w-none ${
               isLight
                 ? "bg-[#EFE7D7] border-[rgba(18,63,49,0.14)] shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
                 : "bg-[#123F31] border-[rgba(201,164,92,0.2)]"

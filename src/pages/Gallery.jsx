@@ -7,7 +7,7 @@ import BeforeAfter from "../components/BeforeAfter"
 import BookingBanner from "../components/BookingBanner"
 
 export default function Gallery() {
-  const { lang, t, l } = useLanguage()
+  const { t, l } = useLanguage()
   const [activeFilter, setActiveFilter] = useState("all")
   const [lightboxItem, setLightboxItem] = useState(null)
 
@@ -116,11 +116,11 @@ export default function Gallery() {
                     <div className="self-end w-9 h-9 rounded-full bg-[rgba(247,242,232,0.9)] text-[#0B2E24] flex items-center justify-center">
                       <MagnifyingGlassPlus size={18} weight="bold" />
                     </div>
-                    <div>
+                    <div className="w-full">
                       <span className="text-[13px] uppercase tracking-wider text-[#E3C88A] block font-medium">
-                        {item.category}
+                        {t.galleryCategories?.[item.category] || item.category}
                       </span>
-                      <h3 className="font-heading text-[18px] sm:text-[20px] text-[#F3ECDD] font-medium leading-snug">
+                      <h3 className="font-heading text-[16px] sm:text-[18px] text-[#F3ECDD] font-medium leading-snug truncate w-full">
                         {l(item.title)}
                       </h3>
                     </div>
@@ -168,7 +168,7 @@ export default function Gallery() {
             </div>
             <div className="mt-4 text-center">
               <span className="text-[13px] uppercase tracking-wider text-[#C9A45C] block mb-1">
-                {lightboxItem.category}
+                {t.galleryCategories?.[lightboxItem.category] || lightboxItem.category}
               </span>
               <h3 className="font-heading text-[22px] sm:text-[24px] text-[#F3ECDD]">
                 {l(lightboxItem.title)}

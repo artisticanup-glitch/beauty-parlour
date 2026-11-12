@@ -7,7 +7,7 @@ import BgVideo from "./BgVideo"
 gsap.registerPlugin(ScrollTrigger)
 
 export default function PinnedBridalDay() {
-  const { lang, t, l } = useLanguage()
+  const { t, l } = useLanguage()
   const sectionRef = useRef(null)
   const pinContainerRef = useRef(null)
   const [activeStep, setActiveStep] = useState(0)
@@ -57,14 +57,18 @@ export default function PinnedBridalDay() {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (prefersReducedMotion || !sectionRef.current) return
+    const isMobile = window.innerWidth < 1024
+    if (prefersReducedMotion || isMobile || !sectionRef.current || !pinContainerRef.current) {
+      return
+    }
 
     const totalSteps = steps.length
     const pinTrigger = ScrollTrigger.create({
       trigger: sectionRef.current,
-      start: "top top",
-      end: `+=${window.innerHeight * 3}`,
+      start: "top top+=88px",
+      end: `+=${window.innerHeight * 2.5}`,
       pin: pinContainerRef.current,
+      pinSpacing: true,
       scrub: 0.5,
       onUpdate: (self) => {
         const step = Math.min(totalSteps - 1, Math.floor(self.progress * totalSteps))
@@ -79,30 +83,31 @@ export default function PinnedBridalDay() {
 
   return (
     <section ref={sectionRef} className="relative bg-[#0B2E24] text-[#F3ECDD]">
+      {/* DESKTOP PINNED SECTION (≥1024px) - Fits inside 100dvh minus header */}
       <div
         ref={pinContainerRef}
-        className="min-h-screen flex items-center justify-center py-20 px-4"
+        className="hidden lg:flex flex-col justify-center h-[calc(100dvh-88px)] max-h-[calc(100dvh-88px)] px-6 overflow-hidden"
       >
-        <div className="site-container w-full">
-          {/* Section Header (Centered) */}
-          <div className="text-center max-w-[760px] mx-auto mb-12 sm:mb-16">
-            <span className="eyebrow block mb-3 text-[#C9A45C]">
+        <div className="site-container w-full my-auto">
+          {/* Section Header (Compact, never covered by sticky header) */}
+          <div className="text-center max-w-[720px] mx-auto mb-6">
+            <span className="eyebrow block mb-2 text-[#C9A45C]">
               {t.sections.bridalDayEyebrow}
             </span>
-            <h2 className="font-heading text-[clamp(2.1rem,4.2vw,3.75rem)] text-[#F3ECDD] leading-[1.05] mb-4">
+            <h2 className="font-heading text-[clamp(1.8rem,2.8vw,2.75rem)] text-[#F3ECDD] leading-[1.08] mb-2">
               {t.sections.bridalDayTitle}
             </h2>
-            <p className="text-[#C3CEC4] text-[clamp(1rem,1.1vw,1.125rem)] mx-auto leading-[1.65]">
+            <p className="text-[#C3CEC4] text-[15px] mx-auto leading-snug max-w-[58ch]">
               {t.sections.bridalDaySubtitle}
             </p>
           </div>
 
-          {/* Symmetrical 50/50 Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            {/* Left: Step Details + Progress Line (Vertically centered against photo) */}
-            <div className="relative pl-8 sm:pl-12 order-2 lg:order-1 flex flex-col justify-center h-full my-auto py-4">
-              {/* Thin Gold Progress Line at side */}
-              <div className="absolute left-0 top-2 bottom-2 w-[2px] bg-[rgba(201,164,92,0.2)]">
+          {/* Symmetrical 50/50 Grid (Video on Right, Text on Left) */}
+          <div className="grid grid-cols-2 gap-12 items-center max-w-[1040px] mx-auto">
+            {/* Left: Step Details + Progress Line */}
+            <div className="relative pl-10 flex flex-col justify-center">
+              {/* Thin Gold Progress Line */}
+              <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-[rgba(201,164,92,0.2)]">
                 <div
                   className="w-full bg-[#C9A45C] transition-all duration-300"
                   style={{
@@ -111,14 +116,14 @@ export default function PinnedBridalDay() {
                 />
               </div>
 
-              {/* Step Navigation Pill Selector */}
-              <div className="flex items-center gap-2 mb-6">
+              {/* Step Navigation Pill Selector (Min 44px touch targets) */}
+              <div className="flex items-center gap-3 mb-6">
                 {steps.map((st, i) => (
                   <button
                     key={st.id}
                     onClick={() => setActiveStep(i)}
                     type="button"
-                    className={`px-3.5 py-1.5 rounded-full text-[13px] font-medium tracking-wide transition-colors cursor-pointer border min-h-[36px] flex items-center justify-center ${
+                    className={`min-h-[44px] min-w-[48px] px-4 py-2 rounded-full text-[13px] font-medium tracking-wide transition-colors cursor-pointer border flex items-center justify-center ${
                       activeStep === i
                         ? "bg-[#C9A45C] text-[#08241C] border-[#C9A45C]"
                         : "bg-transparent text-[#C3CEC4] border-[rgba(201,164,92,0.3)] hover:text-[#F3ECDD]"
@@ -130,22 +135,22 @@ export default function PinnedBridalDay() {
               </div>
 
               {/* Step Content with crossfade transition */}
-              <div className="min-h-[170px] flex flex-col justify-center">
+              <div className="min-h-[160px] flex flex-col justify-center">
                 <span className="text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-semibold block mb-2">
                   {l(steps[activeStep].tag)}
                 </span>
-                <h3 className="font-heading text-[clamp(1.6rem,2.8vw,2.4rem)] text-[#F3ECDD] mb-3 leading-tight">
+                <h3 className="font-heading text-[clamp(1.5rem,2.4vw,2.2rem)] text-[#F3ECDD] mb-2 leading-tight">
                   {l(steps[activeStep].title)}
                 </h3>
-                <p className="text-[#C3CEC4] text-[16px] leading-relaxed max-w-[50ch]">
+                <p className="text-[#C3CEC4] text-[15px] leading-relaxed max-w-[48ch]">
                   {l(steps[activeStep].desc)}
                 </p>
               </div>
             </div>
 
             {/* Right: Crossfading Videos */}
-            <div className="order-1 lg:order-2 flex justify-center">
-              <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-[24px] overflow-hidden border border-[rgba(201,164,92,0.3)] shadow-[0_10px_30px_rgba(8,36,28,0.12)] bg-[#08241C]">
+            <div className="flex justify-center">
+              <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-[24px] overflow-hidden border border-[rgba(201,164,92,0.3)] shadow-[0_10px_30px_rgba(8,36,28,0.12)] bg-[#08241C]">
                 {steps.map((st, idx) => (
                   <div
                     key={st.id}
@@ -166,6 +171,59 @@ export default function PinnedBridalDay() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* MOBILE UNPINNED STACKED LIST (<1024px) - Clean normal scroll, no pinning */}
+      <div className="block lg:hidden py-16 px-4">
+        <div className="site-container">
+          <div className="text-center mb-10">
+            <span className="eyebrow block mb-2 text-[#C9A45C]">
+              {t.sections.bridalDayEyebrow}
+            </span>
+            <h2 className="font-heading text-[clamp(1.8rem,4.2vw,2.5rem)] text-[#F3ECDD] leading-[1.08] mb-3">
+              {t.sections.bridalDayTitle}
+            </h2>
+            <p className="text-[#C3CEC4] text-[14px] leading-relaxed">
+              {t.sections.bridalDaySubtitle}
+            </p>
+          </div>
+
+          <div className="space-y-12">
+            {steps.map((st, i) => (
+              <div
+                key={st.id}
+                className="bg-[#123F31] rounded-[20px] overflow-hidden border border-[rgba(201,164,92,0.2)] shadow-[0_10px_30px_rgba(8,36,28,0.12)]"
+              >
+                {/* 4:5 Video Card */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#08241C]">
+                  <BgVideo
+                    videoName={st.video}
+                    aspectRatio="4/5"
+                    rounded="rounded-none"
+                    overlay={true}
+                    isActive={true}
+                  />
+                  <div className="absolute top-3 left-3 bg-[#08241C] border border-[rgba(201,164,92,0.3)] rounded-full px-3 py-1 text-[13px] text-[#E3C88A] font-medium">
+                    0{i + 1}
+                  </div>
+                </div>
+
+                {/* Text Content */}
+                <div className="p-6 text-left">
+                  <span className="text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-semibold block mb-1">
+                    {l(st.tag)}
+                  </span>
+                  <h3 className="font-heading text-[22px] text-[#F3ECDD] mb-2 leading-tight">
+                    {l(st.title)}
+                  </h3>
+                  <p className="text-[#C3CEC4] text-[14px] leading-relaxed">
+                    {l(st.desc)}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

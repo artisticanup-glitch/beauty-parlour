@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { Check, WhatsappLogo, WarningCircle } from "@phosphor-icons/react"
 import { services } from "../data/services"
@@ -6,31 +6,26 @@ import { siteData } from "../data/site"
 import { useLanguage } from "../i18n/LanguageContext"
 import Button from "./Button"
 
+const TODAY_ISO = "2026-11-13"
+
 export default function BookingForm() {
   const { lang, t, l } = useLanguage()
   const [searchParams] = useSearchParams()
 
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    date: "",
-    serviceId: "",
-    message: "",
+  const [formData, setFormData] = useState(() => {
+    const preService = searchParams.get("service")
+    const match = preService ? services.find((s) => s.id === preService) : null
+    return {
+      name: "",
+      phone: "",
+      date: "",
+      serviceId: match ? match.id : "",
+      message: "",
+    }
   })
 
   const [errors, setErrors] = useState({})
   const [isSuccess, setIsSuccess] = useState(false)
-
-  // Pre-fill service from URL if provided (e.g. ?service=hd-bridal-makeup)
-  useEffect(() => {
-    const preService = searchParams.get("service")
-    if (preService) {
-      const match = services.find((s) => s.id === preService)
-      if (match) {
-        setFormData((prev) => ({ ...prev, serviceId: match.id }))
-      }
-    }
-  }, [searchParams])
 
   const validate = () => {
     const newErrors = {}
@@ -185,7 +180,7 @@ export default function BookingForm() {
             id="date"
             name="date"
             value={formData.date}
-            min={new Date().toISOString().split("T")[0]}
+            min={TODAY_ISO}
             onChange={handleChange}
             className={`w-full px-4 py-3.5 rounded-[12px] bg-[#F7F2E8] text-[#15251F] border text-[15px] outline-none transition-colors ${
               errors.date

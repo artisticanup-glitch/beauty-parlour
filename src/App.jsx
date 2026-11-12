@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { Routes, Route, useLocation } from "react-router-dom"
 import Lenis from "lenis"
 import { LanguageProvider } from "./i18n/LanguageContext"
@@ -31,8 +31,6 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  const [preloaderDone, setPreloaderDone] = useState(false)
-
   // Lenis smooth scrolling (duration 1.1, disabled on reduced motion & native touch)
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -68,7 +66,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <div className="min-h-screen flex flex-col bg-[#0B2E24] text-[#F3ECDD]">
-        <Preloader onComplete={() => setPreloaderDone(true)} />
+        <Preloader />
         <PageTransition />
         <Cursor />
         <ScrollToTop />

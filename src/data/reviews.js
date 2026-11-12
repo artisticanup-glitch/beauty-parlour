@@ -33,8 +33,8 @@ export const reviews = [
       hi: "स्टेशन रोड, मोतिहारी",
     },
     service: {
-      en: "Airbrush Bridal & Saree Draping",
-      hi: "एयरब्रश ब्राइडल व साड़ी ड्रेपिंग",
+      en: "Airbrush Bridal",
+      hi: "एयरब्रश ब्राइडल",
     },
     date: {
       en: "November 2025",

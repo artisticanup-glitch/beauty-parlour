@@ -37,6 +37,16 @@ export const en = {
     backHome: "Return to Home",
   },
 
+  // Gallery Categories
+  galleryCategories: {
+    bridal: "Bridal",
+    mehendi: "Mehendi",
+    party: "Party",
+    hair: "Hair",
+    skin: "Skin",
+    all: "All",
+  },
+
   // Home Hero
   hero: {
     eyebrow: "Motihari's Bridal Studio",
@@ -50,23 +60,23 @@ export const en = {
   // Promises (Intro on Home)
   intro: {
     eyebrow: "Our Promise to You",
-    title: "Dedicated bridal care in the heart of Motihari",
+    title: "Dedicated Bridal Care in Motihari",
     paragraph: "We believe wedding preparations deserve patience, immaculate cleanliness, and natural artistry that honors your heritage.",
     promises: [
       {
-        title: "Branded products only",
+        title: "Branded Products",
         desc: "Authentic MAC, Huda Beauty & Kryolan opened freshly before you.",
       },
       {
-        title: "Fresh kit for every client",
+        title: "Fresh Sanitised Kits",
         desc: "Sanitised brushes, single-use sponges, and sterilized tools.",
       },
       {
-        title: "Bridal trials available",
+        title: "Bridal Trials",
         desc: "Test your foundation shade and jewellery arrangement before the day.",
       },
       {
-        title: "Home service for brides",
+        title: "Home Service",
         desc: "Our senior makeup artists travel to your home or wedding venue.",
       },
     ],
@@ -236,7 +246,7 @@ export const en = {
       {
         name: "Kavita Kumari",
         role: "Senior Mehendi Artist",
-        bio: "Master of traditional Rajasthani bridal figures and organic henna cone crafting.",
+        bio: "Master of traditional Rajasthani bridal figures and organic henna art.",
         image: "/images/team-4.webp",
       },
     ],

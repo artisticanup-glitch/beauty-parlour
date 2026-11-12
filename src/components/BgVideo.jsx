@@ -11,7 +11,12 @@ export default function BgVideo({
 }) {
   const videoRef = useRef(null)
   const containerRef = useRef(null)
-  const [shouldPlayVideo, setShouldPlayVideo] = useState(true)
+  const [shouldPlayVideo] = useState(() => {
+    if (typeof window === "undefined") return true
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const saveData = navigator.connection?.saveData === true
+    return !(prefersReducedMotion || saveData)
+  })
   const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth <= 768)
 
   // Ensure DOM element has muted and defaultMuted set for strict mobile autoplay policies
@@ -22,18 +27,8 @@ export default function BgVideo({
     }
   }, [])
 
-  // Detect mobile, Data Saver & prefers-reduced-motion
+  // Detect mobile resize
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const saveData = navigator.connection?.saveData === true
-    const mobileCheck = window.innerWidth <= 768
-    setIsMobile(mobileCheck)
-
-    if (prefersReducedMotion || saveData) {
-      setShouldPlayVideo(false)
-      return
-    }
-
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768)
     }

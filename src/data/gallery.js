@@ -22,8 +22,8 @@ export const galleryItems = [
     id: "g2",
     category: "bridal",
     title: {
-      en: "Reception Glow & Matha Patti Setting",
-      hi: "रिसेप्शन निखार और माथा पट्टी सज्जा",
+      en: "Reception Glow & Matha Patti",
+      hi: "रिसेप्शन निखार व माथा पट्टी",
     },
     src: "/images/gallery-02.webp",
     aspect: "4/5",
@@ -42,8 +42,8 @@ export const galleryItems = [
     id: "g4",
     category: "party",
     title: {
-      en: "HD Sister-of-the-Bride Makeup",
-      hi: "दुल्हन की बहन के लिए एचडी मेकअप",
+      en: "HD Sister-of-the-Bride Look",
+      hi: "दुल्हन की बहन का एचडी लुक",
     },
     src: "/images/gallery-04.webp",
     aspect: "4/5",
@@ -63,7 +63,7 @@ export const galleryItems = [
     category: "hair",
     title: {
       en: "Rose Petal Bridal Floral Bun",
-      hi: "गुलाब की पंखुड़ियों से सजा ब्राइडल जूड़ा",
+      hi: "गुलाब पंखुड़ी ब्राइडल जूड़ा",
     },
     src: "/images/gallery-06.webp",
     aspect: "4/5",
@@ -72,8 +72,8 @@ export const galleryItems = [
     id: "g7",
     category: "bridal",
     title: {
-      en: "Airbrush Finish with Red Dupatta",
-      hi: "लाल चुनरी के साथ एयरब्रश फिनिश",
+      en: "Airbrush Finish & Red Dupatta",
+      hi: "लाल चुनरी एयरब्रश फिनिश",
     },
     src: "/images/gallery-07.webp",
     aspect: "4/5",
@@ -83,7 +83,7 @@ export const galleryItems = [
     category: "hair",
     title: {
       en: "Silk Waves & Hair Treatment",
-      hi: "सिल्क वेव्स और डीप हेयर केयर",
+      hi: "सिल्क वेव्स हेयर ट्रीटमेंट",
     },
     src: "/images/gallery-08.webp",
     aspect: "4/5",
@@ -92,8 +92,8 @@ export const galleryItems = [
     id: "g9",
     category: "bridal",
     title: {
-      en: "Haldi Radiant Glow & Marigold Styling",
-      hi: "हल्दी रस्म का निखार व गेंदा सज्जा",
+      en: "Haldi Radiant Glow & Flowers",
+      hi: "हल्दी रस्म निखार व पुष्प सज्जा",
     },
     src: "/images/gallery-09.webp",
     aspect: "4/5",

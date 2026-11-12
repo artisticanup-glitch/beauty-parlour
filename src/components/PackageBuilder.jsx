@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { Check, Plus, Minus, WhatsappLogo } from "@phosphor-icons/react"
-import { bridalPackageItems } from "../data/packages"
 import { siteData } from "../data/site"
 import { useLanguage } from "../i18n/LanguageContext"
 import Button from "./Button"
 
 export default function PackageBuilder() {
-  const { lang, t, l } = useLanguage()
+  const { lang, t } = useLanguage()
 
   // State
   const [selectedItems, setSelectedItems] = useState({

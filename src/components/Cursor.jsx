@@ -4,20 +4,17 @@ import { gsap } from "gsap"
 export default function Cursor() {
   const cursorRef = useRef(null)
   const textRef = useRef(null)
-  const [isEnabled, setIsEnabled] = useState(false)
-  const [isHoveringMedia, setIsHoveringMedia] = useState(false)
-
-  useEffect(() => {
-    // Only enable on desktop pointer devices
+  const [isEnabled] = useState(() => {
+    if (typeof window === "undefined") return false
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     const isDesktop = window.innerWidth >= 1024
+    return !isTouch && !prefersReducedMotion && isDesktop
+  })
+  const [isHoveringMedia, setIsHoveringMedia] = useState(false)
 
-    if (isTouch || prefersReducedMotion || !isDesktop) {
-      return
-    }
-
-    setIsEnabled(true)
+  useEffect(() => {
+    if (!isEnabled) return
 
     const cursor = cursorRef.current
     if (!cursor) return
@@ -48,7 +45,7 @@ export default function Cursor() {
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("mouseover", handleMouseOver)
     }
-  }, [])
+  }, [isEnabled])
 
   if (!isEnabled) return null
 

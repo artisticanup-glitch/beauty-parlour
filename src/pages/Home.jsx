@@ -128,10 +128,10 @@ export default function Home() {
 
   // 4 Promise icons for Intro section
   const promiseIcons = [
-    <Sparkle size={28} weight="light" className="text-[#C9A45C]" />,
-    <ShieldCheck size={28} weight="light" className="text-[#C9A45C]" />,
-    <CalendarCheck size={28} weight="light" className="text-[#C9A45C]" />,
-    <House size={28} weight="light" className="text-[#C9A45C]" />,
+    <Sparkle key="sparkle" size={28} weight="light" className="text-[#C9A45C]" />,
+    <ShieldCheck key="shield" size={28} weight="light" className="text-[#C9A45C]" />,
+    <CalendarCheck key="calendar" size={28} weight="light" className="text-[#C9A45C]" />,
+    <House key="house" size={28} weight="light" className="text-[#C9A45C]" />,
   ]
 
   return (
@@ -141,7 +141,7 @@ export default function Home() {
          ===================================================================== */}
       <section
         ref={heroRef}
-        className="relative w-full h-[100dvh] min-h-[600px] flex items-center justify-center text-center overflow-hidden bg-[#0B2E24]"
+        className="relative w-full h-[100dvh] min-h-[600px] flex items-end justify-center text-center overflow-hidden bg-[#0B2E24] pb-14 sm:pb-20"
       >
         {/* Background video with scale tween */}
         <div ref={heroVideoRef} className="absolute inset-0 z-0 w-full h-full">
@@ -150,66 +150,68 @@ export default function Home() {
             aspectRatio="16/9"
             isHero={true}
             rounded="rounded-none"
-            overlay={true}
+            overlay={false}
             className="!h-full"
           />
         </div>
 
-        {/* Hero Content (Centred) */}
-        <div className="relative z-10 site-container max-w-[880px] px-4 pt-12">
-          <div ref={heroEyebrowRef} className="mb-4">
-            <span className="eyebrow inline-block bg-[rgba(8,36,28,0.7)] border border-[rgba(201,164,92,0.35)] px-4 py-1.5 rounded-full text-[13px] text-[#E3C88A]">
-              {t.hero.eyebrow}
-            </span>
-          </div>
+        {/* Hero Content (Positioned in bottom third with flat emerald shade behind text area only) */}
+        <div className="relative z-10 site-container max-w-[840px] px-4 w-full">
+          <div className="bg-[rgba(8,36,28,0.78)] border border-[rgba(201,164,92,0.3)] rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_10px_30px_rgba(8,36,28,0.25)]">
+            <div ref={heroEyebrowRef} className="mb-3">
+              <span className="eyebrow inline-block bg-[#0B2E24] border border-[rgba(201,164,92,0.35)] px-4 py-1.5 rounded-full text-[13px] text-[#E3C88A]">
+                {t.hero.eyebrow}
+              </span>
+            </div>
 
-          <h1
-            ref={heroTitleRef}
-            className="font-heading text-[#F3ECDD] mb-6 tracking-tight leading-[0.95]"
-            style={{ fontSize: "clamp(2.75rem, 7vw, 6.5rem)" }}
-          >
-            {t.hero.title}
-          </h1>
-
-          <p
-            ref={heroSubtitleRef}
-            className="mx-auto mb-10 text-[#F3ECDD] opacity-95 leading-[1.65] max-w-[58ch]"
-            style={{ fontSize: "clamp(1.05rem, 1.3vw, 1.25rem)" }}
-          >
-            {t.hero.subtitle}
-          </p>
-
-          <div
-            ref={heroButtonsRef}
-            className="flex flex-wrap items-center justify-center gap-4"
-          >
-            <Button to="/booking" variant="primary">
-              {t.hero.bookBtn}
-            </Button>
-            <Button
-              href={`https://wa.me/${siteData.whatsappNumber}`}
-              variant="secondary-dark"
+            <h1
+              ref={heroTitleRef}
+              className="font-heading text-[#F3ECDD] mb-3 tracking-tight leading-[0.98] whitespace-nowrap"
+              style={{ fontSize: lang === "hi" ? "clamp(1.75rem, 5.2vw, 4.75rem)" : "clamp(2.1rem, 5.8vw, 5.25rem)" }}
             >
-              <WhatsappLogo size={18} weight="light" className="text-[#C9A45C]" />
-              <span>{t.hero.whatsappBtn}</span>
-            </Button>
+              {t.hero.title}
+            </h1>
+
+            <p
+              ref={heroSubtitleRef}
+              className="mx-auto mb-7 text-[#F3ECDD] opacity-95 leading-[1.6] max-w-[56ch]"
+              style={{ fontSize: "clamp(1.05rem, 1.25vw, 1.25rem)" }}
+            >
+              {t.hero.subtitle}
+            </p>
+
+            <div
+              ref={heroButtonsRef}
+              className="flex flex-wrap items-center justify-center gap-4"
+            >
+              <Button to="/booking" variant="primary">
+                {t.hero.bookBtn}
+              </Button>
+              <Button
+                href={`https://wa.me/${siteData.whatsappNumber}`}
+                variant="secondary-dark"
+              >
+                <WhatsappLogo size={18} weight="light" className="text-[#C9A45C]" />
+                <span>{t.hero.whatsappBtn}</span>
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Small Scroll Cue at bottom centre */}
         <div
           ref={heroScrollRef}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 text-[#E3C88A] pointer-events-none"
+          className="hidden md:flex absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-1 text-[#E3C88A] pointer-events-none"
         >
           <span className="text-[13px] uppercase tracking-[0.16em] font-medium opacity-80">
             {t.hero.scrollText}
           </span>
-          <CaretDown size={18} weight="light" className="animate-bounce" />
+          <CaretDown size={16} weight="light" className="animate-bounce" />
         </div>
       </section>
 
       {/* =====================================================================
-          2. INTRO (Ivory) — centred H2 + short paragraph + 4 equal promise items
+          2. INTRO (Ivory) — centred H2 + short paragraph + 4 equal promise items (2x2 on mobile)
          ===================================================================== */}
       <section className="section-ivory section-padding border-t border-[rgba(18,63,49,0.14)]">
         <div className="site-container">
@@ -218,23 +220,23 @@ export default function Home() {
             title={t.intro.title}
             subtitle={t.intro.paragraph}
             theme="light"
-            className="mb-16"
+            className="mb-14 sm:mb-16"
           />
 
-          {/* Row of 4 Equal Promise Items */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          {/* 2x2 Compact Grid on Mobile, 4 Equal Columns on Desktop */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 lg:gap-8">
             {t.intro.promises.map((promise, index) => (
               <div
                 key={index}
-                className="reveal-card p-6 sm:p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.12)] text-center flex flex-col items-center justify-start shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
+                className="reveal-card p-4 sm:p-7 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.12)] text-center flex flex-col items-center justify-start shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
               >
-                <div className="w-14 h-14 rounded-full bg-[#F7F2E8] border border-[rgba(18,63,49,0.14)] flex items-center justify-center mb-5">
+                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-[#F7F2E8] border border-[rgba(18,63,49,0.14)] flex items-center justify-center mb-3 sm:mb-5 shrink-0">
                   {promiseIcons[index]}
                 </div>
-                <h3 className="font-heading text-[20px] text-[#0B2E24] mb-2 font-semibold">
+                <h3 className="font-heading text-[16px] sm:text-[20px] text-[#0B2E24] mb-1.5 font-semibold truncate w-full">
                   {promise.title}
                 </h3>
-                <p className="text-[#4E5F57] text-[14px] leading-relaxed">
+                <p className="text-[#4E5F57] text-[13px] sm:text-[14px] leading-relaxed">
                   {promise.desc}
                 </p>
               </div>

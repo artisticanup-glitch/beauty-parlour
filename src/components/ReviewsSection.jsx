@@ -42,11 +42,11 @@ export default function ReviewsSection() {
         </div>
 
         {/* 3 Equal Review Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {currentReviews.map((rev) => (
             <div
               key={rev.id}
-              className="bg-[#123F31] rounded-[16px] p-8 border border-[rgba(201,164,92,0.2)] flex flex-col justify-between shadow-[0_10px_30px_rgba(8,36,28,0.12)] min-h-[300px]"
+              className="bg-[#123F31] rounded-[16px] p-8 border border-[rgba(201,164,92,0.2)] flex flex-col justify-between shadow-[0_10px_30px_rgba(8,36,28,0.12)] h-full"
             >
               <div>
                 <Quotes size={32} weight="light" className="text-[#C9A45C] mb-4 opacity-80" />
@@ -55,16 +55,16 @@ export default function ReviewsSection() {
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[rgba(201,164,92,0.18)] flex items-center justify-between">
-                <div>
-                  <h4 className="font-heading text-[18px] text-[#F3ECDD] font-medium">
+              <div className="pt-4 border-t border-[rgba(201,164,92,0.18)] flex items-center justify-between gap-3 mt-auto">
+                <div className="min-w-0">
+                  <h4 className="font-heading text-[18px] text-[#F3ECDD] font-medium truncate">
                     {l(rev.author)}
                   </h4>
-                  <span className="text-[13px] text-[#C9A45C] block">
+                  <span className="text-[13px] text-[#C9A45C] block truncate">
                     {l(rev.location)}
                   </span>
                 </div>
-                <span className="text-[13px] text-[#C3CEC4] bg-[#08241C] border border-[rgba(201,164,92,0.2)] rounded-full px-3 py-1">
+                <span className="text-[13px] text-[#C3CEC4] bg-[#08241C] border border-[rgba(201,164,92,0.2)] rounded-full px-3 py-1 whitespace-nowrap shrink-0">
                   {l(rev.service)}
                 </span>
               </div>

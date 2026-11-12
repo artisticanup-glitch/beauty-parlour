@@ -4,7 +4,7 @@ import { useLanguage } from "../i18n/LanguageContext"
 import BgVideo from "./BgVideo"
 
 export default function HygieneProducts({ theme = "light" }) {
-  const { lang, t, l } = useLanguage()
+  const { t, l } = useLanguage()
   const isDark = theme === "dark"
 
   const brands = [

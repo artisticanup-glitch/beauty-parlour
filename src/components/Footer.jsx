@@ -12,6 +12,8 @@ import {
 import { useLanguage } from "../i18n/LanguageContext"
 import { siteData } from "../data/site"
 
+const CURRENT_YEAR = 2026
+
 export default function Footer() {
   const { lang, t, l } = useLanguage()
 
@@ -19,24 +21,24 @@ export default function Footer() {
     <footer className="bg-[#08241C] text-[#F3ECDD] border-t border-[rgba(201,164,92,0.2)]">
       <div className="site-container py-16 sm:py-20">
         {/* Centred Wordmark & Tagline */}
-        <div className="text-center pb-12 sm:pb-16 border-b border-[rgba(201,164,92,0.18)]">
-          <Link to="/" className="inline-block group" aria-label="Roop Nikhar Home">
-            <span className="font-heading text-[34px] sm:text-[44px] text-[#F3ECDD] tracking-[0.04em] block transition-colors group-hover:text-[#E3C88A]">
+        <div className="flex flex-col items-center justify-center text-center pb-12 sm:pb-16 border-b border-[rgba(201,164,92,0.18)]">
+          <Link to="/" className="inline-block group text-center" aria-label="Roop Nikhar Home">
+            <span className="font-heading text-[34px] sm:text-[44px] text-[#F3ECDD] tracking-[0.04em] block transition-colors group-hover:text-[#E3C88A] text-center">
               {l(siteData.name)}
             </span>
           </Link>
-          <p className="text-[14px] uppercase tracking-[0.2em] text-[#C9A45C] mt-2 font-medium">
-            {l(siteData.tagline)} • {lang === "hi" ? "मोतिहारी" : "Motihari"}
+          <p className={`text-[14px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.2em]"} text-[#C9A45C] mt-2 font-medium text-center`}>
+            {l(siteData.tagline)} · {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
           </p>
         </div>
 
         {/* 3 Equal Symmetrical Columns with Centered Text */}
         <div
-          className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-10 py-12 sm:py-16 text-center border-b border-[rgba(201,164,92,0.18)]"
-          style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-10 py-12 sm:py-16 text-center border-b border-[rgba(201,164,92,0.18)] w-full"
+          style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))" }}
         >
           {/* Column 1: Visit us */}
-          <div className="flex flex-col items-center text-center space-y-4">
+          <div className="w-full flex flex-col items-center justify-start text-center space-y-4">
             <div className="flex items-center justify-center gap-2 text-[#C9A45C]">
               <MapPin size={20} weight="light" />
               <span className="text-[13px] uppercase tracking-[0.14em] font-medium">
@@ -58,7 +60,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Hours & Contact */}
-          <div className="flex flex-col items-center text-center space-y-4">
+          <div className="w-full flex flex-col items-center justify-start text-center space-y-4">
             <div className="flex items-center justify-center gap-2 text-[#C9A45C]">
               <Clock size={20} weight="light" />
               <span className="text-[13px] uppercase tracking-[0.14em] font-medium">
@@ -79,59 +81,67 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3: Quick links */}
-          <div className="flex flex-col items-center text-center space-y-4">
-            <span className="text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-medium">
+          {/* Column 3: Quick links (All 8 links in 2 neat columns) */}
+          <div className="w-full flex flex-col items-center justify-start text-center space-y-4">
+            <span className="text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-medium block">
               {t.nav.menu}
             </span>
-            <ul className="space-y-2.5 text-[15px]">
-              <li>
-                <Link
-                  to="/bridal"
-                  className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
-                >
-                  {t.nav.bridal}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/services"
-                  className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
-                >
-                  {t.nav.services}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/pricing"
-                  className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
-                >
-                  {t.nav.pricing}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/gallery"
-                  className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
-                >
-                  {t.nav.gallery}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/booking"
-                  className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
-                >
-                  {t.nav.bookNow}
-                </Link>
-              </li>
-            </ul>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2.5 text-[15px] text-center w-full max-w-[280px]">
+              <Link
+                to="/"
+                className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+              >
+                {t.nav.home}
+              </Link>
+              <Link
+                to="/gallery"
+                className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+              >
+                {t.nav.gallery}
+              </Link>
+              <Link
+                to="/services"
+                className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+              >
+                {t.nav.services}
+              </Link>
+              <Link
+                to="/about"
+                className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+              >
+                {t.nav.about}
+              </Link>
+              <Link
+                to="/bridal"
+                className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+              >
+                {t.nav.bridal}
+              </Link>
+              <Link
+                to="/contact"
+                className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+              >
+                {t.nav.contact}
+              </Link>
+              <Link
+                to="/pricing"
+                className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+              >
+                {t.nav.pricing}
+              </Link>
+              <Link
+                to="/booking"
+                className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+              >
+                {t.nav.bookNow}
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Socials & Copyright on ONE Centred Row */}
-        <div className="pt-10 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 text-center text-[13px] text-[#C3CEC4]">
-          <div className="flex items-center gap-6 text-[#C9A45C]">
+        {/* Socials & Copyright: Centered & Stacked */}
+        <div className="pt-10 flex flex-col items-center justify-center gap-4 text-center text-[13px] text-[#C3CEC4]">
+          <div className="flex items-center justify-center gap-6 text-[#C9A45C]">
             <a
               href={siteData.socials.instagram}
               target="_blank"
@@ -161,10 +171,8 @@ export default function Footer() {
             </a>
           </div>
 
-          <span className="hidden sm:inline-block text-[#C9A45C] opacity-40">•</span>
-
-          <p>
-            © {new Date().getFullYear()} {l(siteData.name)} • {lang === "hi" ? "मोतिहारी, बिहार" : "Motihari, Bihar"}
+          <p className="m-0">
+            © {CURRENT_YEAR} {l(siteData.name)} • {lang === "hi" ? "मोतिहारी, बिहार" : "Motihari, Bihar"}
           </p>
         </div>
       </div>

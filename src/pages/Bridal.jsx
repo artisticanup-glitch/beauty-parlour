@@ -6,7 +6,6 @@ import {
   FlowerLotus,
   BookmarkSimple,
   Crown,
-  CheckCircle,
   WhatsappLogo,
   PhoneCall,
 } from "@phosphor-icons/react"
@@ -18,7 +17,6 @@ import { faqData } from "../data/faq"
 import SectionHeading from "../components/SectionHeading"
 import Button from "../components/Button"
 import PackageBuilder from "../components/PackageBuilder"
-import BgVideo from "../components/BgVideo"
 import BeforeAfter from "../components/BeforeAfter"
 import BookingBanner from "../components/BookingBanner"
 
@@ -26,12 +24,12 @@ export default function Bridal() {
   const { lang, t, l } = useLanguage()
 
   const includedIcons = [
-    <Sparkle size={26} weight="light" className="text-[#C9A45C]" />,
-    <PaintBrush size={26} weight="light" className="text-[#C9A45C]" />,
-    <Eye size={26} weight="light" className="text-[#C9A45C]" />,
-    <FlowerLotus size={26} weight="light" className="text-[#C9A45C]" />,
-    <BookmarkSimple size={26} weight="light" className="text-[#C9A45C]" />,
-    <Crown size={26} weight="light" className="text-[#C9A45C]" />,
+    <Sparkle key="sparkle" size={26} weight="light" className="text-[#C9A45C]" />,
+    <PaintBrush key="brush" size={26} weight="light" className="text-[#C9A45C]" />,
+    <Eye key="eye" size={26} weight="light" className="text-[#C9A45C]" />,
+    <FlowerLotus key="flower" size={26} weight="light" className="text-[#C9A45C]" />,
+    <BookmarkSimple key="bookmark" size={26} weight="light" className="text-[#C9A45C]" />,
+    <Crown key="crown" size={26} weight="light" className="text-[#C9A45C]" />,
   ]
 
   // Filter 4 bridal-specific FAQs
@@ -97,9 +95,9 @@ export default function Bridal() {
       <section className="section-emerald section-padding border-t border-[rgba(201,164,92,0.18)]">
         <div className="site-container">
           <SectionHeading
-            eyebrow={t.bridalPage.heroEyebrow}
+            eyebrow={t.bridalPage.includedEyebrow || (lang === "hi" ? "संपूर्ण ब्राइडल शृंगार" : "Complete Care Ritual")}
             title={t.bridalPage.includedHeading}
-            subtitle={t.bridalPage.heroSubtitle}
+            subtitle={t.bridalPage.includedSubtitle || (lang === "hi" ? "आपके विवाह के पावन उत्सव के लिए हर सूक्ष्म विवरण का विशेष ध्यान।" : "Every nuance curated with calm precision for your sacred wedding festivities.")}
             theme="dark"
             className="mb-16"
           />
@@ -125,7 +123,7 @@ export default function Bridal() {
         </div>
       </section>
 
-      {/* 4. Bridal Trial Process 50/50 with makeup-process.mp4 (Ivory) */}
+      {/* 4. Bridal Trial Process 50/50 with trial image (Ivory) */}
       <section className="section-ivory section-padding border-t border-[rgba(18,63,49,0.14)]">
         <div className="site-container">
           <SectionHeading
@@ -136,21 +134,23 @@ export default function Bridal() {
             className="mb-16"
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left: makeup-process.mp4 video */}
-            <div className="w-full flex justify-center">
-              <div className="w-full max-w-[440px] aspect-[4/5] rounded-[24px] overflow-hidden border border-[rgba(18,63,49,0.2)] shadow-[0_10px_30px_rgba(8,36,28,0.12)] bg-[#EFE7D7]">
-                <BgVideo
-                  videoName="makeup-process"
-                  aspectRatio="4/5"
-                  rounded="rounded-none"
-                  overlay={false}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+            {/* Left: Indian bridal trial image, matching height of 4 steps column */}
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="w-full h-full min-h-[440px] rounded-[24px] overflow-hidden border border-[rgba(18,63,49,0.2)] shadow-[0_10px_30px_rgba(8,36,28,0.12)] bg-[#EFE7D7]">
+                <img
+                  src="/images/bridal-trial.webp"
+                  alt={lang === "hi" ? "ब्राइडल ट्रायल सत्र" : "Bridal Trial Session"}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  width={640}
+                  height={800}
                 />
               </div>
             </div>
 
             {/* Right: 4 Numbered Steps */}
-            <div className="space-y-6 text-left">
+            <div className="flex flex-col justify-between space-y-5 text-left">
               {t.bridalPage.trialSteps.map((step) => (
                 <div
                   key={step.number}
@@ -219,7 +219,10 @@ export default function Bridal() {
                 key={item.id}
                 className="p-6 sm:p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.12)] text-left"
               >
-                <h3 className="font-heading text-[20px] sm:text-[22px] text-[#0B2E24] mb-3 leading-snug">
+                <h3
+                  className="font-heading text-[#0B2E24] mb-3 leading-snug w-full whitespace-normal lg:whitespace-nowrap overflow-hidden text-ellipsis"
+                  style={{ fontSize: "clamp(1.15rem, 1.4vw, 1.35rem)" }}
+                >
                   {l(item.question)}
                 </h3>
                 <p className="text-[#4E5F57] text-[15px] leading-relaxed">

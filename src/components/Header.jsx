@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
-import { List, X, PhoneCall, WhatsappLogo, InstagramLogo, FacebookLogo } from "@phosphor-icons/react"
+import { List, X, WhatsappLogo, InstagramLogo, FacebookLogo } from "@phosphor-icons/react"
 import { useLanguage } from "../i18n/LanguageContext"
 import { siteData } from "../data/site"
 import Button from "./Button"
@@ -11,10 +11,12 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
 
-  // Close mobile menu on route change
-  useEffect(() => {
+  // Close mobile menu on route change without cascading effect render
+  const [prevPath, setPrevPath] = useState(location.pathname)
+  if (prevPath !== location.pathname) {
+    setPrevPath(location.pathname)
     setMobileMenuOpen(false)
-  }, [location.pathname])
+  }
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -104,7 +106,9 @@ export default function Header() {
             >
               {l(siteData.name)}
             </span>
-            <span className="text-[13px] uppercase tracking-[0.25em] text-[#C9A45C] mt-0.5 font-medium">
+            <span
+              className={`text-[13px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.25em]"} text-[#C9A45C] mt-0.5 font-medium`}
+            >
               {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
             </span>
           </Link>
@@ -140,7 +144,7 @@ export default function Header() {
             <button
               onClick={toggleLang}
               type="button"
-              className="px-2.5 py-1 text-[13px] tracking-wider rounded-md border border-[rgba(201,164,92,0.35)] text-[#E3C88A] hover:bg-[#123F31] transition-colors shrink-0 whitespace-nowrap"
+              className="min-h-[44px] px-3.5 py-2 text-[13px] tracking-wider rounded-md border border-[rgba(201,164,92,0.35)] text-[#E3C88A] hover:bg-[#123F31] transition-colors shrink-0 whitespace-nowrap flex items-center justify-center"
               aria-label="Switch Language between English and Hindi"
             >
               {lang === "en" ? (
@@ -168,7 +172,7 @@ export default function Header() {
             <span className="font-heading text-[24px] leading-tight text-[#F3ECDD]">
               {l(siteData.name)}
             </span>
-            <span className="text-[13px] uppercase tracking-[0.22em] text-[#C9A45C]">
+            <span className={`text-[13px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.22em]"} text-[#C9A45C]`}>
               {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
             </span>
           </Link>
@@ -178,7 +182,8 @@ export default function Header() {
             <button
               onClick={toggleLang}
               type="button"
-              className="px-2 py-1 text-[13px] rounded border border-[rgba(201,164,92,0.35)] text-[#E3C88A]"
+              style={{ minHeight: "44px", height: "44px", minWidth: "56px" }}
+              className="px-3 text-[13px] rounded-[10px] border border-[rgba(201,164,92,0.35)] text-[#E3C88A] flex items-center justify-center font-medium shrink-0"
               aria-label="Toggle language"
             >
               {lang === "en" ? "EN | हिं" : "हिं | EN"}
@@ -187,7 +192,8 @@ export default function Header() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
-              className="w-12 h-12 flex items-center justify-center rounded-[12px] bg-[#123F31] text-[#E3C88A] border border-[rgba(201,164,92,0.3)]"
+              style={{ minHeight: "44px", height: "44px", minWidth: "44px", width: "44px" }}
+              className="flex items-center justify-center rounded-[12px] bg-[#123F31] text-[#E3C88A] border border-[rgba(201,164,92,0.3)] shrink-0"
               aria-label={mobileMenuOpen ? t.nav.close : t.nav.menu}
             >
               {mobileMenuOpen ? (

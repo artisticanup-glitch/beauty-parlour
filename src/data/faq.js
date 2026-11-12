@@ -2,8 +2,8 @@ export const faqData = [
   {
     id: "faq-1",
     question: {
-      en: "How many months in advance should I book my bridal date?",
-      hi: "शादी की तारीख के कितने समय पहले बुकिंग करवानी चाहिए?",
+      en: "How many months in advance should I book?",
+      hi: "शादी की तारीख के कितने पहले बुकिंग कराएं?",
     },
     answer: {
       en: "For wedding lagan dates (November to March, May to July), we recommend booking 2 to 3 months in advance. We take only 2 brides per slot to give each bride dedicated attention.",
@@ -13,8 +13,8 @@ export const faqData = [
   {
     id: "faq-2",
     question: {
-      en: "What cosmetic brands do you use for bridal makeup?",
-      hi: "ब्राइडल मेकअप के लिए आप किन ब्रांड्स के कॉस्मेटिक्स का उपयोग करते हैं?",
+      en: "Which cosmetic brands do you use for bridal makeup?",
+      hi: "ब्राइडल मेकअप के लिए किन ब्रांड्स का उपयोग होता है?",
     },
     answer: {
       en: "We use only authentic, international professional makeup including MAC, Huda Beauty, Kryolan Professional, Estée Lauder, and PAC. Every product is opened and sanitised in front of you.",
@@ -24,8 +24,8 @@ export const faqData = [
   {
     id: "faq-3",
     question: {
-      en: "Do you offer bridal trials before the wedding day?",
-      hi: "क्या शादी से पहले ब्राइडल ट्रायल की सुविधा उपलब्ध है?",
+      en: "Do you offer bridal trials before the wedding?",
+      hi: "क्या शादी से पहले ब्राइडल ट्रायल की सुविधा है?",
     },
     answer: {
       en: "Yes. Bridal trials can be booked on weekdays. We test foundation shades matching your skin undertone, discuss your lehenga jewellery setup, and finalize the eye makeup palette.",
@@ -35,8 +35,8 @@ export const faqData = [
   {
     id: "faq-4",
     question: {
-      en: "Is home service available for brides in and around Motihari?",
-      hi: "क्या मोतिहारी और आस-पास के क्षेत्रों में होम सर्विस उपलब्ध है?",
+      en: "Is venue and home service available in Motihari?",
+      hi: "क्या मोतिहारी और आस-पास होम सर्विस उपलब्ध है?",
     },
     answer: {
       en: "Yes, our senior bridal team travels to wedding venues and homes across Motihari, Bettiah, Chakia, and nearby areas for bridal packages. Travel charges apply based on distance.",

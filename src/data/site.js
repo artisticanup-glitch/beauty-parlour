@@ -15,8 +15,8 @@ export const siteData = {
     en: "First Floor, Main Road, near Gandhi Chowk, Motihari, Bihar 845401",
     hi: "प्रथम तल, मेन रोड, गांधी चौक के पास, मोतिहारी, बिहार 845401",
   },
-  phone: "+91 90000 00000",
-  whatsappNumber: "919000000000",
+  phone: "+91 98000 00000",
+  whatsappNumber: "919800000000",
   hours: {
     en: "Monday–Sunday: 10:00 AM – 8:00 PM (Lagan season: from 5:00 AM)",
     hi: "सोमवार–रविवार: सुबह 10:00 – रात 8:00 (लगन का समय: सुबह 5:00 बजे से)",

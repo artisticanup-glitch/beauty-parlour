@@ -4,13 +4,13 @@ import { useLanguage } from "../i18n/LanguageContext"
 import Button from "../components/Button"
 
 export default function NotFound() {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
 
   return (
     <div className="min-h-[80vh] bg-[#0B2E24] text-[#F3ECDD] flex items-center justify-center text-center px-4">
       <div className="site-container max-w-[620px] py-24">
         <span className="eyebrow inline-block bg-[rgba(8,36,28,0.7)] border border-[rgba(201,164,92,0.35)] px-4 py-1.5 rounded-full text-[13px] text-[#E3C88A] mb-6">
-          404 Error
+          {lang === "hi" ? "404 · पेज नहीं मिला" : "404 Error"}
         </span>
         <h1
           className="font-heading text-[#F3ECDD] leading-tight mb-4"

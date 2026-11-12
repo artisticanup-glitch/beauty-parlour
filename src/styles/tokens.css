@@ -44,6 +44,35 @@ html[lang="hi"] {
   --font-body: 'Mukta', 'Jost', sans-serif;
 }
 
+/* Hindi typography rules: weight 400 on headings, letter-spacing 0 on all elements */
+html[lang="hi"] h1,
+html[lang="hi"] h2,
+html[lang="hi"] h3,
+html[lang="hi"] h4,
+html[lang="hi"] h5,
+html[lang="hi"] h6,
+html[lang="hi"] .font-heading,
+:lang(hi) h1,
+:lang(hi) h2,
+:lang(hi) h3,
+:lang(hi) h4,
+:lang(hi) .font-heading {
+  font-weight: 400 !important;
+  font-family: 'Tiro Devanagari Hindi', serif !important;
+}
+
+html[lang="hi"] *,
+:lang(hi),
+:lang(hi) * {
+  letter-spacing: 0 !important;
+}
+
+html[lang="hi"] .eyebrow,
+:lang(hi) .eyebrow {
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
 /* Base element resets */
 html {
   font-family: var(--font-body);
@@ -54,6 +83,12 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none; /* Disable browser faux-bold and faux-italic */
+}
+
+/* Section scroll-margin-top equal to sticky header height so header never covers eyebrows */
+section, [id] {
+  scroll-margin-top: 96px;
 }
 
 :focus-visible {
@@ -61,10 +96,18 @@ html {
   outline-offset: 3px;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  max-width: 100%;
   min-height: 100vh;
 }
 

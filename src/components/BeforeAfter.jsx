@@ -91,19 +91,16 @@ export default function BeforeAfter({
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
 
-        {/* BEFORE IMAGE (Clipped overlay) */}
+        {/* BEFORE IMAGE (Clipped overlay via clip-path) */}
         <div
-          className="absolute inset-0 overflow-hidden pointer-events-none"
-          style={{ width: `${sliderPos}%` }}
+          className="absolute inset-0 pointer-events-none"
+          style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
         >
           <img
             src={beforeImage}
             alt={t.sections.beforeLabel}
             loading="lazy"
-            className="absolute inset-0 h-full object-cover pointer-events-none max-w-none"
-            style={{
-              width: containerRef.current ? `${containerRef.current.offsetWidth}px` : "100%",
-            }}
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           />
         </div>
 

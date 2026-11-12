@@ -5,12 +5,10 @@ import {
   Phone,
   WhatsappLogo,
   ArrowUpRight,
-  NavigationArrow,
 } from "@phosphor-icons/react"
 import { useLanguage } from "../i18n/LanguageContext"
 import { siteData } from "../data/site"
 import SectionHeading from "../components/SectionHeading"
-import Button from "../components/Button"
 import BookingBanner from "../components/BookingBanner"
 
 export default function Contact() {
@@ -104,12 +102,12 @@ export default function Contact() {
                 </div>
 
                 {card.actionUrl && (
-                  <div className="pt-4 border-t border-[rgba(18,63,49,0.12)]">
+                  <div className="pt-2 border-t border-[rgba(18,63,49,0.12)]">
                     <a
                       href={card.actionUrl}
                       target={card.isExternal ? "_blank" : undefined}
                       rel={card.isExternal ? "noopener noreferrer" : undefined}
-                      className="inline-flex items-center gap-1.5 text-[14px] font-medium text-[#0B2E24] hover:text-[#1F6B4F] transition-colors"
+                      className="inline-flex items-center gap-2 text-[14px] font-medium text-[#0B2E24] hover:text-[#1F6B4F] transition-colors min-h-[44px] py-2"
                     >
                       <span>{card.actionLabel}</span>
                       <ArrowUpRight size={16} weight="bold" />
@@ -120,16 +118,16 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* Centred Big "Open in Google Maps" Button (No iframe) */}
-          <div className="text-center">
-            <Button
-              href={siteData.mapUrl}
-              variant="primary"
-              className="!py-4 !px-8 !text-[16px]"
-            >
-              <NavigationArrow size={20} weight="light" className="text-[#08241C]" />
-              <span>{t.contactPage.openInMap}</span>
-            </Button>
+          {/* Google Maps Embed Panel (Full container width, ~420px tall, framed in card style) */}
+          <div className="max-w-[1040px] mx-auto overflow-hidden rounded-[24px] border border-[rgba(18,63,49,0.18)] shadow-[0_10px_30px_rgba(8,36,28,0.08)] bg-[#EFE7D7]">
+            <iframe
+              title="Roop Nikhar Location - Gandhi Chowk, Motihari"
+              src="https://maps.google.com/maps?q=Gandhi+Chowk,+Motihari,+Bihar&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              className="w-full h-[420px] border-0 block"
+              loading="lazy"
+              allowFullScreen=""
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </section>

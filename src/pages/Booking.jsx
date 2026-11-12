@@ -5,7 +5,6 @@ import {
   CheckCircle,
   PhoneCall,
   Clock,
-  MapPin,
 } from "@phosphor-icons/react"
 import { useLanguage } from "../i18n/LanguageContext"
 import { siteData } from "../data/site"
@@ -17,9 +16,9 @@ export default function Booking() {
   const { lang, t, l } = useLanguage()
 
   const stepIcons = [
-    <ChatCircleDots size={24} weight="light" className="text-[#C9A45C]" />,
-    <CalendarCheck size={24} weight="light" className="text-[#C9A45C]" />,
-    <CheckCircle size={24} weight="light" className="text-[#C9A45C]" />,
+    <ChatCircleDots key="chat" size={24} weight="light" className="text-[#C9A45C]" />,
+    <CalendarCheck key="calendar" size={24} weight="light" className="text-[#C9A45C]" />,
+    <CheckCircle key="check" size={24} weight="light" className="text-[#C9A45C]" />,
   ]
 
   return (

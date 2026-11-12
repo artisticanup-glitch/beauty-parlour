@@ -8,7 +8,10 @@ export default function MobileBar() {
   const { t } = useLanguage()
 
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#08241C] border-t border-[rgba(201,164,92,0.3)] shadow-[0_-4px_20px_rgba(8,36,28,0.25)]">
+    <div
+      style={{ left: 0, right: 0, width: "100%", maxWidth: "100%" }}
+      className="lg:hidden fixed bottom-0 z-40 bg-[#08241C] border-t border-[rgba(201,164,92,0.3)] shadow-[0_-4px_20px_rgba(8,36,28,0.25)] box-border"
+    >
       <div className="grid grid-cols-3 h-[64px] divide-x divide-[rgba(201,164,92,0.2)]">
         {/* 1: WhatsApp */}
         <a

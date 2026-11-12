@@ -4,24 +4,23 @@ import { useLanguage } from "../i18n/LanguageContext"
 import { siteData } from "../data/site"
 
 export default function Preloader({ onComplete }) {
-  const { lang, l } = useLanguage()
-  const [shouldShow, setShouldShow] = useState(false)
+  const { l } = useLanguage()
+  const [shouldShow, setShouldShow] = useState(() => {
+    if (typeof window === "undefined") return false
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const alreadyVisited = sessionStorage.getItem("roop_nikhar_preloaded")
+    return !(prefersReducedMotion || alreadyVisited)
+  })
   const preloaderRef = useRef(null)
   const lettersRef = useRef([])
   const lineRef = useRef(null)
   const subtitleRef = useRef(null)
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const alreadyVisited = sessionStorage.getItem("roop_nikhar_preloaded")
-
-    if (prefersReducedMotion || alreadyVisited) {
-      if (onComplete) onComplete()
-      return
+    if (!shouldShow && onComplete) {
+      onComplete()
     }
-
-    setShouldShow(true)
-  }, [onComplete])
+  }, [shouldShow, onComplete])
 
   useEffect(() => {
     if (!shouldShow || !preloaderRef.current) return

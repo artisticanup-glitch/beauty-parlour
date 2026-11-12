@@ -59,16 +59,13 @@ export default function GalleryStrip() {
         />
       </div>
 
-      {/* Moving Photo Row (desktop scrub, mobile touch-scroll) */}
-      <div className="w-full relative px-4">
-        <div
-          ref={trackRef}
-          className="flex items-center gap-6 overflow-x-auto lg:overflow-visible no-scrollbar pb-6 lg:pb-0"
-        >
-          {stripPhotos.map((photo, i) => (
+      {/* Symmetrical 4-Column Grid inside Container (Centered, perfectly balanced) */}
+      <div className="site-container">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          {stripPhotos.slice(0, 4).map((photo) => (
             <div
               key={photo.id}
-              className="flex-shrink-0 w-[240px] sm:w-[280px] lg:w-[320px] aspect-[4/5] rounded-[16px] overflow-hidden border border-[rgba(201,164,92,0.2)] bg-[#123F31] group relative"
+              className="w-full aspect-[4/5] rounded-[16px] overflow-hidden border border-[rgba(201,164,92,0.2)] bg-[#123F31] group relative shadow-[0_10px_30px_rgba(8,36,28,0.12)]"
             >
               <img
                 src={photo.src}
@@ -76,7 +73,7 @@ export default function GalleryStrip() {
                 loading="lazy"
                 width={640}
                 height={800}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-[rgba(8,36,28,0.2)] pointer-events-none" />
               <div className="absolute bottom-3 left-3 right-3 bg-[rgba(8,36,28,0.85)] border border-[rgba(201,164,92,0.2)] rounded-[8px] p-2 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

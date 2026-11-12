@@ -7,12 +7,67 @@ import BookingBanner from "../components/BookingBanner"
 export default function Pricing() {
   const { lang, t, l } = useLanguage()
 
-  // 6 categories split into 2 equal columns (3 categories each)
-  const col1Categories = serviceCategories.slice(0, 3) // Bridal, Makeup, Hair
-  const col2Categories = serviceCategories.slice(3, 6) // Skin, Hands & Feet, Mehendi
+  // 6 categories arranged in 3 balanced rows of 2:
+  // Row 1: Bridal | Skin (both 6 services)
+  // Row 2: Makeup | Hands & Feet (6 & 3 services, equal height)
+  // Row 3: Hair | Mehendi (6 & 3 services, equal height)
+  const categoryPairs = [
+    [serviceCategories.find((c) => c.id === "bridal"), serviceCategories.find((c) => c.id === "skin")],
+    [serviceCategories.find((c) => c.id === "makeup"), serviceCategories.find((c) => c.id === "hands-feet")],
+    [serviceCategories.find((c) => c.id === "hair"), serviceCategories.find((c) => c.id === "mehendi")],
+  ]
 
   const getServicesForCategory = (catId) => {
     return services.filter((s) => s.category === catId)
+  }
+
+  const renderCategoryCard = (cat) => {
+    if (!cat) return null
+    const catServices = getServicesForCategory(cat.id)
+    return (
+      <div
+        key={cat.id}
+        className="h-full flex flex-col justify-between p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.14)] shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
+      >
+        <div>
+          <div className="border-b-2 border-[#0B2E24] pb-3 mb-6 flex items-center justify-between">
+            <h3 className="font-heading text-[24px] sm:text-[26px] text-[#0B2E24] font-semibold">
+              {l(cat.name)}
+            </h3>
+            <span className="text-[13px] uppercase tracking-wider text-[#4E5F57]">
+              {catServices.length} {lang === "hi" ? "उपचार" : "services"}
+            </span>
+          </div>
+
+          <div className="space-y-6">
+            {catServices.map((service) => (
+              <div key={service.id} className="group">
+                {/* Name + Dotted Line + Price */}
+                <div className="flex items-baseline justify-between w-full">
+                  <span className="font-heading text-[18px] sm:text-[19px] text-[#0B2E24] font-medium whitespace-nowrap">
+                    {l(service.name)}
+                  </span>
+                  <span className="flex-grow border-b-2 border-dotted border-[rgba(18,63,49,0.3)] mx-3" />
+                  <span className="font-heading text-[19px] sm:text-[20px] text-[#0B2E24] font-bold whitespace-nowrap">
+                    {service.priceFormatted}
+                  </span>
+                </div>
+
+                {/* Description + Duration */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-[13px] text-[#4E5F57] mt-1 gap-1">
+                  <span className="leading-snug max-w-[42ch]">
+                    {l(service.description)}
+                  </span>
+                  <span className="whitespace-nowrap text-[13px] font-medium text-[#15251F] bg-[#F7F2E8] px-2 py-0.5 rounded">
+                    {l(service.duration)}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -44,105 +99,17 @@ export default function Pricing() {
             </p>
           </div>
 
-          {/* 2 Symmetrical Equal Columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start max-w-[1140px] mx-auto">
-            {/* Column 1: Bridal, Makeup, Hair */}
-            <div className="space-y-10">
-              {col1Categories.map((cat) => {
-                const catServices = getServicesForCategory(cat.id)
-                return (
-                  <div
-                    key={cat.id}
-                    className="p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.14)] shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
-                  >
-                    <div className="border-b-2 border-[#0B2E24] pb-3 mb-6 flex items-center justify-between">
-                      <h3 className="font-heading text-[24px] sm:text-[26px] text-[#0B2E24] font-semibold">
-                        {l(cat.name)}
-                      </h3>
-                      <span className="text-[13px] uppercase tracking-wider text-[#4E5F57]">
-                        {catServices.length} {lang === "hi" ? "उपचार" : "services"}
-                      </span>
-                    </div>
-
-                    <div className="space-y-6">
-                      {catServices.map((service) => (
-                        <div key={service.id} className="group">
-                          {/* Name + Dotted Line + Price */}
-                          <div className="flex items-baseline justify-between w-full">
-                            <span className="font-heading text-[18px] sm:text-[19px] text-[#0B2E24] font-medium whitespace-nowrap">
-                              {l(service.name)}
-                            </span>
-                            <span className="flex-grow border-b-2 border-dotted border-[rgba(18,63,49,0.3)] mx-3" />
-                            <span className="font-heading text-[19px] sm:text-[20px] text-[#0B2E24] font-bold whitespace-nowrap">
-                              {service.priceFormatted}
-                            </span>
-                          </div>
-
-                          {/* Description + Duration */}
-                          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-[13px] text-[#4E5F57] mt-1 gap-1">
-                            <span className="leading-snug max-w-[42ch]">
-                              {l(service.description)}
-                            </span>
-                            <span className="whitespace-nowrap text-[13px] font-medium text-[#15251F] bg-[#F7F2E8] px-2 py-0.5 rounded">
-                              {l(service.duration)}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-
-            {/* Column 2: Skin, Hands & Feet, Mehendi */}
-            <div className="space-y-10">
-              {col2Categories.map((cat) => {
-                const catServices = getServicesForCategory(cat.id)
-                return (
-                  <div
-                    key={cat.id}
-                    className="p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.14)] shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
-                  >
-                    <div className="border-b-2 border-[#0B2E24] pb-3 mb-6 flex items-center justify-between">
-                      <h3 className="font-heading text-[24px] sm:text-[26px] text-[#0B2E24] font-semibold">
-                        {l(cat.name)}
-                      </h3>
-                      <span className="text-[13px] uppercase tracking-wider text-[#4E5F57]">
-                        {catServices.length} {lang === "hi" ? "उपचार" : "services"}
-                      </span>
-                    </div>
-
-                    <div className="space-y-6">
-                      {catServices.map((service) => (
-                        <div key={service.id} className="group">
-                          {/* Name + Dotted Line + Price */}
-                          <div className="flex items-baseline justify-between w-full">
-                            <span className="font-heading text-[18px] sm:text-[19px] text-[#0B2E24] font-medium whitespace-nowrap">
-                              {l(service.name)}
-                            </span>
-                            <span className="flex-grow border-b-2 border-dotted border-[rgba(18,63,49,0.3)] mx-3" />
-                            <span className="font-heading text-[19px] sm:text-[20px] text-[#0B2E24] font-bold whitespace-nowrap">
-                              {service.priceFormatted}
-                            </span>
-                          </div>
-
-                          {/* Description + Duration */}
-                          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-[13px] text-[#4E5F57] mt-1 gap-1">
-                            <span className="leading-snug max-w-[42ch]">
-                              {l(service.description)}
-                            </span>
-                            <span className="whitespace-nowrap text-[13px] font-medium text-[#15251F] bg-[#F7F2E8] px-2 py-0.5 rounded">
-                              {l(service.duration)}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
+          {/* 3 Rows of 2 Symmetrical Equal-Height Cards */}
+          <div className="space-y-10 max-w-[1140px] mx-auto">
+            {categoryPairs.map(([catA, catB], idx) => (
+              <div
+                key={idx}
+                className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch"
+              >
+                {renderCategoryCard(catA)}
+                {renderCategoryCard(catB)}
+              </div>
+            ))}
           </div>
         </div>
       </section>
