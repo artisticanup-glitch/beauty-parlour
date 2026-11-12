@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
-import { List, X, CalendarCheck, WhatsappLogo, InstagramLogo, FacebookLogo } from "@phosphor-icons/react"
+import { List, X, GlobeSimple, CalendarCheck, WhatsappLogo, InstagramLogo, FacebookLogo } from "@phosphor-icons/react"
 import { useLanguage } from "../i18n/LanguageContext"
 import { siteData } from "../data/site"
 import Button from "./Button"
@@ -118,31 +118,15 @@ export default function Header() {
 
           {/* 3. Language Switcher + 4. Book Button */}
           <div className="flex items-center gap-3.5 xl:gap-4 shrink-0 whitespace-nowrap">
-            {/* Luxury Segmented Language Switcher */}
+            {/* Compact Language Switcher */}
             <button
               onClick={toggleLang}
               type="button"
-              className="relative inline-flex items-center h-10 p-0.5 rounded-full border border-[rgba(201,164,92,0.35)] bg-[rgba(18,63,49,0.55)] hover:border-[rgba(201,164,92,0.6)] transition-all duration-200 cursor-pointer select-none shrink-0"
+              className="h-9 px-3 rounded-[10px] border border-[rgba(201,164,92,0.3)] bg-[rgba(18,63,49,0.4)] hover:bg-[rgba(18,63,49,0.7)] hover:border-[rgba(201,164,92,0.55)] text-[#E3C88A] hover:text-[#F3ECDD] text-[13px] font-medium flex items-center gap-1.5 transition-all duration-200 cursor-pointer select-none shrink-0"
               aria-label={`Switch Language to ${lang === "en" ? "Hindi" : "English"}`}
             >
-              <span
-                className={`inline-flex items-center justify-center text-[12px] font-semibold px-2.5 py-1 rounded-full transition-all duration-200 ${
-                  lang === "en"
-                    ? "bg-[#C9A45C] text-[#08241C] shadow-sm"
-                    : "text-[#E3C88A] opacity-75 hover:opacity-100"
-                }`}
-              >
-                EN
-              </span>
-              <span
-                className={`inline-flex items-center justify-center text-[12px] font-semibold px-2.5 py-1 rounded-full transition-all duration-200 ${
-                  lang === "hi"
-                    ? "bg-[#C9A45C] text-[#08241C] shadow-sm"
-                    : "text-[#E3C88A] opacity-75 hover:opacity-100"
-                }`}
-              >
-                हिं
-              </span>
+              <GlobeSimple size={15} weight="regular" className="text-[#C9A45C]" />
+              <span className="leading-none">{lang === "en" ? "हिन्दी" : "English"}</span>
             </button>
 
             {/* Book Button */}
@@ -179,33 +163,17 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Right Controls: Lang toggle + Hamburger */}
+          {/* Right Controls: Compact Lang button + Hamburger */}
           <div className="flex items-center gap-3">
             <button
               onClick={toggleLang}
               type="button"
               style={{ minHeight: "44px", height: "44px" }}
-              className="relative inline-flex items-center p-0.5 rounded-full border border-[rgba(201,164,92,0.35)] bg-[rgba(18,63,49,0.55)] transition-all duration-200 cursor-pointer select-none shrink-0"
+              className="px-2.5 rounded-[10px] border border-[rgba(201,164,92,0.3)] bg-[rgba(18,63,49,0.4)] hover:bg-[rgba(18,63,49,0.7)] text-[#E3C88A] text-[13px] font-medium flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer select-none shrink-0"
               aria-label={`Switch Language to ${lang === "en" ? "Hindi" : "English"}`}
             >
-              <span
-                className={`inline-flex items-center justify-center text-[12px] font-semibold px-2.5 py-1.5 rounded-full transition-all duration-200 ${
-                  lang === "en"
-                    ? "bg-[#C9A45C] text-[#08241C] shadow-sm"
-                    : "text-[#E3C88A] opacity-75 hover:opacity-100"
-                }`}
-              >
-                EN
-              </span>
-              <span
-                className={`inline-flex items-center justify-center text-[12px] font-semibold px-2.5 py-1.5 rounded-full transition-all duration-200 ${
-                  lang === "hi"
-                    ? "bg-[#C9A45C] text-[#08241C] shadow-sm"
-                    : "text-[#E3C88A] opacity-75 hover:opacity-100"
-                }`}
-              >
-                हिं
-              </span>
+              <GlobeSimple size={15} weight="regular" className="text-[#C9A45C]" />
+              <span className="leading-none">{lang === "en" ? "हिन्दी" : "English"}</span>
             </button>
 
             <button
