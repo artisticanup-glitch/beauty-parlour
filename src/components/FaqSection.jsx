@@ -24,15 +24,18 @@ export default function FaqSection() {
         </div>
 
         {/* 2 Equal Columns (All questions & answers visible, NO accordion) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start w-full">
           {/* Column 1 */}
-          <div className="space-y-6">
+          <div className="space-y-6 w-full">
             {col1.map((item) => (
               <div
                 key={item.id}
-                className="p-6 sm:p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.12)] text-left"
+                className="w-full p-6 sm:p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.12)] text-left"
               >
-                <h3 className="font-heading text-[20px] sm:text-[22px] text-[#0B2E24] mb-3 leading-snug">
+                <h3
+                  className="font-heading text-[#0B2E24] mb-3 leading-snug w-full whitespace-normal lg:whitespace-nowrap overflow-hidden text-ellipsis"
+                  style={{ fontSize: "clamp(1.15rem, 1.4vw, 1.35rem)" }}
+                >
                   {l(item.question)}
                 </h3>
                 <p className="text-[#4E5F57] text-[15px] leading-relaxed">
@@ -43,13 +46,16 @@ export default function FaqSection() {
           </div>
 
           {/* Column 2 */}
-          <div className="space-y-6">
+          <div className="space-y-6 w-full">
             {col2.map((item) => (
               <div
                 key={item.id}
-                className="p-6 sm:p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.12)] text-left"
+                className="w-full p-6 sm:p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.12)] text-left"
               >
-                <h3 className="font-heading text-[20px] sm:text-[22px] text-[#0B2E24] mb-3 leading-snug">
+                <h3
+                  className="font-heading text-[#0B2E24] mb-3 leading-snug w-full whitespace-normal lg:whitespace-nowrap overflow-hidden text-ellipsis"
+                  style={{ fontSize: "clamp(1.15rem, 1.4vw, 1.35rem)" }}
+                >
                   {l(item.question)}
                 </h3>
                 <p className="text-[#4E5F57] text-[15px] leading-relaxed">

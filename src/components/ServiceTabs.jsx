@@ -21,11 +21,12 @@ export default function ServiceTabs({
     ? services.filter((s) => s.category === activeTab)
     : services.filter((s) => s.category === activeTab).slice(0, limitCount)
 
-  // Update underline indicator position
+  // Update underline indicator position & scroll active tab into view
   useEffect(() => {
     const activeIndex = serviceCategories.findIndex((c) => c.id === activeTab)
     const activeTabEl = tabsRef.current[activeIndex]
     if (activeTabEl) {
+      activeTabEl.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" })
       setUnderlineStyle({
         left: activeTabEl.offsetLeft,
         width: activeTabEl.offsetWidth,
@@ -57,7 +58,7 @@ export default function ServiceTabs({
         <div
           role="tablist"
           aria-label="Service categories"
-          className="flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar gap-2 sm:gap-6 px-2"
+          className="relative flex items-center justify-start sm:justify-center overflow-x-auto gap-6 px-4 whitespace-nowrap scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {serviceCategories.map((cat, idx) => {
             const isActive = activeTab === cat.id
@@ -72,7 +73,7 @@ export default function ServiceTabs({
                 tabIndex={isActive ? 0 : -1}
                 onClick={() => setActiveTab(cat.id)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
-                className={`py-3 px-4 text-[15px] sm:text-[16px] whitespace-nowrap tracking-wide transition-colors cursor-pointer select-none ${
+                className={`py-3 px-4 shrink-0 text-[15px] sm:text-[16px] whitespace-nowrap tracking-wide transition-colors cursor-pointer select-none min-h-[48px] flex items-center justify-center ${
                   isActive
                     ? isLight
                       ? "text-[#0B2E24] font-semibold border-b-2 border-[#0B2E24]"
@@ -86,18 +87,18 @@ export default function ServiceTabs({
               </button>
             )
           })}
-        </div>
 
-        {/* Animated Gold Underline (Dark mode) */}
-        {!isLight && (
-          <div
-            className="absolute bottom-0 h-[2px] bg-[#C9A45C] transition-all duration-300 pointer-events-none"
-            style={{
-              left: `${underlineStyle.left}px`,
-              width: `${underlineStyle.width}px`,
-            }}
-          />
-        )}
+          {/* Animated Gold Underline (Dark mode) inside scroll list */}
+          {!isLight && (
+            <div
+              className="absolute bottom-0 h-[2px] bg-[#C9A45C] transition-all duration-300 pointer-events-none"
+              style={{
+                left: `${underlineStyle.left}px`,
+                width: `${underlineStyle.width}px`,
+              }}
+            />
+          )}
+        </div>
       </div>
 
       {/* Services Grid (3 columns desktop, 1 on mobile) */}

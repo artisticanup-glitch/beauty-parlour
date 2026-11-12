@@ -13,7 +13,7 @@ import { useLanguage } from "../i18n/LanguageContext"
 import { siteData } from "../data/site"
 
 export default function Footer() {
-  const { t, l } = useLanguage()
+  const { lang, t, l } = useLanguage()
 
   return (
     <footer className="bg-[#08241C] text-[#F3ECDD] border-t border-[rgba(201,164,92,0.2)]">
@@ -26,15 +26,18 @@ export default function Footer() {
             </span>
           </Link>
           <p className="text-[14px] uppercase tracking-[0.2em] text-[#C9A45C] mt-2 font-medium">
-            {l(siteData.tagline)} • Motihari
+            {l(siteData.tagline)} • {lang === "hi" ? "मोतिहारी" : "Motihari"}
           </p>
         </div>
 
-        {/* 3 Equal Symmetrical Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-10 py-12 sm:py-16 text-center md:text-left border-b border-[rgba(201,164,92,0.18)]">
+        {/* 3 Equal Symmetrical Columns with Centered Text */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-10 py-12 sm:py-16 text-center border-b border-[rgba(201,164,92,0.18)]"
+          style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
+        >
           {/* Column 1: Visit us */}
-          <div className="flex flex-col items-center md:items-start space-y-4">
-            <div className="flex items-center gap-2 text-[#C9A45C]">
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="flex items-center justify-center gap-2 text-[#C9A45C]">
               <MapPin size={20} weight="light" />
               <span className="text-[13px] uppercase tracking-[0.14em] font-medium">
                 {t.common.address}
@@ -54,9 +57,9 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Column 2: Hours */}
-          <div className="flex flex-col items-center md:items-start space-y-4">
-            <div className="flex items-center gap-2 text-[#C9A45C]">
+          {/* Column 2: Hours & Contact */}
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="flex items-center justify-center gap-2 text-[#C9A45C]">
               <Clock size={20} weight="light" />
               <span className="text-[13px] uppercase tracking-[0.14em] font-medium">
                 {t.common.hours}
@@ -65,7 +68,7 @@ export default function Footer() {
             <p className="text-[#C3CEC4] text-[15px] leading-relaxed max-w-[320px]">
               {l(siteData.hours)}
             </p>
-            <div className="flex items-center gap-2 pt-1 text-[14px] text-[#E3C88A]">
+            <div className="flex items-center justify-center gap-2 pt-1 text-[14px] text-[#E3C88A]">
               <Phone size={16} weight="light" className="text-[#C9A45C]" />
               <a
                 href={`tel:${siteData.phone.replace(/\s+/g, "")}`}
@@ -77,7 +80,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Quick links */}
-          <div className="flex flex-col items-center md:items-start space-y-4">
+          <div className="flex flex-col items-center text-center space-y-4">
             <span className="text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-medium">
               {t.nav.menu}
             </span>
@@ -126,8 +129,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Socials & Copyright (Symmetrical) */}
-        <div className="pt-10 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left text-[13px] text-[#C3CEC4]">
+        {/* Socials & Copyright on ONE Centred Row */}
+        <div className="pt-10 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 text-center text-[13px] text-[#C3CEC4]">
           <div className="flex items-center gap-6 text-[#C9A45C]">
             <a
               href={siteData.socials.instagram}
@@ -158,8 +161,10 @@ export default function Footer() {
             </a>
           </div>
 
+          <span className="hidden sm:inline-block text-[#C9A45C] opacity-40">•</span>
+
           <p>
-            © {new Date().getFullYear()} {l(siteData.name)}. {t.common.allRightsReserved}.
+            © {new Date().getFullYear()} {l(siteData.name)} • {lang === "hi" ? "मोतिहारी, बिहार" : "Motihari, Bihar"}
           </p>
         </div>
       </div>

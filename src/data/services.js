@@ -104,6 +104,25 @@ export const services = [
     },
     image: "/images/haldi.webp",
   },
+  {
+    id: "bridal-trial-session",
+    category: "bridal",
+    name: {
+      en: "Bridal Trial Session",
+      hi: "ब्राइडल ट्रायल सत्र",
+    },
+    description: {
+      en: "Complete undertone matching, eye makeup trial, and bridal look consultation before wedding day.",
+      hi: "विवाह पूर्व त्वचा टोन का मिलान, आई मेकअप का परीक्षण और संपूर्ण ब्राइडल लुक परामर्श।",
+    },
+    price: 2100,
+    priceFormatted: "₹2,100",
+    duration: {
+      en: "2 Hours",
+      hi: "2 घंटे",
+    },
+    image: "/images/service-bridal.webp",
+  },
 
   // MAKEUP
   {
@@ -181,6 +200,44 @@ export const services = [
       hi: "1 घंटा",
     },
     image: "/images/gallery-06.webp",
+  },
+  {
+    id: "airbrush-party-makeup",
+    category: "makeup",
+    name: {
+      en: "Airbrush Party Makeup",
+      hi: "एयरब्रश पार्टी मेकअप",
+    },
+    description: {
+      en: "Weightless HD airbrush coverage for cocktail parties, engagements, and sangeet.",
+      hi: "कॉकटेल पार्टी, एंगेजमेंट और संगीत के लिए हल्का व टिकाऊ एयरब्रश मेकअप।",
+    },
+    price: 3500,
+    priceFormatted: "₹3,500",
+    duration: {
+      en: "2 Hours",
+      hi: "2 घंटे",
+    },
+    image: "/images/service-makeup.webp",
+  },
+  {
+    id: "eye-makeup-lashes",
+    category: "makeup",
+    name: {
+      en: "Eye Artistry & 3D Lashes",
+      hi: "आई आर्टिस्ट्री एवं 3D लैशेज़",
+    },
+    description: {
+      en: "Smokey or shimmer eye look with precise wing liner and featherlight 3D lash application.",
+      hi: "स्मोकी अथवा शिमर आई लुक, सटीक विंग लाइनर और हल्की 3D पलकों की सेटिंग।",
+    },
+    price: 900,
+    priceFormatted: "₹900",
+    duration: {
+      en: "45 Mins",
+      hi: "45 मिनट",
+    },
+    image: "/images/gallery-04.webp",
   },
 
   // HAIR
@@ -278,6 +335,25 @@ export const services = [
       hi: "1.5 घंटे",
     },
     image: "/images/gallery-10.webp",
+  },
+  {
+    id: "hair-botox",
+    category: "hair",
+    name: {
+      en: "Hair Botox & Deep Repair",
+      hi: "हेयर बोटॉक्स एवं डीप रिपेयर",
+    },
+    description: {
+      en: "Deep restructuring therapy restoring silk softness, strength, and brilliant shine to dull hair.",
+      hi: "रूखे बालों को गहराई से पोषण, रेशमी कोमलता और प्राकृतिक मजबूती प्रदान करने वाला उपचार।",
+    },
+    price: 2800,
+    priceFormatted: "₹2,800 से",
+    duration: {
+      en: "2.5 Hours",
+      hi: "2.5 घंटे",
+    },
+    image: "/images/service-hair.webp",
   },
 
   // SKIN
@@ -493,5 +569,24 @@ export const services = [
       hi: "1 घंटा",
     },
     image: "/images/mehendi.webp",
+  },
+  {
+    id: "engagement-mehendi",
+    category: "mehendi",
+    name: {
+      en: "Sangeet & Engagement Mehendi",
+      hi: "संगीत एवं सगाई मेहंदी",
+    },
+    description: {
+      en: "Elbow-length intricate floral and jali patterns using 100% natural organic dark-stain henna.",
+      hi: "शुद्ध प्राकृतिक मेंहदी से कोहनी तक सुंदर जाल और फूलों वाला उत्सव डिजाइन।",
+    },
+    price: 2100,
+    priceFormatted: "₹2,100",
+    duration: {
+      en: "2.5 Hours",
+      hi: "2.5 घंटे",
+    },
+    image: "/images/service-mehendi.webp",
   },
 ]

@@ -99,10 +99,10 @@ export default function PinnedBridalDay() {
 
           {/* Symmetrical 50/50 Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            {/* Left: Step Details + Progress Line */}
-            <div className="relative pl-8 sm:pl-10 order-2 lg:order-1">
+            {/* Left: Step Details + Progress Line (Vertically centered against photo) */}
+            <div className="relative pl-8 sm:pl-12 order-2 lg:order-1 flex flex-col justify-center h-full my-auto py-4">
               {/* Thin Gold Progress Line at side */}
-              <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-[rgba(201,164,92,0.2)]">
+              <div className="absolute left-0 top-2 bottom-2 w-[2px] bg-[rgba(201,164,92,0.2)]">
                 <div
                   className="w-full bg-[#C9A45C] transition-all duration-300"
                   style={{
@@ -118,7 +118,7 @@ export default function PinnedBridalDay() {
                     key={st.id}
                     onClick={() => setActiveStep(i)}
                     type="button"
-                    className={`px-3 py-1 rounded-full text-[13px] font-medium tracking-wide transition-colors cursor-pointer border ${
+                    className={`px-3.5 py-1.5 rounded-full text-[13px] font-medium tracking-wide transition-colors cursor-pointer border min-h-[36px] flex items-center justify-center ${
                       activeStep === i
                         ? "bg-[#C9A45C] text-[#08241C] border-[#C9A45C]"
                         : "bg-transparent text-[#C3CEC4] border-[rgba(201,164,92,0.3)] hover:text-[#F3ECDD]"
@@ -130,7 +130,7 @@ export default function PinnedBridalDay() {
               </div>
 
               {/* Step Content with crossfade transition */}
-              <div className="min-h-[160px]">
+              <div className="min-h-[170px] flex flex-col justify-center">
                 <span className="text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-semibold block mb-2">
                   {l(steps[activeStep].tag)}
                 </span>

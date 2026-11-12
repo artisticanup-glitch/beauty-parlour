@@ -4,14 +4,38 @@ import { useLanguage } from "../i18n/LanguageContext"
 import BgVideo from "./BgVideo"
 
 export default function HygieneProducts({ theme = "light" }) {
-  const { t } = useLanguage()
+  const { lang, t, l } = useLanguage()
   const isDark = theme === "dark"
 
   const brands = [
-    { name: "MAC Cosmetics", desc: "Studio Fix & Prep" },
-    { name: "Huda Beauty", desc: "Eyeshadows & Lashes" },
-    { name: "Kryolan Professional", desc: "Derma & TV Paint" },
-    { name: "Lakmé Absolute", desc: "Argan Oil Radiance" },
+    {
+      name: "MAC Cosmetics",
+      desc: {
+        en: "Studio Fix & Prep",
+        hi: "स्टूडियो फिक्स एवं प्राइमर",
+      },
+    },
+    {
+      name: "Huda Beauty",
+      desc: {
+        en: "Eyeshadows & Lashes",
+        hi: "आईशैडो एवं 3D पलकें",
+      },
+    },
+    {
+      name: "Kryolan Professional",
+      desc: {
+        en: "Derma & TV Paint Stick",
+        hi: "डर्मा एवं टीवी पेंट स्टिक",
+      },
+    },
+    {
+      name: "Lakmé Absolute",
+      desc: {
+        en: "Argan Oil Radiance",
+        hi: "आर्गन ऑयल रेडिएंस सीरम",
+      },
+    },
   ]
 
   return (
@@ -93,7 +117,7 @@ export default function HygieneProducts({ theme = "light" }) {
                         isDark ? "text-[#C3CEC4]" : "text-[#4E5F57]"
                       }`}
                     >
-                      {b.desc}
+                      {l(b.desc)}
                     </span>
                   </div>
                 ))}

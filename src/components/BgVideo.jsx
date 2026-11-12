@@ -11,8 +11,16 @@ export default function BgVideo({
 }) {
   const videoRef = useRef(null)
   const containerRef = useRef(null)
-  const [shouldPlayVideo, setShouldPlayVideo] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [shouldPlayVideo, setShouldPlayVideo] = useState(true)
+  const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth <= 768)
+
+  // Ensure DOM element has muted and defaultMuted set for strict mobile autoplay policies
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true
+      videoRef.current.defaultMuted = true
+    }
+  }, [])
 
   // Detect mobile, Data Saver & prefers-reduced-motion
   useEffect(() => {
@@ -25,8 +33,6 @@ export default function BgVideo({
       setShouldPlayVideo(false)
       return
     }
-
-    setShouldPlayVideo(true)
 
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768)

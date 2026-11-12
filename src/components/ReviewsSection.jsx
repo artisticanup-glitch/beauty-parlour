@@ -30,36 +30,15 @@ export default function ReviewsSection() {
   return (
     <section className="section-emerald section-padding border-t border-[rgba(201,164,92,0.18)]">
       <div className="site-container">
-        {/* Header with Navigation Arrows */}
-        <div className="flex flex-col sm:flex-row items-center justify-between mb-16 gap-6 text-center sm:text-left">
+        {/* Centered Heading */}
+        <div className="mb-14 sm:mb-16">
           <SectionHeading
             eyebrow={t.sections.reviewsEyebrow}
             title={t.sections.reviewsTitle}
             subtitle={t.sections.reviewsSubtitle}
             theme="dark"
-            align="left"
-            className="!mx-0"
+            align="center"
           />
-
-          {/* Manual Control Arrows (NO autoplay) */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={handlePrev}
-              type="button"
-              className="w-12 h-12 rounded-full border border-[rgba(201,164,92,0.3)] bg-[#123F31] text-[#E3C88A] hover:bg-[#1F6B4F] flex items-center justify-center transition-colors cursor-pointer"
-              aria-label="Previous reviews"
-            >
-              <CaretLeft size={20} weight="light" />
-            </button>
-            <button
-              onClick={handleNext}
-              type="button"
-              className="w-12 h-12 rounded-full border border-[rgba(201,164,92,0.3)] bg-[#123F31] text-[#E3C88A] hover:bg-[#1F6B4F] flex items-center justify-center transition-colors cursor-pointer"
-              aria-label="Next reviews"
-            >
-              <CaretRight size={20} weight="light" />
-            </button>
-          </div>
         </div>
 
         {/* 3 Equal Review Cards Grid */}
@@ -91,6 +70,26 @@ export default function ReviewsSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Centred Navigation Arrows below cards */}
+        <div className="flex items-center justify-center gap-4 mt-12 sm:mt-14">
+          <button
+            onClick={handlePrev}
+            type="button"
+            className="w-12 h-12 rounded-full border border-[rgba(201,164,92,0.3)] bg-[#123F31] text-[#E3C88A] hover:bg-[#1F6B4F] flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Previous reviews"
+          >
+            <CaretLeft size={20} weight="light" />
+          </button>
+          <button
+            onClick={handleNext}
+            type="button"
+            className="w-12 h-12 rounded-full border border-[rgba(201,164,92,0.3)] bg-[#123F31] text-[#E3C88A] hover:bg-[#1F6B4F] flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Next reviews"
+          >
+            <CaretRight size={20} weight="light" />
+          </button>
         </div>
       </div>
     </section>

@@ -41,16 +41,20 @@ export default function Header() {
     { to: "/", label: t.nav.home },
     { to: "/services", label: t.nav.services },
     { to: "/bridal", label: t.nav.bridal },
+    { to: "/pricing", label: t.nav.pricing },
   ]
 
   const rightNavItems = [
-    { to: "/pricing", label: t.nav.pricing },
     { to: "/gallery", label: t.nav.gallery },
     { to: "/about", label: t.nav.about },
     { to: "/contact", label: t.nav.contact },
   ]
 
-  const allNavItems = [...leftNavItems, ...rightNavItems]
+  const allNavItems = [
+    ...leftNavItems,
+    ...rightNavItems,
+    { to: "/booking", label: t.nav.bookNow },
+  ]
 
   return (
     <header
@@ -63,14 +67,14 @@ export default function Header() {
       <div className="site-container h-[88px] flex items-center justify-between">
         {/* DESKTOP SYMMETRICAL HEADER */}
         <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] items-center w-full gap-4">
-          {/* Left Nav */}
-          <nav className="flex items-center gap-7 justify-start">
+          {/* Left Nav (4 items) */}
+          <nav className="flex items-center gap-6 xl:gap-8 justify-start">
             {leftNavItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `relative py-2 text-[15px] tracking-wide transition-colors duration-200 group ${
+                  `relative py-2 text-[15px] tracking-wide whitespace-nowrap transition-colors duration-200 group ${
                     isActive ? "text-[#C9A45C] font-medium" : "text-[#F3ECDD] hover:text-[#C9A45C]"
                   }`
                 }
@@ -92,7 +96,7 @@ export default function Header() {
           {/* Centred Wordmark */}
           <Link
             to="/"
-            className="flex flex-col items-center justify-center text-center px-6 py-1 group"
+            className="flex flex-col items-center justify-center text-center px-6 py-1 group shrink-0"
             aria-label="Roop Nikhar Home"
           >
             <span
@@ -101,19 +105,19 @@ export default function Header() {
               {l(siteData.name)}
             </span>
             <span className="text-[13px] uppercase tracking-[0.25em] text-[#C9A45C] mt-0.5 font-medium">
-              Motihari
+              {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
             </span>
           </Link>
 
-          {/* Right Nav + Actions */}
-          <div className="flex items-center justify-end gap-6">
-            <nav className="flex items-center gap-6">
+          {/* Right Nav + Actions (3 items + Book button + Lang toggle) */}
+          <div className="flex items-center justify-end gap-5 xl:gap-6 whitespace-nowrap">
+            <nav className="flex items-center gap-6 xl:gap-8">
               {rightNavItems.map((item) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   className={({ isActive }) =>
-                    `relative py-2 text-[15px] tracking-wide transition-colors duration-200 group ${
+                    `relative py-2 text-[15px] tracking-wide whitespace-nowrap transition-colors duration-200 group ${
                       isActive ? "text-[#C9A45C] font-medium" : "text-[#F3ECDD] hover:text-[#C9A45C]"
                     }`
                   }
@@ -136,7 +140,7 @@ export default function Header() {
             <button
               onClick={toggleLang}
               type="button"
-              className="px-2.5 py-1 text-[13px] tracking-wider rounded-md border border-[rgba(201,164,92,0.35)] text-[#E3C88A] hover:bg-[#123F31] transition-colors"
+              className="px-2.5 py-1 text-[13px] tracking-wider rounded-md border border-[rgba(201,164,92,0.35)] text-[#E3C88A] hover:bg-[#123F31] transition-colors shrink-0 whitespace-nowrap"
               aria-label="Switch Language between English and Hindi"
             >
               {lang === "en" ? (
@@ -151,7 +155,7 @@ export default function Header() {
             </button>
 
             {/* Book Button */}
-            <Button to="/booking" variant="primary" className="!py-2.5 !px-5 !text-[14px]">
+            <Button to="/booking" variant="primary" className="!py-2.5 !px-5 !text-[14px] shrink-0 whitespace-nowrap">
               {t.nav.bookNow}
             </Button>
           </div>
@@ -165,7 +169,7 @@ export default function Header() {
               {l(siteData.name)}
             </span>
             <span className="text-[13px] uppercase tracking-[0.22em] text-[#C9A45C]">
-              Motihari
+              {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
             </span>
           </Link>
 

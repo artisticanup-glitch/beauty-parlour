@@ -173,7 +173,8 @@ export default function Home() {
 
           <p
             ref={heroSubtitleRef}
-            className="mx-auto mb-10 text-[#F3ECDD] opacity-95 text-[clamp(1rem,1.15vw,1.15rem)] leading-[1.65] max-w-[58ch]"
+            className="mx-auto mb-10 text-[#F3ECDD] opacity-95 leading-[1.65] max-w-[58ch]"
+            style={{ fontSize: "clamp(1.05rem, 1.3vw, 1.25rem)" }}
           >
             {t.hero.subtitle}
           </p>
