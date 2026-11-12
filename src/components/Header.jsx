@@ -39,23 +39,19 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const leftNavItems = [
+  const navItems = [
     { to: "/", label: t.nav.home },
     { to: "/services", label: t.nav.services },
     { to: "/bridal", label: t.nav.bridal },
     { to: "/pricing", label: t.nav.pricing },
-  ]
-
-  const rightNavItems = [
     { to: "/gallery", label: t.nav.gallery },
     { to: "/about", label: t.nav.about },
     { to: "/contact", label: t.nav.contact },
   ]
 
   const allNavItems = [
-    ...leftNavItems,
-    ...rightNavItems,
-    { to: "/booking", label: t.nav.bookNow },
+    ...navItems,
+    { to: "/booking", label: lang === "hi" ? "बुक" : "Book" },
   ]
 
   return (
@@ -67,16 +63,43 @@ export default function Header() {
       }`}
     >
       <div className="site-container h-[88px] flex items-center justify-between">
-        {/* DESKTOP SYMMETRICAL HEADER */}
-        <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] items-center w-full gap-4">
-          {/* Left Nav (4 items) */}
-          <nav className="flex items-center gap-6 xl:gap-8 justify-start">
-            {leftNavItems.map((item) => (
+        {/* DESKTOP HEADER (Logo Left -> Menu Items -> Language Switcher -> Book Button) */}
+        <div className="hidden lg:flex items-center justify-between w-full gap-4 xl:gap-8">
+          {/* 1. Logo Left */}
+          <Link
+            to="/"
+            className="flex items-center gap-3.5 group shrink-0"
+            aria-label="Roop Nikhar Home"
+          >
+            <img
+              src="/images/logo.webp"
+              alt="Roop Nikhar Emblem"
+              width={46}
+              height={46}
+              className="w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="flex flex-col items-start text-left">
+              <span
+                className="font-heading text-[24px] xl:text-[26px] leading-tight text-[#F3ECDD] tracking-[0.03em] transition-colors group-hover:text-[#E3C88A]"
+              >
+                {l(siteData.name)}
+              </span>
+              <span
+                className={`text-[11px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.24em]"} text-[#C9A45C] font-medium leading-none`}
+              >
+                {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
+              </span>
+            </div>
+          </Link>
+
+          {/* 2. Menu Items */}
+          <nav className="flex items-center gap-5 xl:gap-7">
+            {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `relative py-2 text-[15px] tracking-wide whitespace-nowrap transition-colors duration-200 group ${
+                  `relative py-2 text-[14px] xl:text-[15px] tracking-wide whitespace-nowrap transition-colors duration-200 group ${
                     isActive ? "text-[#C9A45C] font-medium" : "text-[#F3ECDD] hover:text-[#C9A45C]"
                   }`
                 }
@@ -95,65 +118,13 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Centred Logo & Wordmark */}
-          <Link
-            to="/"
-            className="flex items-center justify-center gap-3.5 px-6 py-1 group shrink-0"
-            aria-label="Roop Nikhar Home"
-          >
-            <img
-              src="/images/logo.webp"
-              alt="Roop Nikhar Emblem"
-              width={46}
-              height={46}
-              className="w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="flex flex-col items-start text-left">
-              <span
-                className="font-heading text-[26px] sm:text-[28px] leading-tight text-[#F3ECDD] tracking-[0.03em] transition-colors group-hover:text-[#E3C88A]"
-              >
-                {l(siteData.name)}
-              </span>
-              <span
-                className={`text-[12px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.24em]"} text-[#C9A45C] font-medium leading-none`}
-              >
-                {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
-              </span>
-            </div>
-          </Link>
-
-          {/* Right Nav + Actions (3 items + Book button + Lang toggle) */}
-          <div className="flex items-center justify-end gap-5 xl:gap-6 whitespace-nowrap">
-            <nav className="flex items-center gap-6 xl:gap-8">
-              {rightNavItems.map((item) => (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  className={({ isActive }) =>
-                    `relative py-2 text-[15px] tracking-wide whitespace-nowrap transition-colors duration-200 group ${
-                      isActive ? "text-[#C9A45C] font-medium" : "text-[#F3ECDD] hover:text-[#C9A45C]"
-                    }`
-                  }
-                >
-                  {({ isActive }) => (
-                    <>
-                      <span>{item.label}</span>
-                      <span
-                        className={`absolute bottom-0 left-0 h-[1.5px] bg-[#C9A45C] transition-all duration-300 ${
-                          isActive ? "w-full" : "w-0 group-hover:w-full"
-                        }`}
-                      />
-                    </>
-                  )}
-                </NavLink>
-              ))}
-            </nav>
-
-            {/* Language Toggle */}
+          {/* 3. Language Switcher + 4. Book Button */}
+          <div className="flex items-center gap-3 xl:gap-4 shrink-0 whitespace-nowrap">
+            {/* Language Switcher */}
             <button
               onClick={toggleLang}
               type="button"
-              className="min-h-[44px] px-3.5 py-2 text-[13px] tracking-wider rounded-md border border-[rgba(201,164,92,0.35)] text-[#E3C88A] hover:bg-[#123F31] transition-colors shrink-0 whitespace-nowrap flex items-center justify-center"
+              className="min-h-[44px] px-3.5 py-2 text-[13px] tracking-wider rounded-md border border-[rgba(201,164,92,0.35)] text-[#E3C88A] hover:bg-[#123F31] transition-colors shrink-0 whitespace-nowrap flex items-center justify-center font-medium"
               aria-label="Switch Language between English and Hindi"
             >
               {lang === "en" ? (
@@ -168,8 +139,12 @@ export default function Header() {
             </button>
 
             {/* Book Button */}
-            <Button to="/booking" variant="primary" className="!py-2.5 !px-5 !text-[14px] shrink-0 whitespace-nowrap">
-              {t.nav.bookNow}
+            <Button
+              to="/booking"
+              variant="primary"
+              className="!py-2.5 !px-5 !text-[14px] shrink-0 whitespace-nowrap font-medium"
+            >
+              {lang === "hi" ? "बुक" : "Book"}
             </Button>
           </div>
         </div>
