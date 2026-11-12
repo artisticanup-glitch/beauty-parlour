@@ -4,11 +4,17 @@ import { serviceCategories, services } from "../data/services"
 import { useLanguage } from "../i18n/LanguageContext"
 import Button from "./Button"
 
-export default function ServiceTabs({ limitCount = 6, showAll = false }) {
+export default function ServiceTabs({
+  limitCount = 6,
+  showAll = false,
+  theme = "dark", // "dark" (on emerald) | "light" (on ivory)
+}) {
   const { lang, t, l } = useLanguage()
   const [activeTab, setActiveTab] = useState(serviceCategories[0].id)
   const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 })
   const tabsRef = useRef([])
+
+  const isLight = theme === "light"
 
   // Filter services by category
   const activeServices = showAll
@@ -43,7 +49,11 @@ export default function ServiceTabs({ limitCount = 6, showAll = false }) {
   return (
     <div className="w-full">
       {/* Category Tabs Container */}
-      <div className="relative mb-12 border-b border-[rgba(201,164,92,0.28)] pb-1">
+      <div
+        className={`relative mb-12 border-b pb-1 ${
+          isLight ? "border-[rgba(18,63,49,0.16)]" : "border-[rgba(201,164,92,0.28)]"
+        }`}
+      >
         <div
           role="tablist"
           aria-label="Service categories"
@@ -64,7 +74,11 @@ export default function ServiceTabs({ limitCount = 6, showAll = false }) {
                 onKeyDown={(e) => handleKeyDown(e, idx)}
                 className={`py-3 px-4 text-[15px] sm:text-[16px] whitespace-nowrap tracking-wide transition-colors cursor-pointer select-none ${
                   isActive
-                    ? "text-[#C9A45C] font-medium"
+                    ? isLight
+                      ? "text-[#0B2E24] font-semibold border-b-2 border-[#0B2E24]"
+                      : "text-[#C9A45C] font-medium"
+                    : isLight
+                    ? "text-[#4E5F57] hover:text-[#0B2E24]"
                     : "text-[#C3CEC4] hover:text-[#F3ECDD]"
                 }`}
               >
@@ -74,14 +88,16 @@ export default function ServiceTabs({ limitCount = 6, showAll = false }) {
           })}
         </div>
 
-        {/* Animated Gold Underline */}
-        <div
-          className="absolute bottom-0 h-[2px] bg-[#C9A45C] transition-all duration-300 pointer-events-none"
-          style={{
-            left: `${underlineStyle.left}px`,
-            width: `${underlineStyle.width}px`,
-          }}
-        />
+        {/* Animated Gold Underline (Dark mode) */}
+        {!isLight && (
+          <div
+            className="absolute bottom-0 h-[2px] bg-[#C9A45C] transition-all duration-300 pointer-events-none"
+            style={{
+              left: `${underlineStyle.left}px`,
+              width: `${underlineStyle.width}px`,
+            }}
+          />
+        )}
       </div>
 
       {/* Services Grid (3 columns desktop, 1 on mobile) */}
@@ -94,10 +110,18 @@ export default function ServiceTabs({ limitCount = 6, showAll = false }) {
         {activeServices.map((service) => (
           <div
             key={service.id}
-            className="service-card group bg-[#123F31] rounded-[16px] overflow-hidden border border-[rgba(201,164,92,0.2)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1"
+            className={`service-card group rounded-[16px] overflow-hidden border flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 ${
+              isLight
+                ? "bg-[#EFE7D7] border-[rgba(18,63,49,0.14)] shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
+                : "bg-[#123F31] border-[rgba(201,164,92,0.2)]"
+            }`}
           >
             {/* Card Media with 1.05 zoom on hover */}
-            <div className="relative w-full aspect-[4/3] overflow-hidden bg-[#08241C]">
+            <div
+              className={`relative w-full aspect-[4/3] overflow-hidden ${
+                isLight ? "bg-[#F7F2E8]" : "bg-[#08241C]"
+              }`}
+            >
               <img
                 src={service.image}
                 alt={l(service.name)}
@@ -106,36 +130,68 @@ export default function ServiceTabs({ limitCount = 6, showAll = false }) {
                 height={600}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute top-3 right-3 bg-[rgba(8,36,28,0.85)] border border-[rgba(201,164,92,0.3)] rounded-full px-3 py-1 flex items-center gap-1.5 text-[13px] text-[#E3C88A]">
-                <Clock size={14} weight="light" className="text-[#C9A45C]" />
-                <span>{l(service.duration)}</span>
+              <div
+                className={`absolute top-3 right-3 rounded-full px-3 py-1 flex items-center gap-1.5 text-[13px] border ${
+                  isLight
+                    ? "bg-[rgba(247,242,232,0.92)] border-[rgba(18,63,49,0.18)] text-[#0B2E24]"
+                    : "bg-[rgba(8,36,28,0.85)] border-[rgba(201,164,92,0.3)] text-[#E3C88A]"
+                }`}
+              >
+                <Clock
+                  size={14}
+                  weight="light"
+                  className={isLight ? "text-[#0B2E24]" : "text-[#C9A45C]"}
+                />
+                <span className="font-medium">{l(service.duration)}</span>
               </div>
             </div>
 
             {/* Card Body */}
             <div className="p-6 flex flex-col flex-grow justify-between">
               <div>
-                <h3 className="font-heading text-[22px] sm:text-[24px] text-[#F3ECDD] mb-2 leading-snug">
+                <h3
+                  className={`font-heading text-[22px] sm:text-[24px] mb-2 leading-snug ${
+                    isLight ? "text-[#0B2E24]" : "text-[#F3ECDD]"
+                  }`}
+                >
                   {l(service.name)}
                 </h3>
-                <p className="text-[#C3CEC4] text-[14px] leading-relaxed mb-6">
+                <p
+                  className={`text-[14px] leading-relaxed mb-6 ${
+                    isLight ? "text-[#4E5F57]" : "text-[#C3CEC4]"
+                  }`}
+                >
                   {l(service.description)}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[rgba(201,164,92,0.18)] flex items-center justify-between">
+              <div
+                className={`pt-4 border-t flex items-center justify-between ${
+                  isLight
+                    ? "border-[rgba(18,63,49,0.12)]"
+                    : "border-[rgba(201,164,92,0.18)]"
+                }`}
+              >
                 <div>
-                  <span className="text-[12px] uppercase tracking-wider text-[#C3CEC4] block">
+                  <span
+                    className={`text-[12px] uppercase tracking-wider block ${
+                      isLight ? "text-[#4E5F57]" : "text-[#C3CEC4]"
+                    }`}
+                  >
                     {t.common.fromPrice}
                   </span>
-                  <span className="font-heading text-[24px] font-semibold text-[#E3C88A]">
+                  <span
+                    className={`font-heading text-[24px] font-semibold ${
+                      isLight ? "text-[#0B2E24]" : "text-[#E3C88A]"
+                    }`}
+                  >
                     {service.priceFormatted}
                   </span>
                 </div>
 
                 <Button
                   to={`/booking?service=${service.id}`}
-                  variant="primary"
+                  variant={isLight ? "primary" : "primary"}
                   className="!py-2.5 !px-4 !text-[13px]"
                   ariaLabel={`${t.common.bookNow}: ${l(service.name)}`}
                 >

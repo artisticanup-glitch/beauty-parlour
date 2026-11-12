@@ -8,11 +8,14 @@ export default function BeforeAfter({
   title,
   description,
   aspectRatio = "4/5",
+  theme = "light", // "light" (on ivory) | "dark" (on emerald)
 }) {
   const { t } = useLanguage()
   const [sliderPos, setSliderPos] = useState(50) // percentage 0 to 100
   const [isDragging, setIsDragging] = useState(false)
   const containerRef = useRef(null)
+
+  const isDark = theme === "dark"
 
   const handleMove = useCallback((clientX) => {
     if (!containerRef.current) return
@@ -73,7 +76,11 @@ export default function BeforeAfter({
         onKeyDown={handleKeyDown}
         onMouseDown={() => setIsDragging(true)}
         onTouchStart={() => setIsDragging(true)}
-        className="relative w-full overflow-hidden rounded-[16px] select-none cursor-ew-resize border border-[rgba(18,63,49,0.18)] shadow-[0_10px_30px_rgba(8,36,28,0.12)] bg-[#EFE7D7]"
+        className={`relative w-full overflow-hidden rounded-[16px] select-none cursor-ew-resize border shadow-[0_10px_30px_rgba(8,36,28,0.12)] ${
+          isDark
+            ? "border-[rgba(201,164,92,0.25)] bg-[#08241C]"
+            : "border-[rgba(18,63,49,0.18)] bg-[#EFE7D7]"
+        }`}
         style={{ aspectRatio }}
       >
         {/* AFTER IMAGE (Background / Full) */}
@@ -130,12 +137,20 @@ export default function BeforeAfter({
       {(title || description) && (
         <div className="mt-4 px-2">
           {title && (
-            <h4 className="font-heading text-[20px] text-[#0B2E24] mb-1">
+            <h4
+              className={`font-heading text-[20px] mb-1 ${
+                isDark ? "text-[#F3ECDD]" : "text-[#0B2E24]"
+              }`}
+            >
               {title}
             </h4>
           )}
           {description && (
-            <p className="text-[14px] text-[#4E5F57] mx-auto leading-relaxed max-w-[42ch]">
+            <p
+              className={`text-[14px] mx-auto leading-relaxed max-w-[42ch] ${
+                isDark ? "text-[#C3CEC4]" : "text-[#4E5F57]"
+              }`}
+            >
               {description}
             </p>
           )}
