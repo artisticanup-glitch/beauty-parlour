@@ -103,7 +103,7 @@ export const galleryItems = [
     category: "mehendi",
     title: {
       en: "Intricate Feet Mehendi Motifs",
-      hi: "पैरों के लिए पारंपरिक मेहंदी डिजाइन",
+      hi: "पैरों की पारंपरिक मेहंदी",
     },
     src: "/images/gallery-10.webp",
     aspect: "4/5",

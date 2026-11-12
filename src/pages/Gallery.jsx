@@ -65,7 +65,8 @@ export default function Gallery() {
                   key={filt.id}
                   onClick={() => setActiveFilter(filt.id)}
                   type="button"
-                  className={`px-5 py-2.5 rounded-full text-[14px] font-medium tracking-wide transition-all duration-200 cursor-pointer border ${
+                  style={{ minHeight: "44px" }}
+                  className={`px-5 h-11 min-h-[44px] flex items-center justify-center rounded-full text-[14px] font-medium tracking-wide transition-all duration-200 cursor-pointer border box-border ${
                     isActive
                       ? "bg-[#0B2E24] text-[#F3ECDD] border-[#0B2E24] shadow-[0_4px_16px_rgba(8,36,28,0.15)]"
                       : "bg-[#EFE7D7] text-[#4E5F57] border-[rgba(18,63,49,0.14)] hover:border-[#0B2E24] hover:text-[#0B2E24]"

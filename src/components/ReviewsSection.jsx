@@ -57,10 +57,10 @@ export default function ReviewsSection() {
 
               <div className="pt-4 border-t border-[rgba(201,164,92,0.18)] flex items-center justify-between gap-3 mt-auto">
                 <div className="min-w-0">
-                  <h4 className="font-heading text-[18px] text-[#F3ECDD] font-medium truncate">
+                  <h4 className="font-heading text-[18px] text-[#F3ECDD] font-medium leading-snug">
                     {l(rev.author)}
                   </h4>
-                  <span className="text-[13px] text-[#C9A45C] block truncate">
+                  <span className="text-[13px] text-[#C9A45C] block leading-snug">
                     {l(rev.location)}
                   </span>
                 </div>

@@ -52,8 +52,8 @@ export const reviews = [
       hi: "स्नेहा कुमारी",
     },
     location: {
-      en: "Chakia, East Champaran",
-      hi: "चकिया, पूर्वी चम्पारण",
+      en: "Chakia, Champaran",
+      hi: "चकिया, चम्पारण",
     },
     service: {
       en: "Bridal & Sister Makeup",

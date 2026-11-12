@@ -343,7 +343,7 @@ export default function PackageBuilder() {
               type="button"
               onClick={() => updateFamily(-1)}
               disabled={selectedItems.familyCount === 0}
-              className="w-10 h-10 rounded-full border border-[rgba(18,63,49,0.3)] flex items-center justify-center text-[#0B2E24] hover:bg-[#EFE7D7] disabled:opacity-30 disabled:pointer-events-none transition-colors"
+              className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full border border-[rgba(18,63,49,0.3)] flex items-center justify-center text-[#0B2E24] hover:bg-[#EFE7D7] disabled:opacity-30 disabled:pointer-events-none transition-colors"
               aria-label="Decrease family count"
             >
               <Minus size={16} weight="bold" />
@@ -355,7 +355,7 @@ export default function PackageBuilder() {
               type="button"
               onClick={() => updateFamily(1)}
               disabled={selectedItems.familyCount === 10}
-              className="w-10 h-10 rounded-full border border-[rgba(18,63,49,0.3)] flex items-center justify-center text-[#0B2E24] hover:bg-[#EFE7D7] disabled:opacity-30 disabled:pointer-events-none transition-colors"
+              className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full border border-[rgba(18,63,49,0.3)] flex items-center justify-center text-[#0B2E24] hover:bg-[#EFE7D7] disabled:opacity-30 disabled:pointer-events-none transition-colors"
               aria-label="Increase family count"
             >
               <Plus size={16} weight="bold" />
