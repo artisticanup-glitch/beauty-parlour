@@ -1,48 +1,347 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import {
+  CaretDown,
+  Sparkle,
+  ShieldCheck,
+  CalendarCheck,
+  House,
+  WhatsappLogo,
+  ArrowRight,
+} from "@phosphor-icons/react"
 import { useLanguage } from "../i18n/LanguageContext"
+import { siteData } from "../data/site"
+import { beforeAfterPairs } from "../data/gallery"
+
 import SectionHeading from "../components/SectionHeading"
 import Button from "../components/Button"
+import BgVideo from "../components/BgVideo"
+import ServiceTabs from "../components/ServiceTabs"
+import PackageBuilder from "../components/PackageBuilder"
+import PinnedBridalDay from "../components/PinnedBridalDay"
+import BeforeAfter from "../components/BeforeAfter"
+import GalleryStrip from "../components/GalleryStrip"
+import HygieneProducts from "../components/HygieneProducts"
+import ReviewsSection from "../components/ReviewsSection"
+import FaqSection from "../components/FaqSection"
+import BookingBanner from "../components/BookingBanner"
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Home() {
-  const { t } = useLanguage()
+  const { lang, t, l } = useLanguage()
+
+  // Refs for animations
+  const heroRef = useRef(null)
+  const heroVideoRef = useRef(null)
+  const heroEyebrowRef = useRef(null)
+  const heroTitleRef = useRef(null)
+  const heroSubtitleRef = useRef(null)
+  const heroButtonsRef = useRef(null)
+  const heroScrollRef = useRef(null)
+
+  // Hero entrance animation
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReducedMotion) return
+
+    const ctx = gsap.context(() => {
+      // 1. Hero background scale 1.15 -> 1.0 over 1.6s
+      if (heroVideoRef.current) {
+        gsap.fromTo(
+          heroVideoRef.current,
+          { scale: 1.15 },
+          { scale: 1.0, duration: 1.6, ease: "power4.out" }
+        )
+      }
+
+      // 2. Eyebrow, H1 lines mask reveal, subtitle & buttons staggered fade up
+      const tl = gsap.timeline({ delay: 0.2 })
+
+      if (heroEyebrowRef.current) {
+        tl.fromTo(
+          heroEyebrowRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" }
+        )
+      }
+
+      if (heroTitleRef.current) {
+        tl.fromTo(
+          heroTitleRef.current,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 1.0, ease: "power4.out" },
+          "-=0.6"
+        )
+      }
+
+      if (heroSubtitleRef.current) {
+        tl.fromTo(
+          heroSubtitleRef.current,
+          { opacity: 0, y: 25 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" },
+          "-=0.6"
+        )
+      }
+
+      if (heroButtonsRef.current) {
+        tl.fromTo(
+          heroButtonsRef.current.children,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: "power4.out" },
+          "-=0.5"
+        )
+      }
+
+      if (heroScrollRef.current) {
+        tl.fromTo(
+          heroScrollRef.current,
+          { opacity: 0 },
+          { opacity: 0.8, duration: 0.8, ease: "power4.out" },
+          "-=0.3"
+        )
+      }
+
+      // Scroll reveals on general section cards
+      gsap.utils.toArray(".reveal-card").forEach((card) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 88%",
+              once: true,
+            },
+          }
+        )
+      })
+    })
+
+    return () => ctx.revert()
+  }, [])
+
+  // 4 Promise icons for Intro section
+  const promiseIcons = [
+    <Sparkle size={28} weight="light" className="text-[#C9A45C]" />,
+    <ShieldCheck size={28} weight="light" className="text-[#C9A45C]" />,
+    <CalendarCheck size={28} weight="light" className="text-[#C9A45C]" />,
+    <House size={28} weight="light" className="text-[#C9A45C]" />,
+  ]
 
   return (
-    <div className="pb-16 lg:pb-0">
-      {/* Hero Section Placeholder */}
-      <section className="relative min-h-[100dvh] bg-[#0B2E24] text-[#F3ECDD] flex items-center justify-center text-center px-4">
-        <div className="site-container py-24">
-          <span className="eyebrow block mb-4">{t.hero.eyebrow}</span>
-          <h1 className="mb-6 font-heading text-[clamp(2.75rem,7vw,6.5rem)] leading-[0.95] tracking-[-0.02em]">
+    <div className="w-full pb-16 lg:pb-0">
+      {/* =====================================================================
+          1. HERO — full-screen (100dvh) background VIDEO hero.mp4
+         ===================================================================== */}
+      <section
+        ref={heroRef}
+        className="relative w-full h-[100dvh] min-h-[600px] flex items-center justify-center text-center overflow-hidden bg-[#0B2E24]"
+      >
+        {/* Background video with scale tween */}
+        <div ref={heroVideoRef} className="absolute inset-0 z-0 w-full h-full">
+          <BgVideo
+            videoName="hero"
+            aspectRatio="16/9"
+            isHero={true}
+            rounded="rounded-none"
+            overlay={true}
+            className="!h-full"
+          />
+        </div>
+
+        {/* Hero Content (Centred) */}
+        <div className="relative z-10 site-container max-w-[880px] px-4 pt-12">
+          <div ref={heroEyebrowRef} className="mb-4">
+            <span className="eyebrow inline-block bg-[rgba(8,36,28,0.7)] border border-[rgba(201,164,92,0.35)] px-4 py-1.5 rounded-full text-[13px] text-[#E3C88A]">
+              {t.hero.eyebrow}
+            </span>
+          </div>
+
+          <h1
+            ref={heroTitleRef}
+            className="font-heading text-[#F3ECDD] mb-6 tracking-tight leading-[0.95]"
+            style={{ fontSize: "clamp(2.75rem, 7vw, 6.5rem)" }}
+          >
             {t.hero.title}
           </h1>
-          <p className="mx-auto mb-10 max-w-[62ch] text-[#C3CEC4] text-[clamp(1rem,1.1vw,1.125rem)] leading-[1.65]">
+
+          <p
+            ref={heroSubtitleRef}
+            className="mx-auto mb-10 text-[#F3ECDD] opacity-95 text-[clamp(1rem,1.15vw,1.15rem)] leading-[1.65] max-w-[58ch]"
+          >
             {t.hero.subtitle}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
+
+          <div
+            ref={heroButtonsRef}
+            className="flex flex-wrap items-center justify-center gap-4"
+          >
             <Button to="/booking" variant="primary">
               {t.hero.bookBtn}
             </Button>
             <Button
-              href="https://wa.me/919000000000"
+              href={`https://wa.me/${siteData.whatsappNumber}`}
               variant="secondary-dark"
             >
-              {t.hero.whatsappBtn}
+              <WhatsappLogo size={18} weight="light" className="text-[#C9A45C]" />
+              <span>{t.hero.whatsappBtn}</span>
             </Button>
           </div>
         </div>
+
+        {/* Small Scroll Cue at bottom centre */}
+        <div
+          ref={heroScrollRef}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 text-[#E3C88A] pointer-events-none"
+        >
+          <span className="text-[12px] uppercase tracking-[0.16em] font-medium opacity-80">
+            {t.hero.scrollText}
+          </span>
+          <CaretDown size={18} weight="light" className="animate-bounce" />
+        </div>
       </section>
 
-      {/* Intro Section (Ivory) */}
-      <section className="section-ivory section-padding">
+      {/* =====================================================================
+          2. INTRO (Ivory) — centred H2 + short paragraph + 4 equal promise items
+         ===================================================================== */}
+      <section className="section-ivory section-padding border-t border-[rgba(18,63,49,0.14)]">
         <div className="site-container">
           <SectionHeading
             eyebrow={t.intro.eyebrow}
             title={t.intro.title}
             subtitle={t.intro.paragraph}
             theme="light"
+            className="mb-16"
           />
+
+          {/* Row of 4 Equal Promise Items */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {t.intro.promises.map((promise, index) => (
+              <div
+                key={index}
+                className="reveal-card p-6 sm:p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.12)] text-center flex flex-col items-center justify-start shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
+              >
+                <div className="w-14 h-14 rounded-full bg-[#F7F2E8] border border-[rgba(18,63,49,0.14)] flex items-center justify-center mb-5">
+                  {promiseIcons[index]}
+                </div>
+                <h3 className="font-heading text-[20px] text-[#0B2E24] mb-2 font-semibold">
+                  {promise.title}
+                </h3>
+                <p className="text-[#4E5F57] text-[14px] leading-relaxed">
+                  {promise.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* =====================================================================
+          3. SERVICES (Emerald) — ServiceTabs: 3 cols desktop, 1 mobile
+         ===================================================================== */}
+      <section className="section-emerald section-padding border-t border-[rgba(201,164,92,0.18)]">
+        <div className="site-container">
+          <SectionHeading
+            eyebrow={t.sections.servicesEyebrow}
+            title={t.sections.servicesTitle}
+            subtitle={t.sections.servicesSubtitle}
+            theme="dark"
+            className="mb-12 sm:mb-16"
+          />
+
+          <ServiceTabs limitCount={6} />
+
+          <div className="mt-14 text-center">
+            <Button to="/services" variant="secondary-dark">
+              <span>{t.sections.viewAllServices}</span>
+              <ArrowRight size={16} weight="light" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          4. BRIDAL PACKAGES (Ivory) — PackageBuilder
+         ===================================================================== */}
+      <section className="section-ivory section-padding border-t border-[rgba(18,63,49,0.14)]">
+        <div className="site-container">
+          <SectionHeading
+            eyebrow={t.sections.packageEyebrow}
+            title={t.sections.packageTitle}
+            subtitle={t.sections.packageSubtitle}
+            theme="light"
+            className="mb-14"
+          />
+
+          <PackageBuilder />
+        </div>
+      </section>
+
+      {/* =====================================================================
+          5. PINNED "Your bridal day" (Emerald) — Haldi, Mehendi, Shaadi, Reception
+         ===================================================================== */}
+      <PinnedBridalDay />
+
+      {/* =====================================================================
+          6. BEFORE / AFTER (Ivory) — 2 BeforeAfter sliders side by side (equal)
+         ===================================================================== */}
+      <section className="section-ivory section-padding border-t border-[rgba(18,63,49,0.14)]">
+        <div className="site-container">
+          <SectionHeading
+            eyebrow={t.sections.beforeAfterEyebrow}
+            title={t.sections.beforeAfterTitle}
+            subtitle={t.sections.beforeAfterSubtitle}
+            theme="light"
+            className="mb-16"
+          />
+
+          {/* 2 Sliders Side by Side on Desktop, 1 on Mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-[1040px] mx-auto">
+            {beforeAfterPairs.map((pair) => (
+              <div key={pair.id} className="reveal-card flex justify-center">
+                <BeforeAfter
+                  beforeImage={pair.beforeImage}
+                  afterImage={pair.afterImage}
+                  title={l(pair.title)}
+                  description={l(pair.description)}
+                  aspectRatio="4/5"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          7. GALLERY STRIP (Emerald) — Horizontal moving row of 8 photos
+         ===================================================================== */}
+      <GalleryStrip />
+
+      {/* =====================================================================
+          8. HYGIENE & PRODUCTS (Ivory) — 50/50: studio.mp4 + Brands & Steps
+         ===================================================================== */}
+      <HygieneProducts />
+
+      {/* =====================================================================
+          9. REVIEWS (Emerald) — 3 equal review cards, manual arrows
+         ===================================================================== */}
+      <ReviewsSection />
+
+      {/* =====================================================================
+          10. FAQ (Ivory) — All Q&As visible in 2 equal columns (no accordion)
+         ===================================================================== */}
+      <FaqSection />
+
+      {/* =====================================================================
+          11. BOOKING BANNER (Emerald) — banner.mp4 subtle background + CTA
+         ===================================================================== */}
+      <BookingBanner />
     </div>
   )
 }
