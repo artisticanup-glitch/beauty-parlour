@@ -198,22 +198,28 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Soft bottom blend into the ivory Intro section */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 md:h-48 bg-gradient-to-t from-[#F7F2E8] via-[rgba(247,242,232,0.45)] to-transparent pointer-events-none z-[5]"
+          aria-hidden="true"
+        />
+
         {/* Small Scroll Cue at bottom centre */}
         <div
           ref={heroScrollRef}
-          className="hidden md:flex absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-1 text-[#E3C88A] pointer-events-none"
+          className="hidden md:flex absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-1 text-[#0B2E24] pointer-events-none"
         >
           <span className="text-[13px] uppercase tracking-[0.16em] font-medium opacity-80">
             {t.hero.scrollText}
           </span>
-          <CaretDown size={16} weight="light" className="animate-bounce" />
+          <CaretDown size={16} weight="bold" className="animate-bounce text-[#B5914A]" />
         </div>
       </section>
 
       {/* =====================================================================
           2. INTRO (Ivory) — centred H2 + short paragraph + 4 equal promise items (2x2 on mobile)
          ===================================================================== */}
-      <section className="section-ivory section-padding border-t border-[rgba(18,63,49,0.14)]">
+      <section className="section-ivory section-padding">
         <div className="site-container">
           <SectionHeading
             eyebrow={t.intro.eyebrow}

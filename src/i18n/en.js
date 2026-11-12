@@ -8,8 +8,8 @@ export const en = {
     gallery: "Gallery",
     about: "About",
     contact: "Contact",
-    bookNow: "Book appointment",
-    whatsapp: "WhatsApp us",
+    bookNow: "Book",
+    whatsapp: "WhatsApp",
     callUs: "Call us",
     menu: "Menu",
     close: "Close",
@@ -18,7 +18,7 @@ export const en = {
   // Common UI & Actions
   common: {
     viewDetails: "View details",
-    bookNow: "Book appointment",
+    bookNow: "Book",
     sendWhatsapp: "Send on WhatsApp",
     callDirect: "Call direct",
     openMap: "Open in Google Maps",
@@ -52,8 +52,8 @@ export const en = {
     eyebrow: "Motihari's Bridal Studio",
     title: "Your most beautiful day",
     subtitle: "Calm, unhurried bridal artistry and skincare near Gandhi Chowk.",
-    bookBtn: "Book appointment",
-    whatsappBtn: "WhatsApp us",
+    bookBtn: "Book",
+    whatsappBtn: "WhatsApp",
     scrollText: "Scroll down",
   },
 

@@ -8,8 +8,8 @@ export const hi = {
     gallery: "गैलरी",
     about: "हमारे बारे में",
     contact: "संपर्क",
-    bookNow: "अपॉइंटमेंट बुक करें",
-    whatsapp: "व्हाट्सएप करें",
+    bookNow: "बुक",
+    whatsapp: "व्हाट्सएप",
     callUs: "कॉल करें",
     menu: "मेन्यू",
     close: "बंद करें",
@@ -18,7 +18,7 @@ export const hi = {
   // Common UI & Actions
   common: {
     viewDetails: "विवरण देखें",
-    bookNow: "अपॉइंटमेंट बुक करें",
+    bookNow: "बुक",
     sendWhatsapp: "व्हाट्सएप पर भेजें",
     callDirect: "सीधे कॉल करें",
     openMap: "गूगल मैप्स में देखें",
@@ -52,8 +52,8 @@ export const hi = {
     eyebrow: "मोतिहारी का ब्राइडल स्टूडियो",
     title: "आपका सबसे सुंदर दिन",
     subtitle: "गांधी चौक के पास शांत और समर्पित ब्राइडल शृंगार एवं त्वचा देखभाल।",
-    bookBtn: "अपॉइंटमेंट बुक करें",
-    whatsappBtn: "व्हाट्सएप करें",
+    bookBtn: "बुक",
+    whatsappBtn: "व्हाट्सएप",
     scrollText: "नीचे देखें",
   },
 
