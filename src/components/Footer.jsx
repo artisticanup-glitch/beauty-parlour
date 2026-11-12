@@ -1,0 +1,168 @@
+import React from "react"
+import { Link } from "react-router-dom"
+import {
+  MapPin,
+  Clock,
+  Phone,
+  WhatsappLogo,
+  InstagramLogo,
+  FacebookLogo,
+  ArrowUpRight,
+} from "@phosphor-icons/react"
+import { useLanguage } from "../i18n/LanguageContext"
+import { siteData } from "../data/site"
+
+export default function Footer() {
+  const { t, l } = useLanguage()
+
+  return (
+    <footer className="bg-[#08241C] text-[#F3ECDD] border-t border-[rgba(201,164,92,0.2)]">
+      <div className="site-container py-16 sm:py-20">
+        {/* Centred Wordmark & Tagline */}
+        <div className="text-center pb-12 sm:pb-16 border-b border-[rgba(201,164,92,0.18)]">
+          <Link to="/" className="inline-block group" aria-label="Roop Nikhar Home">
+            <span className="font-heading text-[34px] sm:text-[44px] text-[#F3ECDD] tracking-[0.04em] block transition-colors group-hover:text-[#E3C88A]">
+              {l(siteData.name)}
+            </span>
+          </Link>
+          <p className="text-[14px] uppercase tracking-[0.2em] text-[#C9A45C] mt-2 font-medium">
+            {l(siteData.tagline)} • Motihari
+          </p>
+        </div>
+
+        {/* 3 Equal Symmetrical Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-10 py-12 sm:py-16 text-center md:text-left border-b border-[rgba(201,164,92,0.18)]">
+          {/* Column 1: Visit us */}
+          <div className="flex flex-col items-center md:items-start space-y-4">
+            <div className="flex items-center gap-2 text-[#C9A45C]">
+              <MapPin size={20} weight="light" />
+              <span className="text-[13px] uppercase tracking-[0.14em] font-medium">
+                {t.common.address}
+              </span>
+            </div>
+            <p className="text-[#C3CEC4] text-[15px] leading-relaxed max-w-[320px]">
+              {l(siteData.address)}
+            </p>
+            <a
+              href={siteData.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-[14px] text-[#E3C88A] hover:text-[#C9A45C] transition-colors pt-1"
+            >
+              <span>{t.common.openMap}</span>
+              <ArrowUpRight size={16} weight="light" />
+            </a>
+          </div>
+
+          {/* Column 2: Hours */}
+          <div className="flex flex-col items-center md:items-start space-y-4">
+            <div className="flex items-center gap-2 text-[#C9A45C]">
+              <Clock size={20} weight="light" />
+              <span className="text-[13px] uppercase tracking-[0.14em] font-medium">
+                {t.common.hours}
+              </span>
+            </div>
+            <p className="text-[#C3CEC4] text-[15px] leading-relaxed max-w-[320px]">
+              {l(siteData.hours)}
+            </p>
+            <div className="flex items-center gap-2 pt-1 text-[14px] text-[#E3C88A]">
+              <Phone size={16} weight="light" className="text-[#C9A45C]" />
+              <a
+                href={`tel:${siteData.phone.replace(/\s+/g, "")}`}
+                className="hover:underline"
+              >
+                {siteData.phone}
+              </a>
+            </div>
+          </div>
+
+          {/* Column 3: Quick links */}
+          <div className="flex flex-col items-center md:items-start space-y-4">
+            <span className="text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-medium">
+              {t.nav.menu}
+            </span>
+            <ul className="space-y-2.5 text-[15px]">
+              <li>
+                <Link
+                  to="/bridal"
+                  className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+                >
+                  {t.nav.bridal}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services"
+                  className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+                >
+                  {t.nav.services}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/pricing"
+                  className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+                >
+                  {t.nav.pricing}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/gallery"
+                  className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+                >
+                  {t.nav.gallery}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/booking"
+                  className="text-[#C3CEC4] hover:text-[#C9A45C] transition-colors"
+                >
+                  {t.nav.bookNow}
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Socials & Copyright (Symmetrical) */}
+        <div className="pt-10 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left text-[13px] text-[#C3CEC4]">
+          <div className="flex items-center gap-6 text-[#C9A45C]">
+            <a
+              href={siteData.socials.instagram}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              className="hover:text-[#E3C88A] transition-colors p-1"
+            >
+              <InstagramLogo size={22} weight="light" />
+            </a>
+            <a
+              href={siteData.socials.facebook}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+              className="hover:text-[#E3C88A] transition-colors p-1"
+            >
+              <FacebookLogo size={22} weight="light" />
+            </a>
+            <a
+              href={`https://wa.me/${siteData.whatsappNumber}`}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="WhatsApp"
+              className="hover:text-[#E3C88A] transition-colors p-1"
+            >
+              <WhatsappLogo size={22} weight="light" />
+            </a>
+          </div>
+
+          <p>
+            © {new Date().getFullYear()} {l(siteData.name)}. {t.common.allRightsReserved}.
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}

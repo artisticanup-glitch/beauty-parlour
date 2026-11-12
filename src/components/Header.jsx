@@ -1,0 +1,279 @@
+import React, { useState, useEffect } from "react"
+import { Link, NavLink, useLocation } from "react-router-dom"
+import { List, X, PhoneCall, WhatsappLogo, InstagramLogo, FacebookLogo } from "@phosphor-icons/react"
+import { useLanguage } from "../i18n/LanguageContext"
+import { siteData } from "../data/site"
+import Button from "./Button"
+
+export default function Header() {
+  const { lang, toggleLang, t, l } = useLanguage()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const location = useLocation()
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [location.pathname])
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [mobileMenuOpen])
+
+  // Track scroll for subtle background elevation (flat color)
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const leftNavItems = [
+    { to: "/", label: t.nav.home },
+    { to: "/services", label: t.nav.services },
+    { to: "/bridal", label: t.nav.bridal },
+  ]
+
+  const rightNavItems = [
+    { to: "/pricing", label: t.nav.pricing },
+    { to: "/gallery", label: t.nav.gallery },
+    { to: "/about", label: t.nav.about },
+    { to: "/contact", label: t.nav.contact },
+  ]
+
+  const allNavItems = [...leftNavItems, ...rightNavItems]
+
+  return (
+    <header
+      className={`sticky top-0 z-50 w-full transition-colors duration-300 border-b ${
+        scrolled
+          ? "bg-[#0B2E24] border-[rgba(201,164,92,0.28)]"
+          : "bg-[#0B2E24] border-[rgba(201,164,92,0.18)]"
+      }`}
+    >
+      <div className="site-container h-[88px] flex items-center justify-between">
+        {/* DESKTOP SYMMETRICAL HEADER */}
+        <div className="hidden lg:grid lg:grid-cols-[1fr_auto_1fr] items-center w-full gap-4">
+          {/* Left Nav */}
+          <nav className="flex items-center gap-7 justify-start">
+            {leftNavItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  `relative py-2 text-[15px] tracking-wide transition-colors duration-200 group ${
+                    isActive ? "text-[#C9A45C] font-medium" : "text-[#F3ECDD] hover:text-[#C9A45C]"
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <span>{item.label}</span>
+                    <span
+                      className={`absolute bottom-0 left-0 h-[1.5px] bg-[#C9A45C] transition-all duration-300 ${
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    />
+                  </>
+                )}
+              </NavLink>
+            ))}
+          </nav>
+
+          {/* Centred Wordmark */}
+          <Link
+            to="/"
+            className="flex flex-col items-center justify-center text-center px-6 py-1 group"
+            aria-label="Roop Nikhar Home"
+          >
+            <span
+              className="font-heading text-[28px] leading-tight text-[#F3ECDD] tracking-[0.04em] transition-colors group-hover:text-[#E3C88A]"
+            >
+              {l(siteData.name)}
+            </span>
+            <span className="text-[11px] uppercase tracking-[0.25em] text-[#C9A45C] mt-0.5 font-medium">
+              Motihari
+            </span>
+          </Link>
+
+          {/* Right Nav + Actions */}
+          <div className="flex items-center justify-end gap-6">
+            <nav className="flex items-center gap-6">
+              {rightNavItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) =>
+                    `relative py-2 text-[15px] tracking-wide transition-colors duration-200 group ${
+                      isActive ? "text-[#C9A45C] font-medium" : "text-[#F3ECDD] hover:text-[#C9A45C]"
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      <span>{item.label}</span>
+                      <span
+                        className={`absolute bottom-0 left-0 h-[1.5px] bg-[#C9A45C] transition-all duration-300 ${
+                          isActive ? "w-full" : "w-0 group-hover:w-full"
+                        }`}
+                      />
+                    </>
+                  )}
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLang}
+              type="button"
+              className="px-2.5 py-1 text-[13px] tracking-wider rounded-md border border-[rgba(201,164,92,0.35)] text-[#E3C88A] hover:bg-[#123F31] transition-colors"
+              aria-label="Switch Language between English and Hindi"
+            >
+              {lang === "en" ? (
+                <span>
+                  <strong className="text-[#C9A45C]">EN</strong> | हिं
+                </span>
+              ) : (
+                <span>
+                  EN | <strong className="text-[#C9A45C]">हिं</strong>
+                </span>
+              )}
+            </button>
+
+            {/* Book Button */}
+            <Button to="/booking" variant="primary" className="!py-2.5 !px-5 !text-[14px]">
+              {t.nav.bookNow}
+            </Button>
+          </div>
+        </div>
+
+        {/* MOBILE HEADER (Phones & Tablets) */}
+        <div className="flex lg:hidden items-center justify-between w-full">
+          {/* Wordmark Left */}
+          <Link to="/" className="flex flex-col text-left" aria-label="Roop Nikhar Home">
+            <span className="font-heading text-[24px] leading-tight text-[#F3ECDD]">
+              {l(siteData.name)}
+            </span>
+            <span className="text-[10px] uppercase tracking-[0.22em] text-[#C9A45C]">
+              Motihari
+            </span>
+          </Link>
+
+          {/* Right Controls: Lang toggle + Hamburger */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleLang}
+              type="button"
+              className="px-2 py-1 text-[13px] rounded border border-[rgba(201,164,92,0.35)] text-[#E3C88A]"
+              aria-label="Toggle language"
+            >
+              {lang === "en" ? "EN | हिं" : "हिं | EN"}
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              type="button"
+              className="w-12 h-12 flex items-center justify-center rounded-[12px] bg-[#123F31] text-[#E3C88A] border border-[rgba(201,164,92,0.3)]"
+              aria-label={mobileMenuOpen ? t.nav.close : t.nav.menu}
+            >
+              {mobileMenuOpen ? (
+                <X size={26} weight="light" />
+              ) : (
+                <List size={26} weight="light" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* FULL-SCREEN EMERALD MOBILE MENU */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 top-[88px] z-50 bg-[#0B2E24] text-[#F3ECDD] flex flex-col justify-between p-6 pb-28 overflow-y-auto"
+          style={{ height: "calc(100dvh - 88px)" }}
+        >
+          {/* Centred Links in Cormorant 32px */}
+          <nav className="flex flex-col items-center justify-center text-center py-6 gap-5">
+            {allNavItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                onClick={() => setMobileMenuOpen(false)}
+                className={({ isActive }) =>
+                  `font-heading text-[32px] tracking-wide transition-colors ${
+                    isActive ? "text-[#C9A45C]" : "text-[#F3ECDD] hover:text-[#C9A45C]"
+                  }`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+
+            <div className="pt-4 w-full max-w-[280px]">
+              <Button
+                to="/booking"
+                variant="primary"
+                className="w-full text-center"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.nav.bookNow}
+              </Button>
+            </div>
+          </nav>
+
+          {/* Bottom Info: Phone + Hours + Socials */}
+          <div className="border-t border-[rgba(201,164,92,0.2)] pt-6 text-center text-sm space-y-3">
+            <p className="text-[#C3CEC4] text-[13px]">{l(siteData.hours)}</p>
+            <p className="text-[14px]">
+              <a
+                href={`tel:${siteData.phone.replace(/\s+/g, "")}`}
+                className="text-[#E3C88A] hover:underline"
+              >
+                {siteData.phone}
+              </a>
+            </p>
+            <div className="flex justify-center gap-6 pt-1 text-[#C9A45C]">
+              <a
+                href={siteData.socials.instagram}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="p-2"
+              >
+                <InstagramLogo size={22} weight="light" />
+              </a>
+              <a
+                href={siteData.socials.facebook}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+                className="p-2"
+              >
+                <FacebookLogo size={22} weight="light" />
+              </a>
+              <a
+                href={`https://wa.me/${siteData.whatsappNumber}`}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+                className="p-2"
+              >
+                <WhatsappLogo size={22} weight="light" />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  )
+}

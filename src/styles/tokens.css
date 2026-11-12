@@ -1,0 +1,272 @@
+/* Design Tokens & CSS Variables for Roop Nikhar */
+:root {
+  /* Colours — Flat Only */
+  --emerald-950: #08241C;   /* darkest, footer */
+  --emerald-900: #0B2E24;   /* dark section background */
+  --emerald-800: #123F31;   /* cards on dark */
+  --emerald-600: #1F6B4F;   /* hover, small accents */
+  --gold-500:    #C9A45C;   /* lines, icons, borders, buttons */
+  --gold-300:    #E3C88A;   /* gold TEXT on dark backgrounds */
+  --ivory-50:    #F7F2E8;   /* light section background */
+  --ivory-100:   #EFE7D7;   /* cards on light */
+  --ink-900:     #15251F;   /* main text on ivory */
+  --ink-600:     #4E5F57;   /* secondary text on ivory */
+  --cream-100:   #F3ECDD;   /* main text on emerald */
+  --cream-300:   #C3CEC4;   /* secondary text on emerald */
+  --line-dark:   rgba(201, 164, 92, 0.28);  /* hairlines on emerald */
+  --line-light:  rgba(18, 63, 49, 0.14);    /* hairlines on ivory */
+  --hero-overlay: rgba(8, 36, 28, 0.45);   /* flat dark layer */
+
+  /* Shadows (if any) */
+  --shadow-subtle: 0 10px 30px rgba(8, 36, 28, 0.12);
+
+  /* Radii */
+  --radius-card: 16px;
+  --radius-panel: 24px;
+  --radius-btn: 12px;
+  --radius-input: 12px;
+  --radius-pill: 999px;
+
+  /* Typography Fonts - Default English */
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Jost', system-ui, -apple-system, sans-serif;
+
+  /* Sizes */
+  --text-hero: clamp(2.75rem, 7vw, 6.5rem);
+  --text-h2: clamp(2.1rem, 4.2vw, 3.75rem);
+  --text-h3: clamp(1.35rem, 2vw, 1.75rem);
+  --text-body: clamp(1rem, 1.1vw, 1.125rem);
+}
+
+/* Switch fonts automatically with html[lang="hi"] */
+html[lang="hi"] {
+  --font-heading: 'Tiro Devanagari Hindi', 'Cormorant Garamond', serif;
+  --font-body: 'Mukta', 'Jost', sans-serif;
+}
+
+/* Base element resets */
+html {
+  font-family: var(--font-body);
+  font-size: 16px;
+  background-color: var(--emerald-900);
+  color: var(--cream-100);
+  scroll-behavior: auto; /* Handled smoothly by Lenis */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Headings */
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--text-hero);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: var(--text-h2);
+  line-height: 1.05;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: var(--text-h3);
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+/* Body and UI */
+p, span, a, button, input, textarea, select {
+  font-family: var(--font-body);
+}
+
+p {
+  font-size: var(--text-body);
+  line-height: 1.65;
+  max-width: 62ch;
+}
+
+.eyebrow {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  color: var(--gold-500);
+  font-family: 'Jost', sans-serif;
+}
+
+/* Container */
+.site-container {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (max-width: 640px) {
+  .site-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Alternating Section Themes */
+.section-emerald {
+  background-color: var(--emerald-900);
+  color: var(--cream-100);
+}
+
+.section-emerald h2, .section-emerald h3 {
+  color: var(--cream-100);
+}
+
+.section-emerald .text-secondary {
+  color: var(--cream-300);
+}
+
+.section-emerald .hairline {
+  border-color: var(--line-dark);
+}
+
+.section-ivory {
+  background-color: var(--ivory-50);
+  color: var(--ink-900);
+}
+
+.section-ivory h1, .section-ivory h2, .section-ivory h3 {
+  color: var(--emerald-900);
+}
+
+.section-ivory .text-secondary {
+  color: var(--ink-600);
+}
+
+.section-ivory .hairline {
+  border-color: var(--line-light);
+}
+
+/* Standard Section Padding: 128px desktop, 80px mobile */
+.section-padding {
+  padding-top: 128px;
+  padding-bottom: 128px;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--gold-500);
+  color: var(--emerald-950);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 16px 28px;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--gold-500);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 250ms ease, transform 150ms ease;
+  min-height: 48px;
+}
+
+.btn-primary:hover {
+  background-color: #B5914A;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--gold-300);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 16px 28px;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--gold-500);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 250ms ease, color 250ms ease, transform 150ms ease;
+  min-height: 48px;
+}
+
+.btn-secondary-dark:hover {
+  background-color: rgba(201, 164, 92, 0.1);
+  color: var(--gold-500);
+}
+
+.btn-secondary-dark:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--emerald-900);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 16px 28px;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--emerald-900);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 250ms ease, color 250ms ease, transform 150ms ease;
+  min-height: 48px;
+}
+
+.btn-secondary-light:hover {
+  background-color: rgba(11, 46, 36, 0.08);
+}
+
+.btn-secondary-light:active {
+  transform: scale(0.98);
+}
+
+/* Minimum text size enforcement */
+* {
+  min-height: 0;
+  min-width: 0;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
