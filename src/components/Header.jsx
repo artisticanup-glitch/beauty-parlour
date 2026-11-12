@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
-import { List, X, GlobeSimple, CalendarCheck, WhatsappLogo, InstagramLogo, FacebookLogo } from "@phosphor-icons/react"
+import { List, X, CalendarCheck, WhatsappLogo, InstagramLogo, FacebookLogo } from "@phosphor-icons/react"
 import { useLanguage } from "../i18n/LanguageContext"
 import { siteData } from "../data/site"
 import Button from "./Button"
@@ -116,17 +116,23 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* 3. Language Switcher + 4. Book Button */}
+          {/* 3. Language Switcher (artisticanup.com style) + 4. Book Button */}
           <div className="flex items-center gap-3.5 xl:gap-4 shrink-0 whitespace-nowrap">
-            {/* Compact Language Switcher */}
             <button
               onClick={toggleLang}
               type="button"
-              className="h-9 px-3 rounded-[10px] border border-[rgba(201,164,92,0.3)] bg-[rgba(18,63,49,0.4)] hover:bg-[rgba(18,63,49,0.7)] hover:border-[rgba(201,164,92,0.55)] text-[#E3C88A] hover:text-[#F3ECDD] text-[13px] font-medium flex items-center gap-1.5 transition-all duration-200 cursor-pointer select-none shrink-0"
-              aria-label={`Switch Language to ${lang === "en" ? "Hindi" : "English"}`}
+              className="w-10 h-10 rounded-full border border-[rgba(201,164,92,0.4)] bg-[rgba(18,63,49,0.55)] hover:bg-[#1A5240] hover:border-[#E3C88A] text-[#E3C88A] hover:text-[#FFFFFF] transition-all duration-200 flex items-center justify-center font-bold text-[14px] leading-none shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer select-none shrink-0"
+              aria-label={lang === "en" ? "हिंदी में देखें" : "View in English"}
             >
-              <GlobeSimple size={15} weight="regular" className="text-[#C9A45C]" />
-              <span className="leading-none">{lang === "en" ? "हिन्दी" : "English"}</span>
+              {lang === "en" ? (
+                <span lang="hi" className="font-heading text-[17px] font-semibold leading-none">
+                  हि
+                </span>
+              ) : (
+                <span className="font-sans text-[13px] font-bold tracking-wider leading-none">
+                  EN
+                </span>
+              )}
             </button>
 
             {/* Book Button */}
@@ -163,17 +169,24 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Right Controls: Compact Lang button + Hamburger */}
+          {/* Right Controls: Compact Lang button (artisticanup.com style) + Hamburger */}
           <div className="flex items-center gap-3">
             <button
               onClick={toggleLang}
               type="button"
-              style={{ minHeight: "44px", height: "44px" }}
-              className="px-2.5 rounded-[10px] border border-[rgba(201,164,92,0.3)] bg-[rgba(18,63,49,0.4)] hover:bg-[rgba(18,63,49,0.7)] text-[#E3C88A] text-[13px] font-medium flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer select-none shrink-0"
-              aria-label={`Switch Language to ${lang === "en" ? "Hindi" : "English"}`}
+              style={{ minHeight: "44px", height: "44px", minWidth: "44px", width: "44px" }}
+              className="rounded-full border border-[rgba(201,164,92,0.4)] bg-[rgba(18,63,49,0.55)] hover:bg-[#1A5240] hover:border-[#E3C88A] text-[#E3C88A] hover:text-[#FFFFFF] transition-all duration-200 flex items-center justify-center font-bold text-[14px] leading-none shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer select-none shrink-0"
+              aria-label={lang === "en" ? "हिंदी में देखें" : "View in English"}
             >
-              <GlobeSimple size={15} weight="regular" className="text-[#C9A45C]" />
-              <span className="leading-none">{lang === "en" ? "हिन्दी" : "English"}</span>
+              {lang === "en" ? (
+                <span lang="hi" className="font-heading text-[17px] font-semibold leading-none">
+                  हि
+                </span>
+              ) : (
+                <span className="font-sans text-[13px] font-bold tracking-wider leading-none">
+                  EN
+                </span>
+              )}
             </button>
 
             <button
