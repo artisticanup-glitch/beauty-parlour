@@ -20,9 +20,16 @@ export default function Footer() {
   return (
     <footer className="bg-[#08241C] text-[#F3ECDD] border-t border-[rgba(201,164,92,0.2)]">
       <div className="site-container py-16 sm:py-20">
-        {/* Centred Wordmark & Tagline */}
+        {/* Centred Logo, Wordmark & Tagline */}
         <div className="flex flex-col items-center justify-center text-center pb-12 sm:pb-16 border-b border-[rgba(201,164,92,0.18)]">
-          <Link to="/" className="inline-block group text-center" aria-label="Roop Nikhar Home">
+          <Link to="/" className="inline-flex items-center justify-center gap-3.5 group text-center" aria-label="Roop Nikhar Home">
+            <img
+              src="/images/logo.webp"
+              alt="Roop Nikhar Emblem"
+              width={54}
+              height={54}
+              className="w-12 h-12 sm:w-14 sm:h-14 object-contain transition-transform duration-300 group-hover:scale-105"
+            />
             <span className="font-heading text-[34px] sm:text-[44px] text-[#F3ECDD] tracking-[0.04em] block transition-colors group-hover:text-[#E3C88A] text-center">
               {l(siteData.name)}
             </span>

@@ -12,6 +12,7 @@ export default function Preloader({ onComplete }) {
     return !(prefersReducedMotion || alreadyVisited)
   })
   const preloaderRef = useRef(null)
+  const logoRef = useRef(null)
   const lettersRef = useRef([])
   const lineRef = useRef(null)
   const subtitleRef = useRef(null)
@@ -33,7 +34,16 @@ export default function Preloader({ onComplete }) {
       },
     })
 
-    // 1. Letters rise one by one
+    // 1. Logo fades in gently
+    if (logoRef.current) {
+      tl.fromTo(
+        logoRef.current,
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.6, ease: "power3.out" }
+      )
+    }
+
+    // 2. Letters rise one by one
     tl.fromTo(
       lettersRef.current,
       { y: 40, opacity: 0 },
@@ -43,7 +53,8 @@ export default function Preloader({ onComplete }) {
         duration: 0.6,
         stagger: 0.04,
         ease: "power4.out",
-      }
+      },
+      "-=0.3"
     )
 
     // 2. Thin gold line draws underneath
@@ -92,7 +103,18 @@ export default function Preloader({ onComplete }) {
       ref={preloaderRef}
       className="fixed inset-0 z-[100] bg-[#F7F2E8] flex flex-col items-center justify-center pointer-events-auto"
     >
-      <div className="text-center px-4 overflow-hidden">
+      <div className="text-center px-4 overflow-hidden flex flex-col items-center">
+        {/* Logo Emblem */}
+        <div ref={logoRef} className="mb-3 opacity-0">
+          <img
+            src="/images/logo.webp"
+            alt="Roop Nikhar"
+            width={72}
+            height={72}
+            className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-[0_4px_12px_rgba(8,36,28,0.15)]"
+          />
+        </div>
+
         {/* Wordmark Letters */}
         <div className="overflow-hidden flex items-center justify-center pb-2">
           {letters.map((char, index) => (

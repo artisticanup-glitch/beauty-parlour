@@ -95,22 +95,31 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Centred Wordmark */}
+          {/* Centred Logo & Wordmark */}
           <Link
             to="/"
-            className="flex flex-col items-center justify-center text-center px-6 py-1 group shrink-0"
+            className="flex items-center justify-center gap-3.5 px-6 py-1 group shrink-0"
             aria-label="Roop Nikhar Home"
           >
-            <span
-              className="font-heading text-[28px] leading-tight text-[#F3ECDD] tracking-[0.04em] transition-colors group-hover:text-[#E3C88A]"
-            >
-              {l(siteData.name)}
-            </span>
-            <span
-              className={`text-[13px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.25em]"} text-[#C9A45C] mt-0.5 font-medium`}
-            >
-              {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
-            </span>
+            <img
+              src="/images/logo.webp"
+              alt="Roop Nikhar Emblem"
+              width={46}
+              height={46}
+              className="w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="flex flex-col items-start text-left">
+              <span
+                className="font-heading text-[26px] sm:text-[28px] leading-tight text-[#F3ECDD] tracking-[0.03em] transition-colors group-hover:text-[#E3C88A]"
+              >
+                {l(siteData.name)}
+              </span>
+              <span
+                className={`text-[12px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.24em]"} text-[#C9A45C] font-medium leading-none`}
+              >
+                {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
+              </span>
+            </div>
           </Link>
 
           {/* Right Nav + Actions (3 items + Book button + Lang toggle) */}
@@ -167,14 +176,23 @@ export default function Header() {
 
         {/* MOBILE HEADER (Phones & Tablets) */}
         <div className="flex lg:hidden items-center justify-between w-full">
-          {/* Wordmark Left */}
-          <Link to="/" className="flex flex-col text-left" aria-label="Roop Nikhar Home">
-            <span className="font-heading text-[24px] leading-tight text-[#F3ECDD]">
-              {l(siteData.name)}
-            </span>
-            <span className={`text-[13px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.22em]"} text-[#C9A45C]`}>
-              {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
-            </span>
+          {/* Logo & Wordmark Left */}
+          <Link to="/" className="flex items-center gap-2.5 text-left group" aria-label="Roop Nikhar Home">
+            <img
+              src="/images/logo.webp"
+              alt="Roop Nikhar Emblem"
+              width={38}
+              height={38}
+              className="w-9 h-9 object-contain"
+            />
+            <div className="flex flex-col text-left">
+              <span className="font-heading text-[22px] sm:text-[24px] leading-tight text-[#F3ECDD]">
+                {l(siteData.name)}
+              </span>
+              <span className={`text-[12px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.22em]"} text-[#C9A45C] leading-none`}>
+                {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
+              </span>
+            </div>
           </Link>
 
           {/* Right Controls: Lang toggle + Hamburger */}
