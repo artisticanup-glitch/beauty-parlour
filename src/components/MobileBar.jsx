@@ -19,7 +19,7 @@ export default function MobileBar() {
           aria-label={t.common.whatsappUs}
         >
           <WhatsappLogo size={22} weight="light" className="text-[#C9A45C]" />
-          <span className="text-[12px] font-medium tracking-wide">
+          <span className="text-[13px] font-medium tracking-wide">
             {t.common.whatsappUs}
           </span>
         </a>
@@ -31,7 +31,7 @@ export default function MobileBar() {
           aria-label={t.common.callDirect}
         >
           <PhoneCall size={22} weight="light" className="text-[#C9A45C]" />
-          <span className="text-[12px] font-medium tracking-wide">
+          <span className="text-[13px] font-medium tracking-wide">
             {t.nav.callUs}
           </span>
         </a>
@@ -43,7 +43,7 @@ export default function MobileBar() {
           aria-label={t.nav.bookNow}
         >
           <CalendarCheck size={22} weight="light" className="text-[#08241C]" />
-          <span className="text-[12px] font-semibold tracking-wide">
+          <span className="text-[13px] font-semibold tracking-wide">
             {t.nav.bookNow}
           </span>
         </Link>

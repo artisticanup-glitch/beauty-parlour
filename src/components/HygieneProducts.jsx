@@ -89,7 +89,7 @@ export default function HygieneProducts({ theme = "light" }) {
                       {b.name}
                     </span>
                     <span
-                      className={`text-[12px] block mt-0.5 ${
+                      className={`text-[13px] block mt-0.5 ${
                         isDark ? "text-[#C3CEC4]" : "text-[#4E5F57]"
                       }`}
                     >

@@ -116,7 +116,7 @@ export default function Preloader({ onComplete }) {
         {/* Subtitle */}
         <p
           ref={subtitleRef}
-          className="text-[12px] sm:text-[13px] uppercase tracking-[0.25em] text-[#C9A45C] mt-3 font-medium opacity-0"
+          className="text-[13px] sm:text-[13px] uppercase tracking-[0.25em] text-[#C9A45C] mt-3 font-medium opacity-0"
         >
           Motihari • Bihar
         </p>

@@ -117,7 +117,7 @@ export default function Gallery() {
                       <MagnifyingGlassPlus size={18} weight="bold" />
                     </div>
                     <div>
-                      <span className="text-[11px] uppercase tracking-wider text-[#E3C88A] block font-medium">
+                      <span className="text-[13px] uppercase tracking-wider text-[#E3C88A] block font-medium">
                         {item.category}
                       </span>
                       <h3 className="font-heading text-[18px] sm:text-[20px] text-[#F3ECDD] font-medium leading-snug">
@@ -167,7 +167,7 @@ export default function Gallery() {
               />
             </div>
             <div className="mt-4 text-center">
-              <span className="text-[12px] uppercase tracking-wider text-[#C9A45C] block mb-1">
+              <span className="text-[13px] uppercase tracking-wider text-[#C9A45C] block mb-1">
                 {lightboxItem.category}
               </span>
               <h3 className="font-heading text-[22px] sm:text-[24px] text-[#F3ECDD]">

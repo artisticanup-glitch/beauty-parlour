@@ -200,7 +200,7 @@ export default function Home() {
           ref={heroScrollRef}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 text-[#E3C88A] pointer-events-none"
         >
-          <span className="text-[12px] uppercase tracking-[0.16em] font-medium opacity-80">
+          <span className="text-[13px] uppercase tracking-[0.16em] font-medium opacity-80">
             {t.hero.scrollText}
           </span>
           <CaretDown size={18} weight="light" className="animate-bounce" />

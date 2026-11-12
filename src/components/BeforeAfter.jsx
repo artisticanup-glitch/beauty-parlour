@@ -109,12 +109,12 @@ export default function BeforeAfter({
 
         {/* LABELS */}
         <div className="absolute top-4 left-4 pointer-events-none">
-          <span className="bg-[rgba(8,36,28,0.85)] border border-[rgba(201,164,92,0.3)] text-[#F3ECDD] text-[12px] font-medium tracking-wider uppercase px-2.5 py-1 rounded-[6px]">
+          <span className="bg-[rgba(8,36,28,0.85)] border border-[rgba(201,164,92,0.3)] text-[#F3ECDD] text-[13px] font-medium tracking-wider uppercase px-2.5 py-1 rounded-[6px]">
             {t.sections.beforeLabel}
           </span>
         </div>
         <div className="absolute top-4 right-4 pointer-events-none">
-          <span className="bg-[rgba(8,36,28,0.85)] border border-[rgba(201,164,92,0.3)] text-[#E3C88A] text-[12px] font-medium tracking-wider uppercase px-2.5 py-1 rounded-[6px]">
+          <span className="bg-[rgba(8,36,28,0.85)] border border-[rgba(201,164,92,0.3)] text-[#E3C88A] text-[13px] font-medium tracking-wider uppercase px-2.5 py-1 rounded-[6px]">
             {t.sections.afterLabel}
           </span>
         </div>

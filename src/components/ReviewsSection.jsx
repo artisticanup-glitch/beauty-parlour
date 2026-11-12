@@ -85,7 +85,7 @@ export default function ReviewsSection() {
                     {l(rev.location)}
                   </span>
                 </div>
-                <span className="text-[12px] text-[#C3CEC4] bg-[#08241C] border border-[rgba(201,164,92,0.2)] rounded-full px-3 py-1">
+                <span className="text-[13px] text-[#C3CEC4] bg-[#08241C] border border-[rgba(201,164,92,0.2)] rounded-full px-3 py-1">
                   {l(rev.service)}
                 </span>
               </div>

@@ -100,7 +100,7 @@ export default function Header() {
             >
               {l(siteData.name)}
             </span>
-            <span className="text-[11px] uppercase tracking-[0.25em] text-[#C9A45C] mt-0.5 font-medium">
+            <span className="text-[13px] uppercase tracking-[0.25em] text-[#C9A45C] mt-0.5 font-medium">
               Motihari
             </span>
           </Link>
@@ -164,7 +164,7 @@ export default function Header() {
             <span className="font-heading text-[24px] leading-tight text-[#F3ECDD]">
               {l(siteData.name)}
             </span>
-            <span className="text-[10px] uppercase tracking-[0.22em] text-[#C9A45C]">
+            <span className="text-[13px] uppercase tracking-[0.22em] text-[#C9A45C]">
               Motihari
             </span>
           </Link>

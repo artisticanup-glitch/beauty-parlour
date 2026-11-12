@@ -59,7 +59,7 @@ export default function Pricing() {
                       <h3 className="font-heading text-[24px] sm:text-[26px] text-[#0B2E24] font-semibold">
                         {l(cat.name)}
                       </h3>
-                      <span className="text-[12px] uppercase tracking-wider text-[#4E5F57]">
+                      <span className="text-[13px] uppercase tracking-wider text-[#4E5F57]">
                         {catServices.length} {lang === "hi" ? "उपचार" : "services"}
                       </span>
                     </div>
@@ -83,7 +83,7 @@ export default function Pricing() {
                             <span className="leading-snug max-w-[42ch]">
                               {l(service.description)}
                             </span>
-                            <span className="whitespace-nowrap text-[12px] font-medium text-[#15251F] bg-[#F7F2E8] px-2 py-0.5 rounded">
+                            <span className="whitespace-nowrap text-[13px] font-medium text-[#15251F] bg-[#F7F2E8] px-2 py-0.5 rounded">
                               {l(service.duration)}
                             </span>
                           </div>
@@ -108,7 +108,7 @@ export default function Pricing() {
                       <h3 className="font-heading text-[24px] sm:text-[26px] text-[#0B2E24] font-semibold">
                         {l(cat.name)}
                       </h3>
-                      <span className="text-[12px] uppercase tracking-wider text-[#4E5F57]">
+                      <span className="text-[13px] uppercase tracking-wider text-[#4E5F57]">
                         {catServices.length} {lang === "hi" ? "उपचार" : "services"}
                       </span>
                     </div>
@@ -132,7 +132,7 @@ export default function Pricing() {
                             <span className="leading-snug max-w-[42ch]">
                               {l(service.description)}
                             </span>
-                            <span className="whitespace-nowrap text-[12px] font-medium text-[#15251F] bg-[#F7F2E8] px-2 py-0.5 rounded">
+                            <span className="whitespace-nowrap text-[13px] font-medium text-[#15251F] bg-[#F7F2E8] px-2 py-0.5 rounded">
                               {l(service.duration)}
                             </span>
                           </div>

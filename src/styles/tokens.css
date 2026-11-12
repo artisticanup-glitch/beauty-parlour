@@ -32,10 +32,10 @@
   --font-body: 'Jost', system-ui, -apple-system, sans-serif;
 
   /* Sizes */
-  --text-hero: clamp(2.75rem, 7vw, 6.5rem);
-  --text-h2: clamp(2.1rem, 4.2vw, 3.75rem);
-  --text-h3: clamp(1.35rem, 2vw, 1.75rem);
-  --text-body: clamp(1rem, 1.1vw, 1.125rem);
+  --text-hero: clamp(2.5rem, 6.5vw, 6.5rem);
+  --text-h2: clamp(1.75rem, 4vw, 3.5rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.75rem);
+  --text-body: clamp(0.95rem, 1.1vw, 1.125rem);
 }
 
 /* Switch fonts automatically with html[lang="hi"] */
@@ -54,6 +54,11 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
 }
 
 body {

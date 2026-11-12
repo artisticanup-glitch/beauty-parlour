@@ -17,7 +17,7 @@ export default function SectionHeading({
       } ${className}`}
     >
       {eyebrow && (
-        <span className="eyebrow block mb-3 text-[13px] uppercase tracking-[0.14em] text-[#C9A45C]">
+        <span className="eyebrow block mb-3 text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-semibold">
           {eyebrow}
         </span>
       )}
@@ -26,8 +26,8 @@ export default function SectionHeading({
           isDark ? "text-[#F3ECDD]" : "text-[#0B2E24]"
         }`}
         style={{
-          fontSize: "clamp(2.1rem, 4.2vw, 3.75rem)",
-          lineHeight: 1.05,
+          fontSize: "clamp(1.75rem, 4vw, 3.5rem)",
+          lineHeight: 1.1,
           textWrap: "balance",
         }}
       >
@@ -39,7 +39,7 @@ export default function SectionHeading({
             isDark ? "text-[#C3CEC4]" : "text-[#4E5F57]"
           }`}
           style={{
-            fontSize: "clamp(1rem, 1.1vw, 1.125rem)",
+            fontSize: "clamp(0.95rem, 1.1vw, 1.125rem)",
             lineHeight: 1.65,
             maxWidth: "62ch",
           }}

@@ -18,7 +18,7 @@ export const faqData = [
     },
     answer: {
       en: "We use only authentic, international professional makeup including MAC, Huda Beauty, Kryolan Professional, Estée Lauder, and PAC. Every product is opened and sanitised in front of you.",
-      hi: "हम केवल असली और पेशेवर अंतरराष्ट्रीय ब्रांड्स जैसे MAC, Huda Beauty, Kryolan, Estée Lauder और PAC का इस्तेमाल करते हैं। हर उत्पाद आपके सामने साफ और तैयार किया जाता है।",
+      hi: "हम केवल असली और पेशेवर अंतरराष्ट्रीय ब्रांड्स जैसे मैक, हुडा ब्यूटी, क्रायोलॉन, एस्टी लॉडर और पैक का इस्तेमाल करते हैं। हर उत्पाद आपके सामने साफ और तैयार किया जाता है।",
     },
   },
   {
