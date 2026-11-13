@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Impeccable binary engines (downloaded automatically on demand)
+**/scripts/bin/
+*.exe
+
