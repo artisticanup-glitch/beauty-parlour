@@ -318,3 +318,55 @@ p {
     scroll-behavior: auto !important;
   }
 }
+
+/* Hero editorial split card */
+.rn-hero-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: left;
+  background: rgba(8, 36, 28, 0.65);
+  border: 1px solid rgba(201, 164, 92, 0.32);
+  border-radius: 20px;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 12px 32px rgba(8, 36, 28, 0.28);
+}
+
+@media (min-width: 768px) {
+  .rn-hero-split {
+    grid-template-columns: 1.45fr auto;
+    gap: 2.25rem;
+    padding: 2.25rem 2.75rem;
+  }
+}
+
+.rn-hero-split .rn-split-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-top: 1px solid rgba(201, 164, 92, 0.24);
+  padding-top: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .rn-hero-split .rn-split-actions {
+    border-top: none;
+    border-left: 1px solid rgba(201, 164, 92, 0.24);
+    padding-top: 0;
+    padding-left: 2rem;
+    min-width: 210px;
+  }
+}
+
+/* Hygiene & Authentic Products panoramic showcase */
+.rn-hyg-v3-video {
+  max-width: 1080px;
+  margin: 0 auto 3rem auto;
+}
+
+.rn-hyg-v3-brands {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}

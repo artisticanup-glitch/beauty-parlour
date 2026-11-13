@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+﻿import React, { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import {
@@ -137,7 +137,7 @@ export default function Home() {
   return (
     <div className="w-full pb-16 lg:pb-0">
       {/* =====================================================================
-          1. HERO — full-screen (100dvh) background VIDEO hero.mp4
+          1. HERO â€” full-screen (100dvh) background VIDEO hero.mp4
          ===================================================================== */}
       <section
         ref={heroRef}
@@ -157,45 +157,35 @@ export default function Home() {
 
         {/* Hero Content (Positioned in bottom third with flat emerald shade behind text area only) */}
         <div className="relative z-10 site-container max-w-[840px] px-4 w-full">
-          <div className="bg-[rgba(8,36,28,0.78)] border border-[rgba(201,164,92,0.3)] rounded-[24px] p-6 sm:p-8 md:p-10 shadow-[0_10px_30px_rgba(8,36,28,0.25)]">
-            <div ref={heroEyebrowRef} className="mb-3">
-              <span className="eyebrow inline-block bg-[#0B2E24] border border-[rgba(201,164,92,0.35)] px-4 py-1.5 rounded-full text-[13px] text-[#E3C88A]">
-                {t.hero.eyebrow}
-              </span>
+            <div className="rn-hero-split">
+              <div>
+                <h1
+                  className="font-heading text-[#F3ECDD] mb-2 tracking-tight leading-[1.02]"
+                  style={{ fontSize: lang === "hi" ? "clamp(1.75rem, 4.4vw, 3.85rem)" : "clamp(2.1rem, 4.8vw, 4.25rem)" }}
+                >
+                  {t.hero.title}
+                </h1>
+                <p
+                  className="text-[#F3ECDD] opacity-90 leading-[1.6] max-w-[46ch]"
+                  style={{ fontSize: "clamp(0.98rem, 1.15vw, 1.15rem)" }}
+                >
+                  {t.hero.subtitle}
+                </p>
+              </div>
+              <div className="rn-split-actions">
+                <Button to="/booking" variant="primary" className="w-full justify-center">
+                  {t.hero.bookBtn}
+                </Button>
+                <Button
+                  href={`https://wa.me/${siteData.whatsappNumber}`}
+                  variant="secondary-dark"
+                  className="w-full justify-center"
+                >
+                  <WhatsappLogo size={18} weight="light" className="text-[#C9A45C]" />
+                  <span>{t.hero.whatsappBtn}</span>
+                </Button>
+              </div>
             </div>
-
-            <h1
-              ref={heroTitleRef}
-              className="font-heading text-[#F3ECDD] mb-3 tracking-tight leading-[0.98] whitespace-nowrap"
-              style={{ fontSize: lang === "hi" ? "clamp(1.75rem, 5.2vw, 4.75rem)" : "clamp(2.1rem, 5.8vw, 5.25rem)" }}
-            >
-              {t.hero.title}
-            </h1>
-
-            <p
-              ref={heroSubtitleRef}
-              className="mx-auto mb-7 text-[#F3ECDD] opacity-95 leading-[1.6] max-w-[56ch]"
-              style={{ fontSize: "clamp(1.05rem, 1.25vw, 1.25rem)" }}
-            >
-              {t.hero.subtitle}
-            </p>
-
-            <div
-              ref={heroButtonsRef}
-              className="flex flex-wrap items-center justify-center gap-4"
-            >
-              <Button to="/booking" variant="primary">
-                {t.hero.bookBtn}
-              </Button>
-              <Button
-                href={`https://wa.me/${siteData.whatsappNumber}`}
-                variant="secondary-dark"
-              >
-                <WhatsappLogo size={18} weight="light" className="text-[#C9A45C]" />
-                <span>{t.hero.whatsappBtn}</span>
-              </Button>
-            </div>
-          </div>
         </div>
 
         {/* Seamless deep easing blend into the ivory Intro section (no hard edge) */}
@@ -221,7 +211,7 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          2. INTRO (Ivory) — centred H2 + short paragraph + 4 equal promise items (2x2 on mobile)
+          2. INTRO (Ivory) â€” centred H2 + short paragraph + 4 equal promise items (2x2 on mobile)
          ===================================================================== */}
       <section className="section-ivory section-padding">
         <div className="site-container">
@@ -256,7 +246,7 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          3. SERVICES (Emerald) — ServiceTabs: 3 cols desktop, 1 mobile
+          3. SERVICES (Emerald) â€” ServiceTabs: 3 cols desktop, 1 mobile
          ===================================================================== */}
       <section className="section-emerald section-padding border-t border-[rgba(201,164,92,0.18)]">
         <div className="site-container">
@@ -280,7 +270,7 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          4. BRIDAL PACKAGES (Ivory) — PackageBuilder
+          4. BRIDAL PACKAGES (Ivory) â€” PackageBuilder
          ===================================================================== */}
       <section className="section-ivory section-padding border-t border-[rgba(18,63,49,0.14)]">
         <div className="site-container">
@@ -297,12 +287,12 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          5. PINNED "Your bridal day" (Emerald) — Haldi, Mehendi, Shaadi, Reception
+          5. PINNED "Your bridal day" (Emerald) â€” Haldi, Mehendi, Shaadi, Reception
          ===================================================================== */}
       <PinnedBridalDay />
 
       {/* =====================================================================
-          6. BEFORE / AFTER (Ivory) — 2 BeforeAfter sliders side by side (equal)
+          6. BEFORE / AFTER (Ivory) â€” 2 BeforeAfter sliders side by side (equal)
          ===================================================================== */}
       <section className="section-ivory section-padding border-t border-[rgba(18,63,49,0.14)]">
         <div className="site-container">
@@ -332,27 +322,27 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          7. GALLERY STRIP (Emerald) — Horizontal moving row of 8 photos
+          7. GALLERY STRIP (Emerald) â€” Horizontal moving row of 8 photos
          ===================================================================== */}
       <GalleryStrip />
 
       {/* =====================================================================
-          8. HYGIENE & PRODUCTS (Ivory) — 50/50: studio.mp4 + Brands & Steps
+          8. HYGIENE & PRODUCTS (Ivory) â€” 50/50: studio.mp4 + Brands & Steps
          ===================================================================== */}
       <HygieneProducts />
 
       {/* =====================================================================
-          9. REVIEWS (Emerald) — 3 equal review cards, manual arrows
+          9. REVIEWS (Emerald) â€” 3 equal review cards, manual arrows
          ===================================================================== */}
       <ReviewsSection />
 
       {/* =====================================================================
-          10. FAQ (Ivory) — All Q&As visible in 2 equal columns (no accordion)
+          10. FAQ (Ivory) â€” All Q&As visible in 2 equal columns (no accordion)
          ===================================================================== */}
       <FaqSection />
 
       {/* =====================================================================
-          11. BOOKING BANNER (Emerald) — banner.mp4 subtle background + CTA
+          11. BOOKING BANNER (Emerald) â€” banner.mp4 subtle background + CTA
          ===================================================================== */}
       <BookingBanner />
     </div>
