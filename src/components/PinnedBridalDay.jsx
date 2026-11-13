@@ -66,8 +66,11 @@ export default function PinnedBridalDay() {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: "top top+=88px",
-        end: "bottom bottom",
+        pin: true,
+        start: "top top",
+        end: () => `+=${window.innerHeight * 2.2}`,
+        pinSpacing: true,
+        anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const step = Math.min(totalSteps - 1, Math.floor(self.progress * totalSteps))
@@ -82,11 +85,11 @@ export default function PinnedBridalDay() {
   }, [steps.length])
 
   return (
-    <section ref={sectionRef} className="relative bg-[#0B2E24] text-[#F3ECDD] lg:min-h-[240vh]">
-      {/* DESKTOP STICKY SECTION (≥1024px) - Zero GSAP pin jumps */}
+    <section ref={sectionRef} className="relative bg-[#0B2E24] text-[#F3ECDD]">
+      {/* DESKTOP PINNED SECTION (≥1024px) */}
       <div
         ref={pinContainerRef}
-        className="hidden lg:flex lg:sticky lg:top-[88px] flex-col justify-center h-[calc(100vh-88px)] max-h-[calc(100vh-88px)] px-6 overflow-hidden"
+        className="hidden lg:flex flex-col justify-center h-screen max-h-screen pt-[88px] px-6 overflow-hidden"
       >
         <div className="site-container w-full my-auto">
           {/* Section Header (Compact, never covered by sticky header) */}

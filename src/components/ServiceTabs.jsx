@@ -42,8 +42,11 @@ export default function ServiceTabs({
     updateUnderline()
     const activeIndex = serviceCategories.findIndex((c) => c.id === activeTab)
     const activeTabEl = tabsRef.current[activeIndex]
-    if (activeTabEl) {
-      activeTabEl.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" })
+    const container = tablistRef.current
+    if (activeTabEl && container) {
+      const scrollLeft =
+        activeTabEl.offsetLeft - container.clientWidth / 2 + activeTabEl.clientWidth / 2
+      container.scrollTo({ left: Math.max(0, scrollLeft), behavior: "smooth" })
     }
 
     const handleResize = () => updateUnderline()

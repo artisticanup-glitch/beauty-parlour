@@ -29,6 +29,9 @@ function ScrollToTop() {
   const { pathname } = useLocation()
 
   useEffect(() => {
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: true })
+    }
     window.scrollTo({ top: 0, left: 0, behavior: "instant" })
   }, [pathname])
 
@@ -36,12 +39,11 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  // Lenis smooth scrolling (duration 1.1, disabled on reduced motion & native touch)
+  // Lenis smooth scrolling (duration 1.1, disabled only on reduced motion; syncTouch is false by default)
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0
 
-    if (prefersReducedMotion || isTouch) {
+    if (prefersReducedMotion) {
       window.lenis = null
       return
     }
@@ -59,15 +61,16 @@ export default function App() {
     window.lenis = lenis
     lenis.on("scroll", ScrollTrigger.update)
 
-    // Sync Lenis directly with GSAP ticker to prevent ScrollTrigger pin jumps
-    const updateLenis = (time) => {
-      lenis.raf(time * 1000)
+    let rafId
+    function raf(time) {
+      lenis.raf(time)
+      rafId = requestAnimationFrame(raf)
     }
-    gsap.ticker.add(updateLenis)
+    rafId = requestAnimationFrame(raf)
     gsap.ticker.lagSmoothing(0)
 
     return () => {
-      gsap.ticker.remove(updateLenis)
+      cancelAnimationFrame(rafId)
       lenis.destroy()
       window.lenis = null
     }

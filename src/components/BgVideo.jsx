@@ -105,13 +105,13 @@ export default function BgVideo({
       {shouldPlayVideo ? (
         <video
           ref={videoRef}
-          src={hasEnteredRange && (isHero || isActive) ? videoSrc : undefined}
+          src={hasEnteredRange ? videoSrc : undefined}
           poster={posterSrc}
           autoPlay={isHero}
           muted
           loop
           playsInline
-          preload={isHero ? "auto" : "none"}
+          preload={isHero ? "auto" : "metadata"}
           className="w-full h-full object-cover transition-opacity duration-500"
         />
       ) : (

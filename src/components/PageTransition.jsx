@@ -1,9 +1,6 @@
 import React, { useRef, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-gsap.registerPlugin(ScrollTrigger)
 
 export default function PageTransition() {
   const { pathname } = useLocation()
@@ -11,9 +8,6 @@ export default function PageTransition() {
   const isFirstRender = useRef(true)
 
   useEffect(() => {
-    // Kill all previous ScrollTriggers on route change
-    ScrollTrigger.getAll().forEach((st) => st.kill())
-
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (prefersReducedMotion) {
       window.scrollTo(0, 0)
