@@ -19,6 +19,7 @@ import Button from "../components/Button"
 import PackageBuilder from "../components/PackageBuilder"
 import BeforeAfter from "../components/BeforeAfter"
 import BookingBanner from "../components/BookingBanner"
+import ParallaxImage from "../components/ParallaxImage"
 
 export default function Bridal() {
   const { lang, t, l } = useLanguage()
@@ -140,16 +141,15 @@ export default function Bridal() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
             {/* Left: Indian bridal trial image, matching height of 4 steps column */}
             <div className="w-full h-full flex items-center justify-center">
-              <div className="w-full h-full min-h-[440px] rounded-[24px] overflow-hidden border border-[rgba(18,63,49,0.2)] shadow-[0_10px_30px_rgba(8,36,28,0.12)] bg-[#EFE7D7]">
-                <img
-                  src="/images/bridal-trial.webp"
-                  alt={lang === "hi" ? "ब्राइडल ट्रायल सत्र" : "Bridal Trial Session"}
-                  className="w-full h-full object-cover object-[center_12%]"
-                  loading="lazy"
-                  width={640}
-                  height={800}
-                />
-              </div>
+              <ParallaxImage
+                src="/images/bridal-trial.webp"
+                alt={lang === "hi" ? "ब्राइडल ट्रायल सत्र" : "Bridal Trial Session"}
+                objectPosition="center 12%"
+                speed={7}
+                containerClassName="w-full h-full min-h-[440px] rounded-[24px] border border-[rgba(18,63,49,0.2)] shadow-[0_10px_30px_rgba(8,36,28,0.12)] bg-[#EFE7D7]"
+                width={640}
+                height={800}
+              />
             </div>
 
             {/* Right: 4 Numbered Steps */}

@@ -4,6 +4,7 @@ import SectionHeading from "../components/SectionHeading"
 import BgVideo from "../components/BgVideo"
 import HygieneProducts from "../components/HygieneProducts"
 import BookingBanner from "../components/BookingBanner"
+import ParallaxImage from "../components/ParallaxImage"
 
 export default function About() {
   const { lang, t } = useLanguage()
@@ -87,18 +88,18 @@ export default function About() {
                 key={idx}
                 className="group bg-[#123F31] rounded-[16px] overflow-hidden border border-[rgba(201,164,92,0.2)] shadow-[0_10px_30px_rgba(8,36,28,0.12)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1 text-center h-full"
               >
-                {/* Photo with zoom on hover */}
-                <div className="relative aspect-[4/5] overflow-hidden bg-[#08241C] shrink-0">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    loading="lazy"
-                    width={600}
-                    height={750}
-                    className="w-full h-full object-cover object-[center_12%] transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-[rgba(8,36,28,0.2)] pointer-events-none" />
-                </div>
+                {/* Photo with parallax & zoom on hover */}
+                <ParallaxImage
+                  src={member.image}
+                  alt={member.name}
+                  aspectRatio="4/5"
+                  objectPosition="center 12%"
+                  containerClassName="w-full aspect-[4/5] bg-[#08241C] shrink-0"
+                  width={600}
+                  height={750}
+                >
+                  <div className="absolute inset-0 bg-[rgba(8,36,28,0.2)] pointer-events-none z-10" />
+                </ParallaxImage>
 
                 {/* Details (Identical 2-line bio) */}
                 <div className="p-6 flex flex-col flex-grow justify-between">

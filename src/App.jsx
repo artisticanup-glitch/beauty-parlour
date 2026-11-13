@@ -1,7 +1,11 @@
 import React, { useEffect } from "react"
 import { Routes, Route, useLocation } from "react-router-dom"
 import Lenis from "lenis"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { LanguageProvider } from "./i18n/LanguageContext"
+
+gsap.registerPlugin(ScrollTrigger)
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import MobileBar from "./components/MobileBar"
@@ -49,6 +53,8 @@ export default function App() {
       wheelMultiplier: 1,
       touchMultiplier: 1,
     })
+
+    lenis.on("scroll", ScrollTrigger.update)
 
     function raf(time) {
       lenis.raf(time)

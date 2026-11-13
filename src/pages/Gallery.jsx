@@ -5,6 +5,7 @@ import { useLanguage } from "../i18n/LanguageContext"
 import SectionHeading from "../components/SectionHeading"
 import BeforeAfter from "../components/BeforeAfter"
 import BookingBanner from "../components/BookingBanner"
+import ParallaxImage from "../components/ParallaxImage"
 
 export default function Gallery() {
   const { t, l } = useLanguage()
@@ -101,31 +102,32 @@ export default function Gallery() {
                 <div
                   key={item.id}
                   onClick={() => setLightboxItem(item)}
-                  className="group relative aspect-[4/5] rounded-[16px] overflow-hidden border border-[rgba(18,63,49,0.16)] bg-[#EFE7D7] shadow-[0_10px_30px_rgba(8,36,28,0.06)] cursor-pointer"
+                  className="group cursor-pointer"
                 >
-                  <img
+                  <ParallaxImage
                     src={item.src}
                     alt={l(item.title)}
-                    loading="lazy"
+                    aspectRatio="4/5"
+                    objectPosition="center 15%"
                     width={640}
                     height={800}
-                    className="w-full h-full object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-105"
-                  />
-
-                  {/* Dark hover overlay with title */}
-                  <div className="absolute inset-0 bg-[rgba(8,36,28,0.5)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-6 text-left">
-                    <div className="self-end w-9 h-9 rounded-full bg-[rgba(247,242,232,0.9)] text-[#0B2E24] flex items-center justify-center">
-                      <MagnifyingGlassPlus size={18} weight="bold" />
+                    containerClassName="w-full aspect-[4/5] rounded-[16px] border border-[rgba(18,63,49,0.16)] bg-[#EFE7D7] shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
+                  >
+                    {/* Dark hover overlay with title */}
+                    <div className="absolute inset-0 bg-[rgba(8,36,28,0.5)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-6 text-left">
+                      <div className="self-end w-9 h-9 rounded-full bg-[rgba(247,242,232,0.9)] text-[#0B2E24] flex items-center justify-center">
+                        <MagnifyingGlassPlus size={18} weight="bold" />
+                      </div>
+                      <div className="w-full">
+                        <span className="text-[13px] uppercase tracking-wider text-[#E3C88A] block font-medium">
+                          {t.galleryCategories?.[item.category] || item.category}
+                        </span>
+                        <h3 className="font-heading text-[16px] sm:text-[18px] text-[#F3ECDD] font-medium leading-snug truncate w-full">
+                          {l(item.title)}
+                        </h3>
+                      </div>
                     </div>
-                    <div className="w-full">
-                      <span className="text-[13px] uppercase tracking-wider text-[#E3C88A] block font-medium">
-                        {t.galleryCategories?.[item.category] || item.category}
-                      </span>
-                      <h3 className="font-heading text-[16px] sm:text-[18px] text-[#F3ECDD] font-medium leading-snug truncate w-full">
-                        {l(item.title)}
-                      </h3>
-                    </div>
-                  </div>
+                  </ParallaxImage>
                 </div>
               ))}
             </div>

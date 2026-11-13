@@ -3,6 +3,7 @@ import { Clock, ArrowRight } from "@phosphor-icons/react"
 import { serviceCategories, services } from "../data/services"
 import { useLanguage } from "../i18n/LanguageContext"
 import Button from "./Button"
+import ParallaxImage from "./ParallaxImage"
 
 export default function ServiceTabs({
   limitCount = 6,
@@ -144,22 +145,21 @@ export default function ServiceTabs({
                 : "bg-[#123F31] border-[rgba(201,164,92,0.2)]"
             }`}
           >
-            {/* Card Media with 1.05 zoom on hover */}
-            <div
-              className={`relative w-full aspect-[4/3] overflow-hidden ${
+            {/* Card Media with parallax & 1.05 zoom on hover */}
+            <ParallaxImage
+              src={service.image}
+              alt={l(service.name)}
+              aspectRatio="4/3"
+              objectPosition="center 20%"
+              speed={5}
+              width={800}
+              height={600}
+              containerClassName={`w-full aspect-[4/3] ${
                 isLight ? "bg-[#F7F2E8]" : "bg-[#08241C]"
               }`}
             >
-              <img
-                src={service.image}
-                alt={l(service.name)}
-                loading="lazy"
-                width={800}
-                height={600}
-                className="w-full h-full object-cover object-[center_20%] transition-transform duration-500 group-hover:scale-105"
-              />
               <div
-                className={`absolute top-3 right-3 rounded-full px-3 py-1 flex items-center gap-1.5 text-[13px] border ${
+                className={`absolute top-3 right-3 rounded-full px-3 py-1 flex items-center gap-1.5 text-[13px] border z-10 ${
                   isLight
                     ? "bg-[rgba(247,242,232,0.92)] border-[rgba(18,63,49,0.18)] text-[#0B2E24]"
                     : "bg-[rgba(8,36,28,0.85)] border-[rgba(201,164,92,0.3)] text-[#E3C88A]"
@@ -172,7 +172,7 @@ export default function ServiceTabs({
                 />
                 <span className="font-medium">{l(service.duration)}</span>
               </div>
-            </div>
+            </ParallaxImage>
 
             {/* Card Body */}
             <div className="p-6 flex flex-col flex-grow justify-between">
