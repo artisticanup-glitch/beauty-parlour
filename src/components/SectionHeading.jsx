@@ -36,6 +36,7 @@ export default function SectionHeading({
             fontSize: "clamp(0.95rem, 1.1vw, 1.125rem)",
             lineHeight: 1.65,
             maxWidth: "62ch",
+            textWrap: "pretty",
           }}
         >
           {subtitle}

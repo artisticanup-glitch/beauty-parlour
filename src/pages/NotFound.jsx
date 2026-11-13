@@ -18,13 +18,18 @@ export default function NotFound() {
         >
           {t.notFound.title}
         </h1>
-        <p className="text-[#C3CEC4] mx-auto mb-10 text-[clamp(1rem,1.1vw,1.125rem)] leading-relaxed max-w-[48ch]">
+        <p className="text-[#F3ECDD] opacity-85 mx-auto mb-10 text-[clamp(1rem,1.1vw,1.125rem)] leading-relaxed max-w-[48ch]">
           {t.notFound.subtitle}
         </p>
-        <Button to="/" variant="primary" className="!py-4 !px-8">
-          <ArrowLeft size={18} weight="light" className="text-[#08241C]" />
-          <span>{t.notFound.btn}</span>
-        </Button>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Button to="/" variant="primary" className="!py-4 !px-8">
+            <ArrowLeft size={18} weight="light" className="text-[#08241C]" />
+            <span>{t.notFound.btn}</span>
+          </Button>
+          <Button to="/services" variant="secondary-dark" className="!py-4 !px-8">
+            <span>{t.nav.services}</span>
+          </Button>
+        </div>
       </div>
     </div>
   )

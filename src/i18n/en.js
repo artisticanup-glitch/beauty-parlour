@@ -54,8 +54,8 @@ export const en = {
     title: "Your most beautiful day",
     subtitle: "Calm, unhurried bridal artistry and skincare near Gandhi Chowk.",
     laganCue: "Gandhi Chowk, Motihari · Lagan bookings from 5:00 AM",
-    bookBtn: "Book",
-    whatsappBtn: "WhatsApp",
+    bookBtn: "Book Appointment",
+    whatsappBtn: "WhatsApp Us",
     scrollText: "Scroll down",
   },
 
@@ -269,14 +269,14 @@ export const en = {
     servicePlaceholder: "Select a service",
     messageLabel: "Message or wedding details (optional)",
     messagePlaceholder: "Mention your function timing, venue, or special requests...",
-    submitBtn: "Confirm & Send on WhatsApp",
-    successMsg: "Your message is ready on WhatsApp! Please press send in WhatsApp to complete.",
+    submitBtn: "Send Booking Request on WhatsApp",
+    successMsg: "WhatsApp opened with your details — tap Send there to complete your request. We confirm slots within 2–4 hours.",
     nextHeading: "What Happens Next",
     nextSteps: [
       {
         step: "1",
         title: "Instant WhatsApp Chat",
-        desc: "Clicking submit opens a pre-composed message with your details on our studio WhatsApp.",
+        desc: "Sending opens WhatsApp with your details pre-filled for our studio desk.",
       },
       {
         step: "2",
@@ -314,9 +314,9 @@ export const en = {
   packageBuilder: {
     title: "Select your ceremonies",
     totalLabel: "Estimated Package Total",
-    sendWhatsappBtn: "Send package on WhatsApp",
+    sendWhatsappBtn: "Send Package Quote on WhatsApp",
     perPerson: "per person",
-    stepPrompt: "Choose Shaadi base:",
+    stepPrompt: "Choose your Shaadi base",
     whatsappMessagePrefix: "Namaste Roop Nikhar, I would like to inquire about a Bridal Package with the following selections:",
     totalPrefix: "Estimated Total",
   },
@@ -324,7 +324,7 @@ export const en = {
   // 404
   notFound: {
     title: "This page is not here",
-    subtitle: "The page you are looking for has moved or does not exist.",
+    subtitle: "That link may be outdated. You can return to the homepage or browse our bridal & parlour services.",
     btn: "Return to Homepage",
   },
 }

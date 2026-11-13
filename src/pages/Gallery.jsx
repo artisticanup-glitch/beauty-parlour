@@ -114,9 +114,9 @@ export default function Gallery() {
                     height={800}
                     containerClassName="w-full aspect-[4/5] rounded-[16px] border border-[rgba(18,63,49,0.16)] bg-[#EFE7D7] shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
                   >
-                    {/* Overlay with title (visible on mobile, hover on desktop) */}
-                    <div className="absolute inset-0 bg-[rgba(8,36,28,0.45)] opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-6 text-left">
-                      <div className="self-end w-9 h-9 rounded-full bg-[rgba(247,242,232,0.9)] text-[#0B2E24] flex items-center justify-center">
+                    {/* Scrim overlay with always-visible title & hover zoom cue */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[rgba(8,36,28,0.88)] via-[rgba(8,36,28,0.2)] to-transparent flex flex-col justify-between p-4 sm:p-6 text-left">
+                      <div className="self-end w-9 h-9 rounded-full bg-[rgba(247,242,232,0.9)] text-[#0B2E24] flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
                         <MagnifyingGlassPlus size={18} weight="bold" />
                       </div>
                       <div className="w-full">

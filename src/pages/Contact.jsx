@@ -71,13 +71,10 @@ export default function Contact() {
       <section className="section-ivory section-padding border-t border-[rgba(18,63,49,0.14)]">
         <div className="site-container">
           <div className="text-center max-w-[760px] mx-auto mb-16">
-            <span className="eyebrow block mb-3 text-[#C9A45C]">
-              {lang === "hi" ? "स्टूडियो विवरण" : "Location & Reach"}
-            </span>
             <h2 className="font-heading text-[clamp(2.1rem,4.2vw,3.75rem)] text-[#0B2E24] leading-[1.05] mb-4">
               {lang === "hi" ? "हमसे संपर्क करें" : "Visit Our Parlour Studio"}
             </h2>
-            <p className="text-[#4E5F57] text-[clamp(1rem,1.1vw,1.125rem)] mx-auto leading-[1.65]">
+            <p className="text-[#4E5F57] text-[clamp(1rem,1.1vw,1.125rem)] mx-auto leading-[1.65]" style={{ textWrap: "pretty" }}>
               {t.contactPage.directionsText}
             </p>
           </div>
@@ -96,7 +93,7 @@ export default function Contact() {
                   <h3 className="font-heading text-[22px] text-[#0B2E24] mb-2 font-semibold">
                     {card.title}
                   </h3>
-                  <p className="text-[#4E5F57] text-[15px] leading-relaxed mb-6">
+                  <p className="text-[#4E5F57] text-[15px] leading-relaxed mb-6" style={{ textWrap: "pretty" }}>
                     {card.detail}
                   </p>
                 </div>

@@ -118,7 +118,7 @@ export default function Bridal() {
                 <h3 className="font-heading text-[22px] text-[#F3ECDD] mb-2">
                   {item.title}
                 </h3>
-                <p className="text-[#C3CEC4] text-[14px] leading-relaxed">
+                <p className="text-[#F3ECDD] opacity-85 text-[14px] leading-relaxed" style={{ textWrap: "pretty" }}>
                   {item.desc}
                 </p>
               </div>
@@ -166,7 +166,7 @@ export default function Bridal() {
                     <h3 className="font-heading text-[20px] text-[#0B2E24] mb-1">
                       {step.title}
                     </h3>
-                    <p className="text-[#4E5F57] text-[14px] leading-relaxed">
+                    <p className="text-[#4E5F57] text-[14px] leading-relaxed" style={{ textWrap: "pretty" }}>
                       {step.desc}
                     </p>
                   </div>

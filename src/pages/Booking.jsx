@@ -47,13 +47,10 @@ export default function Booking() {
             {/* Right: What Happens Next in 3 Steps */}
             <div className="space-y-8 text-left lg:pt-4">
               <div>
-                <span className="eyebrow block mb-2 text-[#C9A45C]">
-                  {lang === "hi" ? "आसान प्रक्रिया" : "Simple Process"}
-                </span>
                 <h3 className="font-heading text-[28px] sm:text-[34px] text-[#0B2E24] mb-3 leading-snug">
                   {t.bookingPage.nextHeading}
                 </h3>
-                <p className="text-[#4E5F57] text-[15px] leading-relaxed">
+                <p className="text-[#4E5F57] text-[15px] leading-relaxed" style={{ textWrap: "pretty" }}>
                   {lang === "hi"
                     ? "हम आपकी सुविधा और समय का पूरा ध्यान रखते हैं। नीचे दिए गए तीन चरणों में आपकी बुकिंग पूरी होगी:"
                     : "We prioritize your comfort and schedule. Your reservation is confirmed in three simple steps:"}
@@ -74,7 +71,7 @@ export default function Booking() {
                       <h4 className="font-heading text-[20px] text-[#0B2E24] font-semibold mb-1">
                         {st.title}
                       </h4>
-                      <p className="text-[#4E5F57] text-[14px] leading-relaxed">
+                      <p className="text-[#4E5F57] text-[14px] leading-relaxed" style={{ textWrap: "pretty" }}>
                         {st.desc}
                       </p>
                     </div>

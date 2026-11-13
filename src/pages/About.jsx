@@ -42,14 +42,11 @@ export default function About() {
             {/* Left: Story text */}
             <div className="text-left space-y-6">
               <div>
-                <span className="eyebrow block mb-3 text-[#C9A45C]">
-                  {lang === "hi" ? "हमारी यात्रा" : "Our Journey"}
-                </span>
                 <h2 className="font-heading text-[clamp(2.1rem,4.2vw,3.75rem)] text-[#0B2E24] leading-[1.05]">
                   {t.aboutPage.storyHeading}
                 </h2>
               </div>
-              <div className="space-y-5 text-[#4E5F57] text-[clamp(1rem,1.1vw,1.125rem)] leading-[1.75]">
+              <div className="space-y-5 text-[#4E5F57] text-[clamp(1rem,1.1vw,1.125rem)] leading-[1.75] max-w-[54ch]">
                 <p>{t.aboutPage.storyP1}</p>
                 <p>{t.aboutPage.storyP2}</p>
               </div>
@@ -111,7 +108,7 @@ export default function About() {
                       {member.role}
                     </span>
                   </div>
-                  <p className="text-[13px] text-[#C3CEC4] leading-relaxed">
+                  <p className="text-[13px] text-[#F3ECDD] opacity-85 leading-relaxed" style={{ textWrap: "pretty" }}>
                     {member.bio}
                   </p>
                 </div>

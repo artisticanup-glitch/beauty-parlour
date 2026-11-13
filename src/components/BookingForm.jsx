@@ -99,7 +99,11 @@ export default function BookingForm() {
       </p>
 
       {isSuccess && (
-        <div className="mb-6 p-4 rounded-[12px] bg-[#123F31] border border-[#C9A45C] text-[#F3ECDD] flex items-start gap-3">
+        <div
+          role="status"
+          aria-live="polite"
+          className="mb-6 p-4 rounded-[12px] bg-[#123F31] border border-[#C9A45C] text-[#F3ECDD] flex items-start gap-3"
+        >
           <Check size={20} weight="bold" className="text-[#C9A45C] flex-shrink-0 mt-0.5" />
           <p className="text-[14px] text-[#E3C88A] leading-relaxed font-medium">
             {t.bookingPage.successMsg}
@@ -114,23 +118,26 @@ export default function BookingForm() {
             htmlFor="name"
             className="block text-[13px] uppercase tracking-wider font-medium text-[#0B2E24] mb-1.5"
           >
-            {t.bookingPage.nameLabel} <span className="text-[#B5914A]">*</span>
+            {t.bookingPage.nameLabel} <span className="text-[#7A5B1F]" aria-hidden="true">*</span>
           </label>
           <input
             type="text"
             id="name"
             name="name"
+            required
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? "error-name" : undefined}
             value={formData.name}
             onChange={handleChange}
             placeholder={t.bookingPage.namePlaceholder}
-            className={`w-full px-4 py-3.5 rounded-[12px] bg-[#F7F2E8] text-[#15251F] border text-[15px] outline-none transition-colors ${
+            className={`w-full px-4 py-3.5 rounded-[12px] bg-[#F7F2E8] text-[#15251F] placeholder:text-[#4E5F57] placeholder:opacity-100 border text-[15px] outline-none transition-colors ${
               errors.name
                 ? "border-red-600 focus:border-red-600"
                 : "border-[rgba(18,63,49,0.2)] focus:border-[#0B2E24]"
             }`}
           />
           {errors.name && (
-            <div className="flex items-center gap-1.5 text-red-700 text-[13px] mt-1.5">
+            <div id="error-name" role="alert" className="flex items-center gap-1.5 text-red-700 text-[13px] mt-1.5">
               <WarningCircle size={14} weight="bold" />
               <span>{errors.name}</span>
             </div>
@@ -143,24 +150,28 @@ export default function BookingForm() {
             htmlFor="phone"
             className="block text-[13px] uppercase tracking-wider font-medium text-[#0B2E24] mb-1.5"
           >
-            {t.bookingPage.phoneLabel} <span className="text-[#B5914A]">*</span>
+            {t.bookingPage.phoneLabel} <span className="text-[#7A5B1F]" aria-hidden="true">*</span>
           </label>
           <input
             type="tel"
+            inputMode="numeric"
             id="phone"
             name="phone"
+            required
+            aria-invalid={Boolean(errors.phone)}
+            aria-describedby={errors.phone ? "error-phone" : undefined}
             maxLength={10}
             value={formData.phone}
             onChange={handleChange}
             placeholder={t.bookingPage.phonePlaceholder}
-            className={`w-full px-4 py-3.5 rounded-[12px] bg-[#F7F2E8] text-[#15251F] border text-[15px] outline-none transition-colors ${
+            className={`w-full px-4 py-3.5 rounded-[12px] bg-[#F7F2E8] text-[#15251F] placeholder:text-[#4E5F57] placeholder:opacity-100 border text-[15px] outline-none transition-colors ${
               errors.phone
                 ? "border-red-600 focus:border-red-600"
                 : "border-[rgba(18,63,49,0.2)] focus:border-[#0B2E24]"
             }`}
           />
           {errors.phone && (
-            <div className="flex items-center gap-1.5 text-red-700 text-[13px] mt-1.5">
+            <div id="error-phone" role="alert" className="flex items-center gap-1.5 text-red-700 text-[13px] mt-1.5">
               <WarningCircle size={14} weight="bold" />
               <span>{errors.phone}</span>
             </div>
@@ -173,12 +184,15 @@ export default function BookingForm() {
             htmlFor="date"
             className="block text-[13px] uppercase tracking-wider font-medium text-[#0B2E24] mb-1.5"
           >
-            {t.bookingPage.dateLabel} <span className="text-[#B5914A]">*</span>
+            {t.bookingPage.dateLabel} <span className="text-[#7A5B1F]" aria-hidden="true">*</span>
           </label>
           <input
             type="date"
             id="date"
             name="date"
+            required
+            aria-invalid={Boolean(errors.date)}
+            aria-describedby={errors.date ? "error-date" : undefined}
             value={formData.date}
             min={TODAY_ISO}
             onChange={handleChange}
@@ -189,7 +203,7 @@ export default function BookingForm() {
             }`}
           />
           {errors.date && (
-            <div className="flex items-center gap-1.5 text-red-700 text-[13px] mt-1.5">
+            <div id="error-date" role="alert" className="flex items-center gap-1.5 text-red-700 text-[13px] mt-1.5">
               <WarningCircle size={14} weight="bold" />
               <span>{errors.date}</span>
             </div>
@@ -202,11 +216,14 @@ export default function BookingForm() {
             htmlFor="serviceId"
             className="block text-[13px] uppercase tracking-wider font-medium text-[#0B2E24] mb-1.5"
           >
-            {t.bookingPage.serviceLabel} <span className="text-[#B5914A]">*</span>
+            {t.bookingPage.serviceLabel} <span className="text-[#7A5B1F]" aria-hidden="true">*</span>
           </label>
           <select
             id="serviceId"
             name="serviceId"
+            required
+            aria-invalid={Boolean(errors.serviceId)}
+            aria-describedby={errors.serviceId ? "error-serviceId" : undefined}
             value={formData.serviceId}
             onChange={handleChange}
             className={`w-full px-4 py-3.5 rounded-[12px] bg-[#F7F2E8] text-[#15251F] border text-[15px] outline-none transition-colors ${
@@ -223,7 +240,7 @@ export default function BookingForm() {
             ))}
           </select>
           {errors.serviceId && (
-            <div className="flex items-center gap-1.5 text-red-700 text-[13px] mt-1.5">
+            <div id="error-serviceId" role="alert" className="flex items-center gap-1.5 text-red-700 text-[13px] mt-1.5">
               <WarningCircle size={14} weight="bold" />
               <span>{errors.serviceId}</span>
             </div>
@@ -245,7 +262,7 @@ export default function BookingForm() {
             value={formData.message}
             onChange={handleChange}
             placeholder={t.bookingPage.messagePlaceholder}
-            className="w-full px-4 py-3.5 rounded-[12px] bg-[#F7F2E8] text-[#15251F] border border-[rgba(18,63,49,0.2)] focus:border-[#0B2E24] text-[15px] outline-none transition-colors resize-none"
+            className="w-full px-4 py-3.5 rounded-[12px] bg-[#F7F2E8] text-[#15251F] placeholder:text-[#4E5F57] placeholder:opacity-100 border border-[rgba(18,63,49,0.2)] focus:border-[#0B2E24] text-[15px] outline-none transition-colors resize-none"
           />
         </div>
 
