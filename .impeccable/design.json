@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-13T10:05:00.000Z",
+  "title": "Design System: Roop Nikhar",
+  "extensions": {
+    "colorMeta": {
+      "emerald-950": {
+        "role": "primary",
+        "displayName": "Deepest Sanctum",
+        "canonical": "#08241C",
+        "tonalRamp": ["#08241C", "#0B2E24", "#123F31", "#1F6B4F"]
+      },
+      "emerald-900": {
+        "role": "primary",
+        "displayName": "Sanctuary Emerald",
+        "canonical": "#0B2E24",
+        "tonalRamp": ["#08241C", "#0B2E24", "#123F31", "#1F6B4F"]
+      },
+      "gold-500": {
+        "role": "secondary",
+        "displayName": "Antique Gold",
+        "canonical": "#C9A45C",
+        "tonalRamp": ["#B5914A", "#C9A45C", "#E3C88A"]
+      },
+      "ivory-50": {
+        "role": "neutral",
+        "displayName": "Warm Salon Ivory",
+        "canonical": "#F7F2E8",
+        "tonalRamp": ["#F7F2E8", "#EFE7D7", "#F3ECDD"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Serif",
+        "purpose": "Hero H1 headlines (Cormorant Garamond EN / Tiro Devanagari Hindi weight 400 HI)."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Section H2 headings across alternating emerald and ivory bands."
+      },
+      "body": {
+        "displayName": "Body Copy",
+        "purpose": "Primary editorial and UI copy (Jost EN / Mukta HI, max 62ch)."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-subtle",
+        "value": "0 10px 30px rgba(8, 36, 28, 0.12)",
+        "purpose": "Ambient elevation for framed media containers and hero split card."
+      }
+    ],
+    "motion": [
+      {
+        "name": "btn-transition",
+        "value": "background-color 250ms ease, transform 150ms ease",
+        "purpose": "Standard tactile feedback on primary and secondary buttons."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation-duration: 0.001ms !important; transition-duration: 0.001ms !important",
+        "purpose": "Honors prefers-reduced-motion across all animations and Lenis."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Antique gold CTA for primary booking actions.",
+      "html": "<a href=\"/booking\" class=\"btn-primary\">Book Appointment</a>",
+      "css": ".btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: #C9A45C; color: #08241C; font-family: 'Jost', sans-serif; font-weight: 500; font-size: 15px; padding: 16px 28px; border-radius: 12px; border: 1px solid #C9A45C; min-height: 48px; transition: background-color 250ms ease, transform 150ms ease; } .btn-primary:hover { background-color: #B5914A; }"
+    },
+    {
+      "name": "Secondary Dark Button",
+      "kind": "button",
+      "refersTo": "button-secondary-dark",
+      "description": "Outlined gold CTA for WhatsApp and secondary actions on emerald grounds.",
+      "html": "<a href=\"#\" class=\"btn-secondary-dark\">WhatsApp</a>",
+      "css": ".btn-secondary-dark { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: transparent; color: #E3C88A; font-family: 'Jost', sans-serif; font-weight: 500; font-size: 15px; padding: 16px 28px; border-radius: 12px; border: 1px solid #C9A45C; min-height: 48px; transition: background-color 250ms ease, color 250ms ease; } .btn-secondary-dark:hover { background-color: rgba(201, 164, 92, 0.1); color: #C9A45C; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Bridal Sanctuary",
+    "overview": "Roop Nikhar's interface is built as a calm, unhurried boutique sanctuary alternating between deep botanical emerald rooms and warm daylight ivory salons, joined by crisp antique-gold hairlines. Flat tonal layering replaces heavy shadows and harsh gradients, while bilingual English/Hindi typography and 48px thumb-friendly targets serve mobile visitors in Motihari.",
+    "keyCharacteristics": [
+      "Alternating deep emerald (#0B2E24) and warm ivory (#F7F2E8) section grounds",
+      "Flat tonal layering with 1px gold/emerald hairlines instead of harsh gradients",
+      "Bilingual Cormorant Garamond + Jost (EN) and Tiro Devanagari Hindi + Mukta (HI) parity",
+      "Soft 12px-24px architectural radii and 48px minimum button height"
+    ],
+    "rules": [
+      {
+        "name": "Hindi Typography Protection",
+        "body": "Enforce font-weight: 400 on Hindi headings and letter-spacing: 0 across all html[lang=\"hi\"] elements.",
+        "section": "typography"
+      },
+      {
+        "name": "Flat Surface Discipline",
+        "body": "Use flat emerald/ivory fills and subtle 1px hairlines instead of multi-stop gradients or neon glows.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do keep interactive buttons and nav targets at least 44px-48px tall.",
+      "Do use overflow-x: clip on html/body to preserve sticky header and ScrollTrigger behavior.",
+      "Do test both English and Hindi views after typography or layout changes."
+    ],
+    "donts": [
+      "Don't introduce harsh gradients, neon colors, or off-palette gray text.",
+      "Don't apply letter-spacing or bold weights to Devanagari Hindi headings.",
+      "Don't use overflow-x: hidden on html or body."
+    ]
+  }
+}
