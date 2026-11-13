@@ -59,15 +59,15 @@ export default function App() {
     window.lenis = lenis
     lenis.on("scroll", ScrollTrigger.update)
 
-    function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
+    // Sync Lenis directly with GSAP ticker to prevent ScrollTrigger pin jumps
+    const updateLenis = (time) => {
+      lenis.raf(time * 1000)
     }
-
-    const frameId = requestAnimationFrame(raf)
+    gsap.ticker.add(updateLenis)
+    gsap.ticker.lagSmoothing(0)
 
     return () => {
-      cancelAnimationFrame(frameId)
+      gsap.ticker.remove(updateLenis)
       lenis.destroy()
       window.lenis = null
     }

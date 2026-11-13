@@ -93,19 +93,19 @@ export default function Home() {
         )
       }
 
-      // Scroll reveals on general section cards
+      // Scroll reveals on general section cards (gentle, non-jumpy offset)
       gsap.utils.toArray(".reveal-card").forEach((card) => {
         gsap.fromTo(
           card,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 16 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            ease: "power4.out",
+            duration: 0.65,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: card,
-              start: "top 88%",
+              start: "top 90%",
               once: true,
             },
           }
@@ -131,7 +131,7 @@ export default function Home() {
          ===================================================================== */}
       <section
         ref={heroRef}
-        className="relative w-full h-[100dvh] min-h-[600px] flex items-end justify-center text-center overflow-hidden bg-[#0B2E24] pb-14 sm:pb-20"
+        className="relative w-full h-[100svh] lg:h-[100vh] min-h-[600px] flex items-end justify-center text-center overflow-hidden bg-[#0B2E24] pb-14 sm:pb-20"
       >
         {/* Background video with scale tween */}
         <div ref={heroVideoRef} className="absolute inset-0 z-0 w-full h-full">

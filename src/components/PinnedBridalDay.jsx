@@ -63,30 +63,34 @@ export default function PinnedBridalDay() {
     }
 
     const totalSteps = steps.length
-    const pinTrigger = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top top+=88px",
-      end: `+=${window.innerHeight * 2.5}`,
-      pin: pinContainerRef.current,
-      pinSpacing: true,
-      scrub: 0.5,
-      onUpdate: (self) => {
-        const step = Math.min(totalSteps - 1, Math.floor(self.progress * totalSteps))
-        setActiveStep(step)
-      },
-    })
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top+=88px",
+        end: `+=${window.innerHeight * 2.2}`,
+        pin: pinContainerRef.current,
+        pinSpacing: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        scrub: true,
+        onUpdate: (self) => {
+          const step = Math.min(totalSteps - 1, Math.floor(self.progress * totalSteps))
+          setActiveStep((prev) => (prev === step ? prev : step))
+        },
+      })
+    }, sectionRef)
 
     return () => {
-      pinTrigger.kill()
+      ctx.revert()
     }
   }, [steps.length])
 
   return (
     <section ref={sectionRef} className="relative bg-[#0B2E24] text-[#F3ECDD]">
-      {/* DESKTOP PINNED SECTION (≥1024px) - Fits inside 100dvh minus header */}
+      {/* DESKTOP PINNED SECTION (≥1024px) - Fits inside 100vh minus header */}
       <div
         ref={pinContainerRef}
-        className="hidden lg:flex flex-col justify-center h-[calc(100dvh-88px)] max-h-[calc(100dvh-88px)] px-6 overflow-hidden"
+        className="hidden lg:flex flex-col justify-center h-[calc(100vh-88px)] max-h-[calc(100vh-88px)] px-6 overflow-hidden"
       >
         <div className="site-container w-full my-auto">
           {/* Section Header (Compact, never covered by sticky header) */}
