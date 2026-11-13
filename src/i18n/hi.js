@@ -35,6 +35,7 @@ export const hi = {
     close: "बंद करें",
     scrollDown: "नीचे देखें",
     backHome: "मुख्य पृष्ठ पर लौटें",
+    backToTop: "ऊपर जाएं",
   },
 
   // Gallery Categories

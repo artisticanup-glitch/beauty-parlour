@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef, useCallback } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
 import { List, X, CalendarCheck, WhatsappLogo, InstagramLogo, FacebookLogo } from "@phosphor-icons/react"
 import { useLanguage } from "../i18n/LanguageContext"
@@ -8,36 +8,134 @@ import Button from "./Button"
 export default function Header() {
   const { lang, toggleLang, t, l } = useLanguage()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
   const [scrolled, setScrolled] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false
+  )
+  const headerRef = useRef(null)
+  const lastScrollY = useRef(0)
   const location = useLocation()
 
-  // Close mobile menu on route change without cascading effect render
+  // Route change: adjust state during render without cascading effect render
   const [prevPath, setPrevPath] = useState(location.pathname)
   if (prevPath !== location.pathname) {
     setPrevPath(location.pathname)
+    setIsVisible(true)
     setMobileMenuOpen(false)
   }
 
-  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    lastScrollY.current = 0
+  }, [location.pathname])
+
+  // Body scroll locking & dataset marker for mobile menu (also tells BackToTop to hide)
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden"
+      document.body.dataset.mobileMenu = "open"
     } else {
       document.body.style.overflow = ""
+      delete document.body.dataset.mobileMenu
     }
     return () => {
       document.body.style.overflow = ""
+      delete document.body.dataset.mobileMenu
     }
   }, [mobileMenuOpen])
 
-  // Track scroll for subtle background elevation (flat color)
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+  // Keyboard focus inside header must keep it visible
+  const handleFocus = useCallback(() => {
+    setIsVisible(true)
   }, [])
+
+  // Auto-hide scroll detection using Lenis with window fallback
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const onMotionChange = (e) => setPrefersReducedMotion(e.matches)
+    mq.addEventListener("change", onMotionChange)
+
+    const updateHeaderState = (currentY) => {
+      // 1. Scrolled threshold for solid background
+      const isScrolledPastTop = currentY >= 10
+      setScrolled(isScrolledPastTop)
+
+      // 2. First 120px: header must NOT hide
+      if (currentY <= 120) {
+        setIsVisible(true)
+        lastScrollY.current = currentY
+        return
+      }
+
+      // 3. Mobile menu open: header must NOT hide
+      if (mobileMenuOpen) {
+        setIsVisible(true)
+        lastScrollY.current = currentY
+        return
+      }
+
+      // 4. Keyboard focus inside header: header must NOT hide
+      if (headerRef.current && headerRef.current.contains(document.activeElement)) {
+        setIsVisible(true)
+        lastScrollY.current = currentY
+        return
+      }
+
+      // 5. Delta movement calculation
+      const diff = currentY - lastScrollY.current
+
+      // Ignore tiny movements under 8px so it doesn't flicker
+      if (Math.abs(diff) < 8) {
+        return
+      }
+
+      if (diff > 0) {
+        // Scrolling DOWN past 120px -> slide header up out of view
+        setIsVisible(false)
+      } else {
+        // Scrolling UP even a little (8px or more) -> slide back in at once
+        setIsVisible(true)
+      }
+
+      lastScrollY.current = currentY
+    }
+
+    // Lenis listener
+    const lenis = window.lenis
+    const onLenisScroll = (e) => {
+      const scrollPos = typeof e.scroll === "number" ? e.scroll : window.scrollY
+      updateHeaderState(scrollPos)
+    }
+    if (lenis) {
+      lenis.on("scroll", onLenisScroll)
+    }
+
+    // Window scroll listener (for native touch / fallback)
+    const onWindowScroll = () => {
+      updateHeaderState(window.scrollY || document.documentElement.scrollTop)
+    }
+    window.addEventListener("scroll", onWindowScroll, { passive: true })
+
+    return () => {
+      mq.removeEventListener("change", onMotionChange)
+      if (lenis) {
+        lenis.off("scroll", onLenisScroll)
+      }
+      window.removeEventListener("scroll", onWindowScroll)
+    }
+  }, [mobileMenuOpen])
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((prev) => {
+      const next = !prev
+      if (next) {
+        setIsVisible(true)
+      }
+      return next
+    })
+  }
 
   const navItems = [
     { to: "/", label: t.nav.home },
@@ -49,13 +147,21 @@ export default function Header() {
     { to: "/contact", label: t.nav.contact },
   ]
 
-
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 border-b backdrop-blur-md ${
+      ref={headerRef}
+      onFocusCapture={handleFocus}
+      style={{
+        transform: isVisible ? "translateY(0)" : "translateY(-100%)",
+        transition: prefersReducedMotion
+          ? "none"
+          : "transform 350ms cubic-bezier(0.16, 1, 0.3, 1), background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease",
+        willChange: "transform",
+      }}
+      className={`sticky top-0 z-50 w-full ${
         scrolled
-          ? "bg-[rgba(8,36,28,0.95)] border-[rgba(201,164,92,0.28)] shadow-[0_4px_24px_rgba(4,18,14,0.35)]"
-          : "bg-[rgba(8,36,28,0.85)] border-[rgba(201,164,92,0.18)]"
+          ? "bg-[#0B2E24] border-b border-[rgba(201,164,92,0.25)] shadow-[0_4px_24px_rgba(4,18,14,0.35)]"
+          : "bg-[rgba(8,36,28,0.85)] border-b border-[rgba(201,164,92,0.18)] backdrop-blur-md"
       }`}
     >
       <div className="site-container h-[88px] flex items-center justify-between">
@@ -190,7 +296,7 @@ export default function Header() {
             </button>
 
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={toggleMobileMenu}
               type="button"
               style={{ minHeight: "44px", height: "44px", minWidth: "44px", width: "44px" }}
               className="flex items-center justify-center rounded-[12px] bg-[#123F31] hover:bg-[#1A5240] text-[#E3C88A] border border-[rgba(201,164,92,0.3)] shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-colors shrink-0"

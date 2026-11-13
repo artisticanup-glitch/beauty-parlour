@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger)
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import MobileBar from "./components/MobileBar"
+import BackToTop from "./components/BackToTop"
 import Preloader from "./components/Preloader"
 import PageTransition from "./components/PageTransition"
 import Cursor from "./components/Cursor"
@@ -41,6 +42,7 @@ export default function App() {
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0
 
     if (prefersReducedMotion || isTouch) {
+      window.lenis = null
       return
     }
 
@@ -54,6 +56,7 @@ export default function App() {
       touchMultiplier: 1,
     })
 
+    window.lenis = lenis
     lenis.on("scroll", ScrollTrigger.update)
 
     function raf(time) {
@@ -66,6 +69,7 @@ export default function App() {
     return () => {
       cancelAnimationFrame(frameId)
       lenis.destroy()
+      window.lenis = null
     }
   }, [])
 
@@ -92,6 +96,7 @@ export default function App() {
         </main>
         <Footer />
         <MobileBar />
+        <BackToTop />
       </div>
     </LanguageProvider>
   )

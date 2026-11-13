@@ -35,6 +35,7 @@ export const en = {
     close: "Close",
     scrollDown: "Scroll to explore",
     backHome: "Return to Home",
+    backToTop: "Back to top",
   },
 
   // Gallery Categories
