@@ -9,13 +9,11 @@ export default function BackToTop() {
       ? (window.scrollY || document.documentElement.scrollTop) > window.innerHeight * 0.6
       : false
   )
-  const [footerOffset, setFooterOffset] = useState(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   // Listen to prefers-reduced-motion
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
-    // Listener only - initial state read directly on demand
     const handler = () => {}
     mq.addEventListener("change", handler)
     return () => mq.removeEventListener("change", handler)
@@ -35,47 +33,35 @@ export default function BackToTop() {
     return () => observer.disconnect()
   }, [])
 
-  // Scroll position & footer collision detection
-  const checkScrollAndFooter = useCallback(() => {
+  // Scroll position detection (only controls visibility after 60% scroll)
+  const checkScroll = useCallback(() => {
     const scrollY = window.scrollY || document.documentElement.scrollTop
     const threshold = window.innerHeight * 0.6
     setIsVisible(scrollY > threshold)
-
-    // Footer overlap avoidance
-    const footer = document.querySelector("footer")
-    if (footer) {
-      const footerRect = footer.getBoundingClientRect()
-      const windowHeight = window.innerHeight
-      if (footerRect.top < windowHeight) {
-        setFooterOffset(Math.max(0, windowHeight - footerRect.top))
-      } else {
-        setFooterOffset(0)
-      }
-    }
   }, [])
 
   useEffect(() => {
     // Lenis scroll listener
     const lenis = window.lenis
     const onLenisScroll = () => {
-      checkScrollAndFooter()
+      checkScroll()
     }
     if (lenis) {
       lenis.on("scroll", onLenisScroll)
     }
 
     // Native window scroll listener (fallback & touch)
-    window.addEventListener("scroll", checkScrollAndFooter, { passive: true })
-    window.addEventListener("resize", checkScrollAndFooter, { passive: true })
+    window.addEventListener("scroll", checkScroll, { passive: true })
+    window.addEventListener("resize", checkScroll, { passive: true })
 
     return () => {
       if (lenis) {
         lenis.off("scroll", onLenisScroll)
       }
-      window.removeEventListener("scroll", checkScrollAndFooter)
-      window.removeEventListener("resize", checkScrollAndFooter)
+      window.removeEventListener("scroll", checkScroll)
+      window.removeEventListener("resize", checkScroll)
     }
-  }, [checkScrollAndFooter])
+  }, [checkScroll])
 
   // Scroll to top handler
   const handleScrollToTop = () => {
@@ -101,16 +87,9 @@ export default function BackToTop() {
 
   return (
     <div
-      className={`back-to-top-btn fixed z-40 right-3 md:right-6 pointer-events-none transition-all duration-300 ease-out ${
+      className={`back-to-top-btn fixed z-40 right-3 md:right-6 pointer-events-none transition-all duration-300 ease-out bottom-[calc(76px+env(safe-area-inset-bottom,0px))] md:bottom-6 ${
         showButton ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3.5"
       }`}
-      style={{
-        bottom: `calc(${footerOffset > 0 ? `${footerOffset}px + ` : ""}${
-          typeof window !== "undefined" && window.innerWidth > 768
-            ? "24px"
-            : "76px + env(safe-area-inset-bottom, 0px)"
-        })`,
-      }}
     >
       <button
         onClick={handleScrollToTop}
