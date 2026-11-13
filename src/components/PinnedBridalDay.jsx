@@ -91,13 +91,10 @@ export default function PinnedBridalDay() {
         <div className="site-container w-full my-auto">
           {/* Section Header (Compact, never covered by sticky header) */}
           <div className="text-center max-w-[720px] mx-auto mb-6">
-            <span className="eyebrow block mb-2 text-[#C9A45C]">
-              {t.sections.bridalDayEyebrow}
-            </span>
             <h2 className="font-heading text-[clamp(1.8rem,2.8vw,2.75rem)] text-[#F3ECDD] leading-[1.08] mb-2">
               {t.sections.bridalDayTitle}
             </h2>
-            <p className="text-[#C3CEC4] text-[15px] mx-auto leading-snug max-w-[58ch]">
+            <p className="text-[#F3ECDD] opacity-85 text-[15px] mx-auto leading-snug max-w-[58ch]">
               {t.sections.bridalDaySubtitle}
             </p>
           </div>
@@ -136,13 +133,13 @@ export default function PinnedBridalDay() {
 
               {/* Step Content with crossfade transition */}
               <div className="min-h-[160px] flex flex-col justify-center">
-                <span className="text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-semibold block mb-2">
-                  {l(steps[activeStep].tag)}
-                </span>
-                <h3 className="font-heading text-[clamp(1.5rem,2.4vw,2.2rem)] text-[#F3ECDD] mb-2 leading-tight">
+                <h3 className="font-heading text-[clamp(1.5rem,2.4vw,2.2rem)] text-[#F3ECDD] mb-1.5 leading-tight">
                   {l(steps[activeStep].title)}
                 </h3>
-                <p className="text-[#C3CEC4] text-[15px] leading-relaxed max-w-[48ch]">
+                <p className="text-[13px] font-medium text-[#E3C88A] mb-2">
+                  {l(steps[activeStep].tag)}
+                </p>
+                <p className="text-[#F3ECDD] opacity-85 text-[15px] leading-relaxed max-w-[48ch]">
                   {l(steps[activeStep].desc)}
                 </p>
               </div>
@@ -179,13 +176,10 @@ export default function PinnedBridalDay() {
       <div className="block lg:hidden py-16 px-4">
         <div className="site-container">
           <div className="text-center mb-10">
-            <span className="eyebrow block mb-2 text-[#C9A45C]">
-              {t.sections.bridalDayEyebrow}
-            </span>
             <h2 className="font-heading text-[clamp(1.8rem,4.2vw,2.5rem)] text-[#F3ECDD] leading-[1.08] mb-3">
               {t.sections.bridalDayTitle}
             </h2>
-            <p className="text-[#C3CEC4] text-[14px] leading-relaxed">
+            <p className="text-[#F3ECDD] opacity-85 text-[14px] leading-relaxed">
               {t.sections.bridalDaySubtitle}
             </p>
           </div>
@@ -212,13 +206,13 @@ export default function PinnedBridalDay() {
 
                 {/* Text Content */}
                 <div className="p-6 text-left">
-                  <span className="text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-semibold block mb-1">
-                    {l(st.tag)}
-                  </span>
-                  <h3 className="font-heading text-[22px] text-[#F3ECDD] mb-2 leading-tight">
+                  <h3 className="font-heading text-[22px] text-[#F3ECDD] mb-1 leading-tight">
                     {l(st.title)}
                   </h3>
-                  <p className="text-[#C3CEC4] text-[14px] leading-relaxed">
+                  <p className="text-[13px] font-medium text-[#E3C88A] mb-2">
+                    {l(st.tag)}
+                  </p>
+                  <p className="text-[#F3ECDD] opacity-85 text-[14px] leading-relaxed">
                     {l(st.desc)}
                   </p>
                 </div>

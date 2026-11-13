@@ -57,7 +57,7 @@ export default function ParallaxImage({
       {/* Parallax layer with extra vertical bleed */}
       <div
         ref={wrapperRef}
-        className="absolute -top-[12%] -bottom-[12%] left-0 right-0 w-full h-[124%] will-change-transform pointer-events-none"
+        className="absolute -top-[12%] -bottom-[12%] left-0 right-0 w-full h-[124%] pointer-events-none"
       >
         <img
           src={src}

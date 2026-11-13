@@ -99,10 +99,11 @@ export default function Gallery() {
             /* Equal Grid: 3 columns desktop, 2 columns mobile */
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {filteredItems.map((item) => (
-                <div
+                <button
                   key={item.id}
+                  type="button"
                   onClick={() => setLightboxItem(item)}
-                  className="group cursor-pointer"
+                  className="group block w-full text-left cursor-pointer"
                 >
                   <ParallaxImage
                     src={item.src}
@@ -113,8 +114,8 @@ export default function Gallery() {
                     height={800}
                     containerClassName="w-full aspect-[4/5] rounded-[16px] border border-[rgba(18,63,49,0.16)] bg-[#EFE7D7] shadow-[0_10px_30px_rgba(8,36,28,0.06)]"
                   >
-                    {/* Dark hover overlay with title */}
-                    <div className="absolute inset-0 bg-[rgba(8,36,28,0.5)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-6 text-left">
+                    {/* Overlay with title (visible on mobile, hover on desktop) */}
+                    <div className="absolute inset-0 bg-[rgba(8,36,28,0.45)] opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 sm:p-6 text-left">
                       <div className="self-end w-9 h-9 rounded-full bg-[rgba(247,242,232,0.9)] text-[#0B2E24] flex items-center justify-center">
                         <MagnifyingGlassPlus size={18} weight="bold" />
                       </div>
@@ -128,7 +129,7 @@ export default function Gallery() {
                       </div>
                     </div>
                   </ParallaxImage>
-                </div>
+                </button>
               ))}
             </div>
           )}

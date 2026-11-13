@@ -45,12 +45,14 @@ export default function BeforeAfter({
       window.addEventListener("mouseup", handleMouseUp)
       window.addEventListener("touchmove", handleTouchMove)
       window.addEventListener("touchend", handleMouseUp)
+      window.addEventListener("touchcancel", handleMouseUp)
     }
     return () => {
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("mouseup", handleMouseUp)
       window.removeEventListener("touchmove", handleTouchMove)
       window.removeEventListener("touchend", handleMouseUp)
+      window.removeEventListener("touchcancel", handleMouseUp)
     }
   }, [isDragging, handleMouseMove, handleMouseUp, handleTouchMove])
 
@@ -76,7 +78,7 @@ export default function BeforeAfter({
         onKeyDown={handleKeyDown}
         onMouseDown={() => setIsDragging(true)}
         onTouchStart={() => setIsDragging(true)}
-        className={`relative w-full overflow-hidden rounded-[16px] select-none cursor-ew-resize border shadow-[0_10px_30px_rgba(8,36,28,0.12)] ${
+        className={`relative w-full overflow-hidden rounded-[16px] select-none touch-none cursor-ew-resize border shadow-[0_10px_30px_rgba(8,36,28,0.12)] ${
           isDark
             ? "border-[rgba(201,164,92,0.25)] bg-[#08241C]"
             : "border-[rgba(18,63,49,0.18)] bg-[#EFE7D7]"
@@ -134,13 +136,13 @@ export default function BeforeAfter({
       {(title || description) && (
         <div className="mt-4 px-2">
           {title && (
-            <h4
+            <h3
               className={`font-heading text-[20px] mb-1 ${
                 isDark ? "text-[#F3ECDD]" : "text-[#0B2E24]"
               }`}
             >
               {title}
-            </h4>
+            </h3>
           )}
           {description && (
             <p

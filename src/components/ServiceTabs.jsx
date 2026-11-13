@@ -186,7 +186,7 @@ export default function ServiceTabs({
                 </h3>
                 <p
                   className={`text-[14px] leading-relaxed mb-6 ${
-                    isLight ? "text-[#4E5F57]" : "text-[#C3CEC4]"
+                    isLight ? "text-[#4E5F57]" : "text-[#F3ECDD] opacity-85"
                   }`}
                 >
                   {l(service.description)}
@@ -203,7 +203,7 @@ export default function ServiceTabs({
                 <div>
                   <span
                     className={`text-[13px] uppercase tracking-wider block ${
-                      isLight ? "text-[#4E5F57]" : "text-[#C3CEC4]"
+                      isLight ? "text-[#4E5F57]" : "text-[#F3ECDD] opacity-75"
                     }`}
                   >
                     {t.common.fromPrice}

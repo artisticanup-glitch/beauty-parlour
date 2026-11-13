@@ -50,16 +50,16 @@ export default function ReviewsSection() {
             >
               <div>
                 <Quotes size={32} weight="light" className="text-[#C9A45C] mb-4 opacity-80" />
-                <p className="text-[#F3ECDD] text-[15px] leading-relaxed mb-6 italic">
+                <p className="text-[#F3ECDD] text-[15px] leading-relaxed mb-6 italic" style={{ textWrap: "pretty" }}>
                   "{l(rev.quote)}"
                 </p>
               </div>
 
               <div className="pt-4 border-t border-[rgba(201,164,92,0.18)] flex items-center justify-between gap-3 mt-auto">
                 <div className="min-w-0">
-                  <h4 className="font-heading text-[18px] text-[#F3ECDD] font-medium leading-snug">
+                  <h3 className="font-heading text-[18px] text-[#F3ECDD] font-medium leading-snug">
                     {l(rev.author)}
-                  </h4>
+                  </h3>
                   <span className="text-[13px] text-[#C9A45C] block leading-snug">
                     {l(rev.location)}
                   </span>

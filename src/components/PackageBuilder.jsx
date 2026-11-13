@@ -187,11 +187,9 @@ export default function PackageBuilder() {
         <div className="md:col-span-2 p-6 rounded-[16px] bg-[#EFE7D7] border border-[rgba(201,164,92,0.4)]">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-2">
             <div>
-              <span className="text-[13px] uppercase tracking-[0.14em] text-[#C9A45C] font-semibold block">
-                {lang === "hi" ? "मुख्य विवाह (शादी)" : "Main Wedding Ceremony (Shaadi)"}
-              </span>
               <h3 className="font-heading text-[24px] text-[#0B2E24]">
-                {t.packageBuilder.stepPrompt}
+                {lang === "hi" ? "मुख्य विवाह (शादी) — " : "Main Wedding Ceremony (Shaadi) — "}
+                <span className="text-[#7A5B1F]">{t.packageBuilder.stepPrompt}</span>
               </h3>
               <p className="text-[13px] text-[#4E5F57] mt-1">
                 {lang === "hi"

@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import {
@@ -231,7 +231,10 @@ export default function Home() {
                 <h3 className="font-heading text-[16px] sm:text-[20px] text-[#0B2E24] mb-1.5 font-semibold truncate w-full">
                   {promise.title}
                 </h3>
-                <p className="text-[#4E5F57] text-[13px] sm:text-[14px] leading-relaxed">
+                <p
+                  className="text-[#4E5F57] text-[13px] sm:text-[14px] leading-relaxed"
+                  style={{ textWrap: "pretty" }}
+                >
                   {promise.desc}
                 </p>
               </div>

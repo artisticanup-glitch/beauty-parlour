@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { Suspense, lazy, useEffect } from "react"
 import { Routes, Route, useLocation } from "react-router-dom"
 import Lenis from "lenis"
 import { gsap } from "gsap"
@@ -15,14 +15,14 @@ import PageTransition from "./components/PageTransition"
 import Cursor from "./components/Cursor"
 
 import Home from "./pages/Home"
-import Services from "./pages/Services"
-import Bridal from "./pages/Bridal"
-import Pricing from "./pages/Pricing"
-import Gallery from "./pages/Gallery"
-import About from "./pages/About"
-import Booking from "./pages/Booking"
-import Contact from "./pages/Contact"
-import NotFound from "./pages/NotFound"
+const Services = lazy(() => import("./pages/Services"))
+const Bridal = lazy(() => import("./pages/Bridal"))
+const Pricing = lazy(() => import("./pages/Pricing"))
+const Gallery = lazy(() => import("./pages/Gallery"))
+const About = lazy(() => import("./pages/About"))
+const Booking = lazy(() => import("./pages/Booking"))
+const Contact = lazy(() => import("./pages/Contact"))
+const NotFound = lazy(() => import("./pages/NotFound"))
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -82,17 +82,19 @@ export default function App() {
         <ScrollToTop />
         <Header />
         <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/bridal" element={<Bridal />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<div className="min-h-screen bg-[#0B2E24]" />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/bridal" element={<Bridal />} />
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
         <MobileBar />

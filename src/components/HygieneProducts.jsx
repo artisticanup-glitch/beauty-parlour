@@ -1,4 +1,4 @@
-﻿import React from "react"
+import React from "react"
 import { CheckCircle } from "@phosphor-icons/react"
 import { useLanguage } from "../i18n/LanguageContext"
 import BgVideo from "./BgVideo"

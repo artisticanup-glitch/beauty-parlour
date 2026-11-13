@@ -35,13 +35,6 @@ export default function BookingBanner({ theme = "dark" }) {
 
       {/* Centred Content (Symmetrical) */}
       <div className="relative z-10 site-container max-w-[800px] text-center px-4">
-        <span
-          className={`eyebrow block mb-3 ${
-            isLight ? "text-[#C9A45C]" : "text-[#C9A45C]"
-          }`}
-        >
-          {t.sections.bannerEyebrow}
-        </span>
         <h2
           className={`font-heading text-[clamp(2.2rem,4.5vw,3.8rem)] leading-[1.05] mb-4 ${
             isLight ? "text-[#0B2E24]" : "text-[#F3ECDD]"
@@ -51,7 +44,7 @@ export default function BookingBanner({ theme = "dark" }) {
         </h2>
         <p
           className={`text-[clamp(1rem,1.1vw,1.125rem)] mx-auto mb-10 leading-[1.65] max-w-[58ch] ${
-            isLight ? "text-[#4E5F57]" : "text-[#C3CEC4]"
+            isLight ? "text-[#4E5F57]" : "text-[#F3ECDD] opacity-85"
           }`}
         >
           {t.sections.bannerSubtitle}
