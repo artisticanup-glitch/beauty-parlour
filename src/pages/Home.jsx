@@ -35,7 +35,6 @@ export default function Home() {
   // Refs for animations
   const heroRef = useRef(null)
   const heroVideoRef = useRef(null)
-  const heroEyebrowRef = useRef(null)
   const heroTitleRef = useRef(null)
   const heroSubtitleRef = useRef(null)
   const heroButtonsRef = useRef(null)
@@ -56,23 +55,14 @@ export default function Home() {
         )
       }
 
-      // 2. Eyebrow, H1 lines mask reveal, subtitle & buttons staggered fade up
+      // 2. H1, subtitle & buttons staggered fade up
       const tl = gsap.timeline({ delay: 0.2 })
-
-      if (heroEyebrowRef.current) {
-        tl.fromTo(
-          heroEyebrowRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" }
-        )
-      }
 
       if (heroTitleRef.current) {
         tl.fromTo(
           heroTitleRef.current,
           { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 1.0, ease: "power4.out" },
-          "-=0.6"
+          { opacity: 1, y: 0, duration: 1.0, ease: "power4.out" }
         )
       }
 
@@ -160,19 +150,24 @@ export default function Home() {
             <div className="rn-hero-split">
               <div>
                 <h1
+                  ref={heroTitleRef}
                   className="font-heading text-[#F3ECDD] mb-2 tracking-tight leading-[1.02]"
                   style={{ fontSize: lang === "hi" ? "clamp(1.75rem, 4.4vw, 3.85rem)" : "clamp(2.1rem, 4.8vw, 4.25rem)" }}
                 >
                   {t.hero.title}
                 </h1>
                 <p
+                  ref={heroSubtitleRef}
                   className="text-[#F3ECDD] opacity-90 leading-[1.6] max-w-[46ch]"
                   style={{ fontSize: "clamp(0.98rem, 1.15vw, 1.15rem)" }}
                 >
                   {t.hero.subtitle}
                 </p>
+                <p className="mt-2.5 text-[13px] font-medium text-[#E3C88A]">
+                  {t.hero.laganCue}
+                </p>
               </div>
-              <div className="rn-split-actions">
+              <div ref={heroButtonsRef} className="rn-split-actions">
                 <Button to="/booking" variant="primary" className="w-full justify-center">
                   {t.hero.bookBtn}
                 </Button>
@@ -206,7 +201,7 @@ export default function Home() {
           <span className="text-[13px] uppercase tracking-[0.16em] font-medium opacity-80">
             {t.hero.scrollText}
           </span>
-          <CaretDown size={16} weight="bold" className="animate-bounce text-[#B5914A]" />
+          <CaretDown size={16} weight="bold" className="rn-scroll-cue text-[#B5914A]" />
         </div>
       </section>
 

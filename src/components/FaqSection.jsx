@@ -33,7 +33,7 @@ export default function FaqSection() {
                 className="w-full p-6 sm:p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.12)] text-left"
               >
                 <h3
-                  className="font-heading text-[#0B2E24] mb-3 leading-snug w-full whitespace-normal lg:whitespace-nowrap overflow-hidden text-ellipsis"
+                  className="font-heading text-[#0B2E24] mb-3 leading-snug w-full whitespace-normal"
                   style={{ fontSize: "clamp(1.15rem, 1.4vw, 1.35rem)" }}
                 >
                   {l(item.question)}
@@ -53,7 +53,7 @@ export default function FaqSection() {
                 className="w-full p-6 sm:p-8 rounded-[16px] bg-[#EFE7D7] border border-[rgba(18,63,49,0.12)] text-left"
               >
                 <h3
-                  className="font-heading text-[#0B2E24] mb-3 leading-snug w-full whitespace-normal lg:whitespace-nowrap overflow-hidden text-ellipsis"
+                  className="font-heading text-[#0B2E24] mb-3 leading-snug w-full whitespace-normal"
                   style={{ fontSize: "clamp(1.15rem, 1.4vw, 1.35rem)" }}
                 >
                   {l(item.question)}

@@ -53,6 +53,7 @@ export const en = {
     eyebrow: "Motihari's Bridal Studio",
     title: "Your most beautiful day",
     subtitle: "Calm, unhurried bridal artistry and skincare near Gandhi Chowk.",
+    laganCue: "Gandhi Chowk, Motihari · Lagan bookings from 5:00 AM",
     bookBtn: "Book",
     whatsappBtn: "WhatsApp",
     scrollText: "Scroll down",

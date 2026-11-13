@@ -112,9 +112,11 @@ export default function PackageBuilder() {
       {/* Cards Grid: 2 equal columns on desktop, 1 on mobile */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
         {/* 1. Haldi */}
-        <div
+        <button
+          type="button"
           onClick={() => toggleItem("haldi")}
-          className={`p-6 rounded-[16px] cursor-pointer transition-all duration-200 border flex items-start justify-between ${
+          aria-pressed={Boolean(selectedItems.haldi)}
+          className={`w-full text-left p-6 rounded-[16px] cursor-pointer transition-all duration-200 border flex items-start justify-between ${
             selectedItems.haldi
               ? "bg-[#EFE7D7] border-[#C9A45C] shadow-[0_10px_30px_rgba(8,36,28,0.12)]"
               : "bg-[#F7F2E8] border-[rgba(18,63,49,0.14)] hover:border-[rgba(18,63,49,0.3)]"
@@ -134,7 +136,8 @@ export default function PackageBuilder() {
             </span>
           </div>
           <div
-            className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors border ${
+            aria-hidden="true"
+            className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors border shrink-0 ${
               selectedItems.haldi
                 ? "bg-[#0B2E24] border-[#0B2E24] text-[#C9A45C]"
                 : "border-[rgba(18,63,49,0.3)] text-transparent"
@@ -142,12 +145,14 @@ export default function PackageBuilder() {
           >
             <Check size={16} weight="bold" />
           </div>
-        </div>
+        </button>
 
         {/* 2. Mehendi Ceremony Look */}
-        <div
+        <button
+          type="button"
           onClick={() => toggleItem("mehendi_look")}
-          className={`p-6 rounded-[16px] cursor-pointer transition-all duration-200 border flex items-start justify-between ${
+          aria-pressed={Boolean(selectedItems.mehendi_look)}
+          className={`w-full text-left p-6 rounded-[16px] cursor-pointer transition-all duration-200 border flex items-start justify-between ${
             selectedItems.mehendi_look
               ? "bg-[#EFE7D7] border-[#C9A45C] shadow-[0_10px_30px_rgba(8,36,28,0.12)]"
               : "bg-[#F7F2E8] border-[rgba(18,63,49,0.14)] hover:border-[rgba(18,63,49,0.3)]"
@@ -167,7 +172,8 @@ export default function PackageBuilder() {
             </span>
           </div>
           <div
-            className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors border ${
+            aria-hidden="true"
+            className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors border shrink-0 ${
               selectedItems.mehendi_look
                 ? "bg-[#0B2E24] border-[#0B2E24] text-[#C9A45C]"
                 : "border-[rgba(18,63,49,0.3)] text-transparent"
@@ -175,7 +181,7 @@ export default function PackageBuilder() {
           >
             <Check size={16} weight="bold" />
           </div>
-        </div>
+        </button>
 
         {/* 3. Shaadi: Main Wedding Look Choice */}
         <div className="md:col-span-2 p-6 rounded-[16px] bg-[#EFE7D7] border border-[rgba(201,164,92,0.4)]">
@@ -187,14 +193,22 @@ export default function PackageBuilder() {
               <h3 className="font-heading text-[24px] text-[#0B2E24]">
                 {t.packageBuilder.stepPrompt}
               </h3>
+              <p className="text-[13px] text-[#4E5F57] mt-1">
+                {lang === "hi"
+                  ? "HD प्राकृतिक मैट फिनिश देता है; एयरब्रश उमस भरी लगन की रातों के लिए पसीना-रोधी व वाटरप्रूफ टिकाऊपन देता है।"
+                  : "HD gives a classic natural matte finish; Airbrush offers sweat-proof, waterproof hold for humid lagan nights."}
+              </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div role="radiogroup" aria-label={t.packageBuilder.stepPrompt} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* HD Choice */}
-            <div
+            <button
+              type="button"
+              role="radio"
+              aria-checked={selectedItems.shaadi === "shaadi_hd"}
               onClick={() => setShaadiBase("shaadi_hd")}
-              className={`p-5 rounded-[12px] cursor-pointer transition-all border flex items-start justify-between ${
+              className={`w-full text-left p-5 rounded-[12px] cursor-pointer transition-all border flex items-start justify-between ${
                 selectedItems.shaadi === "shaadi_hd"
                   ? "bg-[#F7F2E8] border-[#0B2E24] shadow-[0_10px_30px_rgba(8,36,28,0.12)]"
                   : "bg-transparent border-[rgba(18,63,49,0.2)] hover:bg-[#F7F2E8]"
@@ -214,7 +228,8 @@ export default function PackageBuilder() {
                 </span>
               </div>
               <div
-                className={`w-6 h-6 rounded-full border flex items-center justify-center ${
+                aria-hidden="true"
+                className={`w-6 h-6 rounded-full border flex items-center justify-center shrink-0 ${
                   selectedItems.shaadi === "shaadi_hd"
                     ? "border-[#0B2E24] bg-[#0B2E24] text-[#C9A45C]"
                     : "border-[rgba(18,63,49,0.3)]"
@@ -222,12 +237,15 @@ export default function PackageBuilder() {
               >
                 {selectedItems.shaadi === "shaadi_hd" && <Check size={14} weight="bold" />}
               </div>
-            </div>
+            </button>
 
             {/* Airbrush Choice */}
-            <div
+            <button
+              type="button"
+              role="radio"
+              aria-checked={selectedItems.shaadi === "shaadi_airbrush"}
               onClick={() => setShaadiBase("shaadi_airbrush")}
-              className={`p-5 rounded-[12px] cursor-pointer transition-all border flex items-start justify-between ${
+              className={`w-full text-left p-5 rounded-[12px] cursor-pointer transition-all border flex items-start justify-between ${
                 selectedItems.shaadi === "shaadi_airbrush"
                   ? "bg-[#F7F2E8] border-[#0B2E24] shadow-[0_10px_30px_rgba(8,36,28,0.12)]"
                   : "bg-transparent border-[rgba(18,63,49,0.2)] hover:bg-[#F7F2E8]"
@@ -247,7 +265,8 @@ export default function PackageBuilder() {
                 </span>
               </div>
               <div
-                className={`w-6 h-6 rounded-full border flex items-center justify-center ${
+                aria-hidden="true"
+                className={`w-6 h-6 rounded-full border flex items-center justify-center shrink-0 ${
                   selectedItems.shaadi === "shaadi_airbrush"
                     ? "border-[#0B2E24] bg-[#0B2E24] text-[#C9A45C]"
                     : "border-[rgba(18,63,49,0.3)]"
@@ -255,14 +274,16 @@ export default function PackageBuilder() {
               >
                 {selectedItems.shaadi === "shaadi_airbrush" && <Check size={14} weight="bold" />}
               </div>
-            </div>
+            </button>
           </div>
         </div>
 
         {/* 4. Reception */}
-        <div
+        <button
+          type="button"
           onClick={() => toggleItem("reception")}
-          className={`p-6 rounded-[16px] cursor-pointer transition-all duration-200 border flex items-start justify-between ${
+          aria-pressed={Boolean(selectedItems.reception)}
+          className={`w-full text-left p-6 rounded-[16px] cursor-pointer transition-all duration-200 border flex items-start justify-between ${
             selectedItems.reception
               ? "bg-[#EFE7D7] border-[#C9A45C] shadow-[0_10px_30px_rgba(8,36,28,0.12)]"
               : "bg-[#F7F2E8] border-[rgba(18,63,49,0.14)] hover:border-[rgba(18,63,49,0.3)]"
@@ -282,7 +303,8 @@ export default function PackageBuilder() {
             </span>
           </div>
           <div
-            className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors border ${
+            aria-hidden="true"
+            className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors border shrink-0 ${
               selectedItems.reception
                 ? "bg-[#0B2E24] border-[#0B2E24] text-[#C9A45C]"
                 : "border-[rgba(18,63,49,0.3)] text-transparent"
@@ -290,12 +312,14 @@ export default function PackageBuilder() {
           >
             <Check size={16} weight="bold" />
           </div>
-        </div>
+        </button>
 
         {/* 5. Bridal Mehendi */}
-        <div
+        <button
+          type="button"
           onClick={() => toggleItem("bridal_mehendi")}
-          className={`p-6 rounded-[16px] cursor-pointer transition-all duration-200 border flex items-start justify-between ${
+          aria-pressed={Boolean(selectedItems.bridal_mehendi)}
+          className={`w-full text-left p-6 rounded-[16px] cursor-pointer transition-all duration-200 border flex items-start justify-between ${
             selectedItems.bridal_mehendi
               ? "bg-[#EFE7D7] border-[#C9A45C] shadow-[0_10px_30px_rgba(8,36,28,0.12)]"
               : "bg-[#F7F2E8] border-[rgba(18,63,49,0.14)] hover:border-[rgba(18,63,49,0.3)]"
@@ -315,7 +339,8 @@ export default function PackageBuilder() {
             </span>
           </div>
           <div
-            className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors border ${
+            aria-hidden="true"
+            className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors border shrink-0 ${
               selectedItems.bridal_mehendi
                 ? "bg-[#0B2E24] border-[#0B2E24] text-[#C9A45C]"
                 : "border-[rgba(18,63,49,0.3)] text-transparent"
@@ -323,7 +348,7 @@ export default function PackageBuilder() {
           >
             <Check size={16} weight="bold" />
           </div>
-        </div>
+        </button>
 
         {/* 6. Family Stepper (0 to 10 × ₹1,500) */}
         <div className="md:col-span-2 p-6 rounded-[16px] bg-[#F7F2E8] border border-[rgba(18,63,49,0.14)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

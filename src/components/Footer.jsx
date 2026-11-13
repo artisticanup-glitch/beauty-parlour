@@ -42,7 +42,6 @@ export default function Footer() {
         {/* 3 Equal Symmetrical Columns with Centered Text */}
         <div
           className="grid grid-cols-1 md:grid-cols-3 gap-12 sm:gap-10 py-12 sm:py-16 text-center border-b border-[rgba(201,164,92,0.18)] w-full"
-          style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))" }}
         >
           {/* Column 1: Visit us */}
           <div className="w-full flex flex-col items-center justify-start text-center space-y-4">

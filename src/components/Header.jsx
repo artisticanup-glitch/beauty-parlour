@@ -189,7 +189,7 @@ export default function Header() {
                 {l(siteData.name)}
               </span>
               <span
-                className={`text-[11px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.24em]"} text-[#C9A45C] font-medium leading-none mt-0.5`}
+                className={`text-[13px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.24em]"} text-[#C9A45C] font-medium leading-none mt-0.5`}
               >
                 {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
               </span>
@@ -269,7 +269,7 @@ export default function Header() {
               <span className="font-heading text-[22px] sm:text-[24px] font-semibold leading-tight text-[#F3ECDD]">
                 {l(siteData.name)}
               </span>
-              <span className={`text-[11px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.2em]"} text-[#C9A45C] leading-none mt-0.5`}>
+              <span className={`text-[13px] uppercase ${lang === "hi" ? "tracking-normal" : "tracking-[0.2em]"} text-[#C9A45C] leading-none mt-0.5`}>
                 {lang === "hi" ? "मोतिहारी" : "MOTIHARI"}
               </span>
             </div>
