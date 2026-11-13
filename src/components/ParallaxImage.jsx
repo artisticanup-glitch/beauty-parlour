@@ -63,6 +63,7 @@ export default function ParallaxImage({
           src={src}
           alt={alt}
           loading={loading}
+          decoding="async"
           width={width}
           height={height}
           style={{ objectPosition }}

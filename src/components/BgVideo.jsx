@@ -18,6 +18,7 @@ export default function BgVideo({
     return !(prefersReducedMotion || saveData)
   })
   const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth <= 768)
+  const [hasEnteredRange, setHasEnteredRange] = useState(isHero)
 
   // Ensure DOM element has muted and defaultMuted set for strict mobile autoplay policies
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function BgVideo({
       videoRef.current.muted = true
       videoRef.current.defaultMuted = true
     }
-  }, [])
+  }, [hasEnteredRange])
 
   // Detect mobile resize
   useEffect(() => {
@@ -36,9 +37,29 @@ export default function BgVideo({
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  // Pre-load non-hero video source only when approaching viewport
+  useEffect(() => {
+    if (isHero || !shouldPlayVideo || hasEnteredRange) return
+    const containerEl = containerRef.current
+    if (!containerEl) return
+
+    const rangeObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setHasEnteredRange(true)
+          rangeObserver.disconnect()
+        }
+      },
+      { rootMargin: "300px 0px" }
+    )
+
+    rangeObserver.observe(containerEl)
+    return () => rangeObserver.disconnect()
+  }, [isHero, shouldPlayVideo, hasEnteredRange])
+
   // IntersectionObserver to pause when off-screen and play when visible
   useEffect(() => {
-    if (!shouldPlayVideo) return
+    if (!shouldPlayVideo || !hasEnteredRange) return
 
     const videoEl = videoRef.current
     const containerEl = containerRef.current
@@ -69,7 +90,7 @@ export default function BgVideo({
 
     observer.observe(containerEl)
     return () => observer.disconnect()
-  }, [shouldPlayVideo, isActive, isHero])
+  }, [shouldPlayVideo, isActive, isHero, hasEnteredRange])
 
   // Select video source based on screen (hero uses hero-m on phone)
   const videoSrc = isHero && isMobile ? `/videos/${videoName}-m.mp4` : `/videos/${videoName}.mp4`
@@ -84,13 +105,13 @@ export default function BgVideo({
       {shouldPlayVideo ? (
         <video
           ref={videoRef}
-          src={videoSrc}
+          src={hasEnteredRange && (isHero || isActive) ? videoSrc : undefined}
           poster={posterSrc}
-          autoPlay
+          autoPlay={isHero}
           muted
           loop
           playsInline
-          preload={isHero ? "auto" : "metadata"}
+          preload={isHero ? "auto" : "none"}
           className="w-full h-full object-cover transition-opacity duration-500"
         />
       ) : (
